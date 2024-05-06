@@ -52,5 +52,13 @@ namespace _02.Scirpts.Pool
             component.gameObject.SetActive(false);
             base.Return(component);
         }
+        
+        protected override T Create()
+        {
+            T newMember = base.Create();
+            newMember.transform.SetParent(PoolRoot.transform);
+            newMember.gameObject.SetActive(false);
+            return newMember;
+        }
     }
 }

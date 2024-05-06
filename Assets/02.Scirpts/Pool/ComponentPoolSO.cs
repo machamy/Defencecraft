@@ -38,7 +38,7 @@ namespace _02.Scirpts.Pool
             _parent = t;
             PoolRoot.SetParent(_parent);
         }
-
+        
         public override T Get()
         {
             T component = base.Get();

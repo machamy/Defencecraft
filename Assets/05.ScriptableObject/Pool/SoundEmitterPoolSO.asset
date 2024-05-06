@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e79ddf17b1347449d244afd363002a2, type: 3}
   m_Name: SoundEmitterPoolSO
   m_EditorClassIdentifier: 
+  _factory: {fileID: 11400000, guid: 88eff1cec0b79c74db2876553c08487c, type: 2}

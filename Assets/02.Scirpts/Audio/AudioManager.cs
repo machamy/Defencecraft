@@ -30,12 +30,12 @@ public class AudioManager : MonoBehaviour
     private SoundEmitter musicEmitter = null;
 
 
-    public AudioQueue TestQueue;
+    [FormerlySerializedAs("TestQueue")] public AudioQueueSO testQueueSo;
     public AudioConfigurationSO TestConfig;
 
     public void TestPlay()
     {
-        PlayAudioQ(TestQueue,TestConfig);
+        PlayAudioQ(testQueueSo,TestConfig);
     }
     
     private void Awake()
@@ -43,6 +43,13 @@ public class AudioManager : MonoBehaviour
         
         emitterPoolSO.init(_initSize);
         emitterPoolSO.SetParent(this.transform);
+    }
+
+    private void Start()
+    {
+        ChangeMasterVolume(_masterVolume);
+        ChangeMusicVolume(_musicVolume);
+        ChangeSfxVolume(_sfxVolume);
     }
 
     void ChangeMasterVolume(float value)
@@ -62,9 +69,9 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    private void PlayMusic(AudioQueue queue, AudioConfigurationSO config)
+    private void PlayMusic(AudioQueueSO queueSo, AudioConfigurationSO config)
     {
-        AudioClip audio = queue.GetClip();
+        AudioClip audio = queueSo.GetClip();
         if (musicEmitter != null && musicEmitter.IsPlaying)
         {
             if (musicEmitter.CurrentlyPlayingAudio == audio) // 이미 재생중이면 무시
@@ -78,7 +85,7 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    public void PlayAudioQ(AudioQueue q, AudioConfigurationSO config, Vector3 pos = default)
+    public void PlayAudioQ(AudioQueueSO q, AudioConfigurationSO config, Vector3 pos = default)
     {
         AudioClip song = q.GetClip();
         SoundEmitter emitter = emitterPoolSO.Get();

@@ -40,6 +40,8 @@ namespace _02.Scirpts.Ingame
             }
         }
         
-        
+        public void SetConstructable() { isConstructable = true; }
+
+        public void SetUnConstructable() { isConstructable = false; }
     }
 }

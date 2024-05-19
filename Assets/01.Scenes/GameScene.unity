@@ -267,7 +267,7 @@ MonoBehaviour:
   _masterVolume: 1
   _musicVolume: 1
   _sfxVolume: 1
-  TestQueue: {fileID: 11400000, guid: fe89592a2a5fdd242a1a64ed6197cecc, type: 2}
+  testQueueSo: {fileID: 11400000, guid: fe89592a2a5fdd242a1a64ed6197cecc, type: 2}
   TestConfig: {fileID: 11400000, guid: b0f0893dfdf4df64ab3f5e1ebe14e992, type: 2}
 --- !u!4 &118384249
 Transform:
@@ -827,6 +827,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1331436700}
   - component: {fileID: 1331436699}
+  - component: {fileID: 1331436701}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -865,6 +866,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1331436701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1331436698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e37b2db7c66096f438220f11f447a3fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  issConstructMode: 1
+  buildingprefab: {fileID: 161095633021880786, guid: de7ef4aca471735499cb5b87ee51e7fa,
+    type: 3}
 --- !u!1 &1426313408
 GameObject:
   m_ObjectHideFlags: 0
@@ -1338,7 +1354,7 @@ Transform:
   m_GameObject: {fileID: 1622464622}
   serializedVersion: 2
   m_LocalRotation: {x: 0.35355338, y: 0.35355338, z: -0.1464466, w: 0.8535535}
-  m_LocalPosition: {x: -5.05, y: 4.48, z: -14.96}
+  m_LocalPosition: {x: 9, y: 24, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

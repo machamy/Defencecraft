@@ -945,6 +945,7 @@ MonoBehaviour:
   height: 20
   tileSize: 5
   tileBase: {fileID: 161095633021880786, guid: a9fbeb1209ab7d049a40da9cb3d2ddb6, type: 3}
+  debug: 1
 --- !u!4 &1331436700
 Transform:
   m_ObjectHideFlags: 0

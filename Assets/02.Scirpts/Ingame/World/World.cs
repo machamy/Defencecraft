@@ -5,15 +5,22 @@ namespace _02.Scirpts.Ingame
 {
     public class World : MonoBehaviour
     {
+        [Header("디버그")]
+        [SerializeField] private bool debug = false;
+        
+
         private Grid _grid;
         private Tile[,] map;
 
-        [SerializeField]
-        private int width = 10, height = 10;
-
+        [Header("맵의 크기")] 
+        [SerializeField] private int width = 10;
+        [SerializeField] private int height = 10;
+        [Header("타일")]
         [SerializeField] private float tileSize;
         [SerializeField] private GameObject tileBase;
 
+        
+        
         public int Width => width;
         public int Height => height;
 
@@ -22,6 +29,7 @@ namespace _02.Scirpts.Ingame
         private void Start()
         {
             Initialize();
+            CheckDebug(debug);
         }
 
         /// <summary>
@@ -52,6 +60,21 @@ namespace _02.Scirpts.Ingame
                     tile.name = $"Tile({i},{j})[C : {tile.IsConstructable}]";
                 }
             }
+        }
+        
+        void CheckDebug(bool debug)
+        {
+            if (map == null)
+                return;
+            foreach (var tile in map)
+            {
+                tile.CheckDebug(debug);
+            }
+        }
+
+        private void OnValidate()
+        {
+            CheckDebug(debug);
         }
     }
 }

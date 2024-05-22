@@ -1,5 +1,6 @@
 using System;
 using _02.Scirpts.Ingame.Entity;
+using Unity.Collections;
 using UnityEngine;
 
 namespace _02.Scirpts.Ingame
@@ -12,16 +13,20 @@ namespace _02.Scirpts.Ingame
         Obstacle = 1 << 1,         // 장애물 지형(통과 불가)
         
         All = 1 << 10 - 1
-    } 
-    
+    }
+
     public class Tile : MonoBehaviour
     {
+        [Header("디버그")]
+        [SerializeField] private bool debug = false;
+        
         private int i, j;
         private bool isConstructable;
         private float size;
 
         public bool IsInitialized { private set; get; } = false;
 
+        
         /// <summary>
         /// 건축가능 여부
         /// </summary>
@@ -46,13 +51,37 @@ namespace _02.Scirpts.Ingame
             IsInitialized = true;
             if (chaneState)
             {
-                transform.localPosition = new Vector3(i * size, 0,j * size);
-                transform.localScale = new Vector3(size,transform.localScale.y,size);
+                transform.localPosition = new Vector3(i * size, 0, j * size);
+                transform.localScale = new Vector3(size, transform.localScale.y, size);
             }
         }
-        
-        public void SetConstructable() { isConstructable = true; }
 
-        public void SetUnConstructable() { isConstructable = false; }
+        public void SetConstructable()
+        {
+            isConstructable = true;
+        }
+
+        public void SetUnConstructable()
+        {
+            isConstructable = false;
+        }
+
+        public void CheckDebug(bool debug)
+        {
+            this.debug = debug;
+            if (debug)
+            {
+                GetComponent<MeshRenderer>().enabled = true;
+            }
+            else
+            {
+                GetComponent<MeshRenderer>().enabled = false;
+            }
+        }
+
+        private void OnValidate()
+        {
+            CheckDebug(debug);
+        }
     }
 }

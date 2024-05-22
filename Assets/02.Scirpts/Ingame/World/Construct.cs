@@ -25,66 +25,66 @@ namespace _02.Scirpts.Ingame
         Vector3 pos;
         private void Update()
         {
-            //¸¶¿ì½º ³»·Á°¥¶§ ConstructPrefab »ı¼º
+            //ë§ˆìš°ìŠ¤ ë‚´ë ¤ê°ˆë•Œ ConstructPrefab ìƒì„±
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("¸¶¿ì½º ³»·Á°¨");
+                Debug.Log("ë§ˆìš°ìŠ¤ ë‚´ë ¤ê°");
 
 
-                //°Ç¼³¸ğµå¶ó¸é ¹İÅõ¸í °Ç¹° »ı¼º
+                //ê±´ì„¤ëª¨ë“œë¼ë©´ ë°˜íˆ¬ëª… ê±´ë¬¼ ìƒì„±
                 if (issConstructMode)
                 {
                     building = Instantiate(buildingprefab);
 
-                    //»õ·Î Å¬¸¯ ÇÒ¶§¸¶´Ù ÃÊ±âÈ­
+                    //ìƒˆë¡œ í´ë¦­ í• ë•Œë§ˆë‹¤ ì´ˆê¸°í™”
                     isbuildable = true;
                 }
             }
 
-            //¸¶¿ì½º µå·¡±×Áß ¹İÅõ¸í °Ç¹°ÀÌ ¸¶¿ì½º µû¶ó´Ù´Ï°Ô ÇÏ±â
+            //ë§ˆìš°ìŠ¤ ë“œë˜ê·¸ì¤‘ ë°˜íˆ¬ëª… ê±´ë¬¼ì´ ë§ˆìš°ìŠ¤ ë”°ë¼ë‹¤ë‹ˆê²Œ í•˜ê¸°
             if (Input.GetMouseButton(0))
             {
-                //¸¶¿ì½º À§Ä¡ ºÒ·¯¿À±â
+                //ë§ˆìš°ìŠ¤ ìœ„ì¹˜ ë¶ˆëŸ¬ì˜¤ê¸°
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                Plane groundPlane = new Plane(Vector3.up, new Vector3(0f, 0.2f, 0f)); //¶¥¿¡ ´ê´Â À§Ä¡°¡ y ³ôÀÌ´Â 0.2f
+                Plane groundPlane = new Plane(Vector3.up, new Vector3(0f, 0.2f, 0f)); //ë•…ì— ë‹¿ëŠ” ìœ„ì¹˜ê°€ y ë†’ì´ëŠ” 0.2f
 
                 float rayDistance;
 
                 if (groundPlane.Raycast(ray, out rayDistance))
                     pos = ray.GetPoint(rayDistance);
 
-                //5ÀÇ ¹è¼ö·Î¸¸ ÀÌµ¿ÇÏ°Ô²û ¼öÁ¤
+                //5ì˜ ë°°ìˆ˜ë¡œë§Œ ì´ë™í•˜ê²Œë” ìˆ˜ì •
                 pos = new Vector3(Mathf.Round(pos.x / 5) * 5, Mathf.Round(pos.y), Mathf.Round(pos.z / 5) * 5);
                 
                 Debug.Log(pos);
 
-                //¹İÅõ¸í °Ç¹°ÀÇ À§Ä¡ º¯°æ
+                //ë°˜íˆ¬ëª… ê±´ë¬¼ì˜ ìœ„ì¹˜ ë³€ê²½
                 building.transform.position = pos;
             }
 
-            //¸¶¿ì½º¸¦ ¶®À»¶§
+            //ë§ˆìš°ìŠ¤ë¥¼ ë• ì„ë•Œ
             if(Input.GetMouseButtonUp(0))
             {
                 World worldscript = GetComponent<World>();
                 Debug.Log(Mathf.RoundToInt(pos.x));
 
-                //ÁÂÇ¥ ºÒ·¯¿À±â
+                //ì¢Œí‘œ ë¶ˆëŸ¬ì˜¤ê¸°
                 int tilenum_x = Mathf.RoundToInt(pos.x) / 5;
                 int tilenum_z = Mathf.RoundToInt(pos.z) / 5;
 
-                //ÇØ´ç ÁÂÇ¥¿¡ Å¸ÀÏÀÌ ÀÖ´Ù¸é tile Á¤º¸ ºÒ·¯¿À±â
+                //í•´ë‹¹ ì¢Œí‘œì— íƒ€ì¼ì´ ìˆë‹¤ë©´ tile ì •ë³´ ë¶ˆëŸ¬ì˜¤ê¸°
                 if ((tilenum_x >= 0 && tilenum_x + building_size[0] < 21) && (tilenum_z >= 0 && tilenum_z + building_size[1] < 21))
                 {
                     for(int i = 0; i < building_size[0]; i++)
                     {
                         for(int j = 0; j < building_size[1]; j++)
                         {
-                            //Å¸ÀÏÁ¤º¸ ¹Ş¾Æ¿À±â
+                            //íƒ€ì¼ì •ë³´ ë°›ì•„ì˜¤ê¸°
                             Tile tile = worldscript.GetTile(tilenum_x + i, tilenum_z + j);
 
                             Debug.Log(tile.IsConstructable);
 
-                            //°Ç¼³°¡´ÉÇÑ Áö¿ªÀÎÁö È®ÀÎ
+                            //ê±´ì„¤ê°€ëŠ¥í•œ ì§€ì—­ì¸ì§€ í™•ì¸
                             if (!tile.IsConstructable)
                             {
                                 isbuildable = false;
@@ -98,28 +98,28 @@ namespace _02.Scirpts.Ingame
                         }
                     }
                 }
-                else //Å¸ÀÏÀÌ ¾ø´Ù¸é ÆÄ±«
+                else //íƒ€ì¼ì´ ì—†ë‹¤ë©´ íŒŒê´´
                 {
                     isbuildable = false;
                 }
 
-                //°Ç¼³ °¡´É ÆÇº°ÀÌ ³µ´Ù¸é °Ç¼³
+                //ê±´ì„¤ ê°€ëŠ¥ íŒë³„ì´ ë‚¬ë‹¤ë©´ ê±´ì„¤
                 if (isbuildable)
                 {
-                    //°Ç¼³
+                    //ê±´ì„¤
 
-                    //ÀÓ½Ã·Î ¸¸µé¾î³õÀº °Ç¼³ ¾Ë¸²
+                    //ì„ì‹œë¡œ ë§Œë“¤ì–´ë†“ì€ ê±´ì„¤ ì•Œë¦¼
                     //Instantiate(buildingprefab, new Vector3(pos.x, pos.y, pos.z), Quaternion.Euler(0, 0, 0));
                     Instantiate(buildingprefab, new Vector3(pos.x + 5, pos.y, pos.z), Quaternion.Euler(0, 0, 0));
                     Instantiate(buildingprefab, new Vector3(pos.x, pos.y, pos.z + 5), Quaternion.Euler(0, 0, 0));
                     Instantiate(buildingprefab, new Vector3(pos.x + 5, pos.y, pos.z + 5), Quaternion.Euler(0, 0, 0));
 
-                    //°Ç¼³ ºÒ°¡ Áö¿ªÀ¸·Î ¼³Á¤
+                    //ê±´ì„¤ ë¶ˆê°€ ì§€ì—­ìœ¼ë¡œ ì„¤ì •
                     for (int i = 0; i < building_size[0]; i++)
                     {
                         for (int j = 0; j < building_size[1]; j++)
                         {
-                            //Å¸ÀÏÁ¤º¸ ¹Ş¾Æ¿À±â
+                            //íƒ€ì¼ì •ë³´ ë°›ì•„ì˜¤ê¸°
                             Tile tile = worldscript.GetTile(tilenum_x + i, tilenum_z + j);
 
                             tile.SetUnConstructable();

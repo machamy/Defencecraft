@@ -5,6 +5,7 @@ namespace _02.Scirpts.Ingame
 {
     public class World : MonoBehaviour
     {
+        private Grid _grid;
         private Tile[,] map;
 
         [SerializeField]

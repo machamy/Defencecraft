@@ -1,8 +1,19 @@
+using System;
 using _02.Scirpts.Ingame.Entity;
 using UnityEngine;
 
 namespace _02.Scirpts.Ingame
 {
+    [Flags]
+    public enum TileInfo
+    {
+        None = 0,
+        NotConstructable = 1 << 0, // 건축 불가 지형
+        Obstacle = 1 << 1,         // 장애물 지형(통과 불가)
+        
+        All = 1 << 10 - 1
+    } 
+    
     public class Tile : MonoBehaviour
     {
         private int i, j;

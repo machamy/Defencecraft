@@ -29,6 +29,7 @@ namespace _02.Scirpts.Ingame.HUD.Button
             if (n >= events.Count)
                 n = 0;
             events[n].Invoke();
+            Debug.Log(n);
             changeSprite();
         }
 

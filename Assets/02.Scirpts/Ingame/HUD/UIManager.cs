@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
     /// <summary>
     /// OnGameResumed Subscribe - UI 보일 거 보이게
     /// </summary>
-    public void onResumed()
+    public void OnResumed()
     {
         go_ingameParent.SetActive(false);
         go_pauseParent.SetActive(true);

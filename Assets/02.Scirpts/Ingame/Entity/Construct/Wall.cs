@@ -33,7 +33,7 @@ public class Wall : AbstractConstruct
     //업그레이드 이벤트가 발생했을 때
     public override void Upgrade()
     {
-        float hprate = hp / maxhp;
+        float hprate = hp /  maxhp;
 
         switch (level)
         {

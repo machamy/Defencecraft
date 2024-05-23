@@ -2,35 +2,40 @@ using System;
 using _02.Scirpts.Ingame.Entity;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _02.Scirpts.Ingame
 {
-    [Flags]
     public enum TileInfo
     {
         None = 0,
-        NotConstructable = 1 << 0, // 건축 불가 지형
-        Obstacle = 1 << 1,         // 장애물 지형(통과 불가)
+        NotConstructable = 1, // 1 << 0, // 건축 불가 지형
+        Obstacle = 2  // 1 << 1,         // 장애물 지형(통과 불가)
         
-        All = 1 << 10 - 1
+        //All = 1 << 10 - 1
     }
 
+    /// <summary>
+    /// 월드의 타일 하나하나.
+    /// 위치와 정보를 저장한다.
+    /// </summary>
     public class Tile : MonoBehaviour
     {
         [Header("디버그")]
         [SerializeField] private bool debug = false;
         
         private int i, j;
-        private bool isConstructable;
         private float size;
 
         public bool IsInitialized { private set; get; } = false;
 
-        
+        [SerializeField] private TileInfo tileInfo = TileInfo.None;
+        public TileInfo TileInfo => tileInfo;
+
         /// <summary>
         /// 건축가능 여부
         /// </summary>
-        public bool IsConstructable => isConstructable || Construct != null;
+        public bool IsConstructable => tileInfo == TileInfo.None || Construct != null;
 
         public AbstractConstruct Construct;
 
@@ -42,12 +47,12 @@ namespace _02.Scirpts.Ingame
         /// <param name="size"></param>
         /// <param name="isConstructable"></param>
         /// <param name="chaneState">해당 값으로 크기와 위치를 변경할지 여부</param>
-        public void Init(int i, int j, float size, bool isConstructable = true, bool chaneState = true)
+        public void Init(int i, int j, float size, TileInfo tileInfo = TileInfo.None, bool chaneState = true)
         {
             this.i = i;
             this.j = j;
             this.size = size;
-            this.isConstructable = isConstructable;
+            this.tileInfo = tileInfo;
             IsInitialized = true;
             if (chaneState)
             {
@@ -58,24 +63,39 @@ namespace _02.Scirpts.Ingame
 
         public void SetConstructable()
         {
-            isConstructable = true;
+            // isConstructable = true;
         }
 
         public void SetUnConstructable()
         {
-            isConstructable = false;
+            // isConstructable = false;
         }
 
+
+        /// <summary>
+        /// 하양 : 일반 타일
+        /// 노랑 : 건설 불가 타일
+        /// 빨강 : 이동 불가 타일
+        /// </summary>
+        private readonly Color[] _debugColors = new[] { Color.white, Color.yellow, Color.red };
+        
+        
+        /// <summary>
+        /// 디버그 옵션 확인
+        /// </summary>
+        /// <param name="debug"></param>
         public void CheckDebug(bool debug)
         {
             this.debug = debug;
+            MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
             if (debug)
             {
-                GetComponent<MeshRenderer>().enabled = true;
+                meshRenderer.enabled = true;
+               meshRenderer.material.color = _debugColors[(int)TileInfo];
             }
             else
             {
-                GetComponent<MeshRenderer>().enabled = false;
+                meshRenderer.enabled = false;
             }
         }
 

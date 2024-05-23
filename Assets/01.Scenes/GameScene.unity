@@ -873,6 +873,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '@AudioManager'
       objectReference: {fileID: 0}
+    - target: {fileID: 7574493634766869963, guid: b9aa394bc11b6ae41b90e3dd3598e624,
+        type: 3}
+      propertyPath: MusicChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: b0c1b5c1f4cb30242b20de0636305e6a,
+        type: 2}
+    - target: {fileID: 7574493634766869963, guid: b9aa394bc11b6ae41b90e3dd3598e624,
+        type: 3}
+      propertyPath: EffectChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: aadb55bad5ce5d44abbfa9561e25e5f0,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

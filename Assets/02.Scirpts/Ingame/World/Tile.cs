@@ -15,6 +15,10 @@ namespace _02.Scirpts.Ingame
         //All = 1 << 10 - 1
     }
 
+    /// <summary>
+    /// 월드의 타일 하나하나.
+    /// 위치와 정보를 저장한다.
+    /// </summary>
     public class Tile : MonoBehaviour
     {
         [Header("디버그")]

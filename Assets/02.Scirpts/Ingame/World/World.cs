@@ -28,6 +28,9 @@ namespace _02.Scirpts.Ingame
         public int Width => width;
         public int Height => height;
 
+        /// <summary>
+        /// 타일의 크기
+        /// </summary>
         public float TileSize => tileSize;
 
         private void Start()

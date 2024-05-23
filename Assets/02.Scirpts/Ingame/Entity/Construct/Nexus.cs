@@ -1,11 +1,10 @@
-﻿using _02.Scirpts.Ingame.Entity;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class Nexus : AbstractConstruct
+public class Nexus : _02.Scirpts.Ingame.Entity.AbstractConstruct
 {
     [HideInInspector] public int hp;
 

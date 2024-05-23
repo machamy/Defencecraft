@@ -86,17 +86,28 @@ namespace _02.Scirpts.Ingame
         /// <param name="debug"></param>
         public void CheckDebug(bool debug)
         {
-            this.debug = debug;
-            MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
-            if (debug)
-            {
-                meshRenderer.enabled = true;
-               meshRenderer.material.color = _debugColors[(int)TileInfo];
-            }
+            if(debug)
+                EnableDebug();
             else
+                DisableDebug();
+        }
+
+        private void EnableDebug()
+        {
+            this.debug = true;
+            MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+            meshRenderer.enabled = true;
+            if (Application.isPlaying)
             {
-                meshRenderer.enabled = false;
+                meshRenderer.material.color = _debugColors[(int)TileInfo];
             }
+        }
+
+        private void DisableDebug()
+        {
+            this.debug = false;
+            MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+            meshRenderer.enabled = false;
         }
 
         private void OnValidate()

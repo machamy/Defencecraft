@@ -28,7 +28,7 @@ namespace _02.Scirpts.Ingame
             //마우스 내려갈때 ConstructPrefab 생성
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("마우스 내려감");
+                // Debug.Log("마우스 내려감");
 
 
                 //건설모드라면 반투명 건물 생성
@@ -56,7 +56,7 @@ namespace _02.Scirpts.Ingame
                 //5의 배수로만 이동하게끔 수정
                 pos = new Vector3(Mathf.Round(pos.x / 5) * 5, Mathf.Round(pos.y), Mathf.Round(pos.z / 5) * 5);
                 
-                Debug.Log(pos);
+                // // Debug.Log(pos);
 
                 //반투명 건물의 위치 변경
                 building.transform.position = pos;
@@ -66,7 +66,7 @@ namespace _02.Scirpts.Ingame
             if(Input.GetMouseButtonUp(0))
             {
                 World worldscript = GetComponent<World>();
-                Debug.Log(Mathf.RoundToInt(pos.x));
+                // // Debug.Log(Mathf.RoundToInt(pos.x));
 
                 //좌표 불러오기
                 int tilenum_x = Mathf.RoundToInt(pos.x) / 5;
@@ -82,7 +82,7 @@ namespace _02.Scirpts.Ingame
                             //타일정보 받아오기
                             Tile tile = worldscript.GetTile(tilenum_x + i, tilenum_z + j);
 
-                            Debug.Log(tile.IsConstructable);
+                            // Debug.Log(tile.IsConstructable);
 
                             //건설가능한 지역인지 확인
                             if (!tile.IsConstructable)

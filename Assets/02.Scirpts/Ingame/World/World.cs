@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace _02.Scirpts.Ingame
 {
+    
+    /// <summary>
+    /// 맵의 월드를 관리하는 클래스
+    /// </summary>
     public class World : MonoBehaviour
     {
         [Header("디버그")]
@@ -56,7 +60,7 @@ namespace _02.Scirpts.Ingame
                 {
                     Tile tile =  Instantiate(tileBase, this.transform).GetComponent<Tile>();
                     map[i, j] = tile;
-                    tile.Init(i,j,tileSize);
+                    tile.Init(i,j,tileSize, (i == 0 ||  j == 0 ? TileInfo.NotConstructable : TileInfo.None));
                     tile.name = $"Tile({i},{j})[C : {tile.IsConstructable}]";
                 }
             }

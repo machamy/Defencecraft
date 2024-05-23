@@ -15,6 +15,9 @@ public class AudioManager : MonoBehaviour
     
     [SerializeField] private SoundEmitterPoolSO emitterPoolSO;
     [SerializeField] private int _initSize = 10;
+
+    [SerializeField] private AudioChannelSO EffectChannel = default;
+    [SerializeField] private AudioChannelSO MusicChannel = default;
     
     
     [Header("Audio control")]
@@ -40,9 +43,11 @@ public class AudioManager : MonoBehaviour
     
     private void Awake()
     {
-        
         emitterPoolSO.init(_initSize);
         emitterPoolSO.SetParent(this.transform);
+        
+        EffectChannel.OnAudioPlayRequested += PlayAudioQ;
+        MusicChannel.OnAudioPlayRequested += PlayMusic;
     }
 
     private void Start()
@@ -50,6 +55,19 @@ public class AudioManager : MonoBehaviour
         ChangeMasterVolume(_masterVolume);
         ChangeMusicVolume(_musicVolume);
         ChangeSfxVolume(_sfxVolume);
+    }
+
+    /// <summary>
+    /// 에디터상에서 변경해도 적용되게
+    /// </summary>
+    private void OnValidate()
+    {
+        if (Application.isPlaying)
+        {
+            ChangeMasterVolume(_masterVolume);
+            ChangeMusicVolume(_musicVolume);
+            ChangeSfxVolume(_sfxVolume);
+        }
     }
 
     void ChangeMasterVolume(float value)
@@ -69,7 +87,13 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    private void PlayMusic(AudioQueueSO queueSo, AudioConfigurationSO config)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="queueSo"></param>
+    /// <param name="config"></param>
+    /// <param name="pos"> 무시되는 값</param>
+    private void PlayMusic(AudioQueueSO queueSo, AudioConfigurationSO config, Vector3 pos = default)
     {
         AudioClip audio = queueSo.GetClip();
         if (musicEmitter != null && musicEmitter.IsPlaying)
@@ -89,7 +113,7 @@ public class AudioManager : MonoBehaviour
     {
         AudioClip song = q.GetClip();
         SoundEmitter emitter = emitterPoolSO.Get();
-        emitter.PlayAudioClip(song,config,q.looping);
+        emitter.PlayAudioClip(song,config,q.looping,pos);
         if (!q.looping)
         {
             emitter.OnSoundFinished += StopCleanEmitter;

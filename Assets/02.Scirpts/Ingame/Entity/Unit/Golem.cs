@@ -17,7 +17,7 @@ public class Golem : _02.Scirpts.Ingame.Entity.AbstractEnemy
         Search();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (true && !iscollision)//시야에 있을 때
         {

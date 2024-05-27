@@ -17,8 +17,8 @@ public class Goblin : _02.Scirpts.Ingame.Entity.AbstractEnemy
         damage = 20;
         Search();
     }
-
-    void Update()
+    
+    void FixedUpdate()
     {
         if(true && !iscollision)//시야에 있을 때
         {

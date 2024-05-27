@@ -13,15 +13,15 @@ namespace _02.Scirpts.Ingame
         public int buildingType = 0;
 
         public bool isConstructMode = true;
-        private bool isbuildable = true;
+        private bool isBuildable = true;
 
-        private int[,] building_size = { { 3, 3 }, { 2, 2 }, { 2, 2 }, { 2, 2 } };
-        private bool[,] isconstructable;
+        private int[,] buildingSize = { { 3, 3 }, { 2, 2 }, { 2, 2 }, { 2, 2 } };
+        private bool[,] isConstructable;
 
-        private int[] world_size;
+        private int[] worldSize;
 
         private GameObject building;
-        public GameObject buildingprefab;
+        public GameObject[] buildingprefab = new GameObject[4];
 
         Vector3 pos;
 
@@ -31,14 +31,14 @@ namespace _02.Scirpts.Ingame
         {
             World worldscript = GetComponent<World>();
 
-            world_size = new int[2] { worldscript.Width, worldscript.Height };
+            worldSize = new int[2] { worldscript.Width, worldscript.Height };
 
             //좌표별 isconstructable에 true로 초기화
-            for (int i = 0; i < world_size[0]; i++)
+            for (int i = 0; i < worldSize[0]; i++)
             {
-                for (int j = 0; j < world_size[1]; j++)
+                for (int j = 0; j < worldSize[1]; j++)
                 {
-                    isconstructable[i, j] = true;
+                    isConstructable[i, j] = true;
                 }
             }
         }
@@ -53,10 +53,10 @@ namespace _02.Scirpts.Ingame
                 //건설모드라면 반투명 건물 생성
                 if (isConstructMode)
                 {
-                    building = Instantiate(buildingprefab);
+                    building = Instantiate(buildingprefab[buildingType]);
 
                     //새로 클릭 할때마다 초기화
-                    isbuildable = true;
+                    isBuildable = true;
                 }
             }
 
@@ -92,26 +92,24 @@ namespace _02.Scirpts.Ingame
                 int tilenum_z = Mathf.RoundToInt(pos.z) / 5;
 
                 //해당 좌표에 타일이 있다면 tile 정보 불러오기
-                if ((tilenum_x >= 0 && tilenum_x + building_size[buildingType, 0] < 21) && (tilenum_z >= 0 && tilenum_z + building_size[buildingType, 1] < 21))
+                if ((tilenum_x >= 0 && tilenum_x + buildingSize[buildingType, 0] < 21) && (tilenum_z >= 0 && tilenum_z + buildingSize[buildingType, 1] < 21))
                 {
-                    for(int i = 0; i < building_size[buildingType, 0]; i++)
+                    for(int i = tilenum_x; i < buildingSize[buildingType, 0]; i++)
                     {
-                        for(int j = 0; j < building_size[buildingType, 1]; j++)
+                        for(int j = tilenum_z; j < buildingSize[buildingType, 1]; j++)
                         {
                             //타일정보 받아오기
                             Tile tile = worldscript.GetTile(tilenum_x + i, tilenum_z + j);
 
-                            Debug.Log(tile.IsConstructable);
-
                             //건설가능한 지역인지 확인
-                            if (!isconstructable[i, j])
+                            if (!isConstructable[i, j] || !tile.IsConstructable)
                             {
-                                isbuildable = false;
+                                isBuildable = false;
                                 break;
                             }
                         }
 
-                        if (!isbuildable)
+                        if (!isBuildable)
                         {
                             break;
                         }
@@ -119,30 +117,30 @@ namespace _02.Scirpts.Ingame
                 }
                 else //타일이 없다면 파괴
                 {
-                    isbuildable = false;
+                    isBuildable = false;
                 }
 
                 //건설 가능 판별이 났다면 건설
-                if (isbuildable)
+                if (isBuildable)
                 {
                     //건설
 
                     //임시로 만들어놓은 건설 알림
                     //Instantiate(buildingprefab, new Vector3(pos.x, pos.y, pos.z), Quaternion.Euler(0, 0, 0));
-                    Instantiate(buildingprefab, new Vector3(pos.x + 5, pos.y, pos.z), Quaternion.Euler(0, 0, 0));
-                    Instantiate(buildingprefab, new Vector3(pos.x, pos.y, pos.z + 5), Quaternion.Euler(0, 0, 0));
-                    Instantiate(buildingprefab, new Vector3(pos.x + 5, pos.y, pos.z + 5), Quaternion.Euler(0, 0, 0));
+                    Instantiate(buildingprefab[buildingType], new Vector3(pos.x + 5, pos.y, pos.z), Quaternion.Euler(0, 0, 0));
+                    Instantiate(buildingprefab[buildingType], new Vector3(pos.x, pos.y, pos.z + 5), Quaternion.Euler(0, 0, 0));
+                    Instantiate(buildingprefab[buildingType], new Vector3(pos.x + 5, pos.y, pos.z + 5), Quaternion.Euler(0, 0, 0));
 
                     //건설 불가 지역으로 설정
-                    for (int i = 0; i < building_size[buildingType, 0]; i++)
+                    for (int i = tilenum_x; i < buildingSize[buildingType, 0]; i++)
                     {
-                        for (int j = 0; j < building_size[buildingType, 1]; j++)
+                        for (int j = tilenum_z; j < buildingSize[buildingType, 1]; j++)
                         {
                             //타일정보 받아오기
                             Tile tile = worldscript.GetTile(tilenum_x + i, tilenum_z + j);
 
                             //건설 불가 지역으로 설정
-                            isconstructable[i, j] = false;
+                            isConstructable[i, j] = false;
                         }
                     }
 
@@ -154,5 +152,6 @@ namespace _02.Scirpts.Ingame
 
             }
         }
+
     }
 }

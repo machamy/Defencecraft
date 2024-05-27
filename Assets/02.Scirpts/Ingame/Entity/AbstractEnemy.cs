@@ -11,9 +11,15 @@ namespace _02.Scirpts.Ingame.Entity
         protected int hp;
         protected float speed;
         protected int damage;
+        protected bool iscollision = false;
         private void Start()
         {
+
+        }
+        protected void init()
+        {
             rigid = GetComponent<Rigidbody>();
+            rigid.velocity = Vector3.zero;
         }
         protected abstract void Idle();
         protected abstract void Move(AbstractConstruct target);

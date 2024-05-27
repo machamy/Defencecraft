@@ -9,22 +9,18 @@ public class Goblin : _02.Scirpts.Ingame.Entity.AbstractEnemy
 
     AbstractConstruct Target;
 
-    
-
-
-    // Start is called before the first frame update
     void Start()
     {
+        init();
         hp = 50;
         speed = 4.0f;
         damage = 20;
         Search();
     }
 
-        // Update is called once per frame
     void Update()
     {
-        if(true)//시야에 있을 때
+        if(true && !iscollision)//시야에 있을 때
         {
             //Target = 시야에 있는 것
             Move(Target);
@@ -38,7 +34,12 @@ public class Goblin : _02.Scirpts.Ingame.Entity.AbstractEnemy
 
     private void OnCollisionEnter(Collision collision)
     {
-           
+        if (collision.gameObject.CompareTag("building"))
+        {
+            iscollision = true;
+            rigid.isKinematic = true;
+            StartCoroutine(Attack(Target));
+        }
     }
     protected override void Idle()
     {
@@ -53,18 +54,12 @@ public class Goblin : _02.Scirpts.Ingame.Entity.AbstractEnemy
     }
     protected override IEnumerator Attack(AbstractConstruct target)
     {
-        if (target != null)
+        while (target != null || target.hp < 0)
         { 
-            target.Damaged(damage);
+            target.OnDamaged(damage);
             yield return new WaitForSeconds(1.0f);
         }
         
-
-        else
-        {
-            throw new System.NotImplementedException();
-        }
-        //if(target.)
     }
 
     protected override void Damaged(int damage)
@@ -78,8 +73,17 @@ public class Goblin : _02.Scirpts.Ingame.Entity.AbstractEnemy
 
     protected override void Search()
     {
+        Target = FindObjectOfType<Nexus>();
+        //if(시야에 확인되는 것이 있을 때){}
         Target = FindObjectOfType<AbstractConstruct>();
-
+        if (Target != null)
+        {
+            Debug.Log(Target.name + " has detected!");
+        }
+        else
+        {
+            Debug.Log("nothing detected!");
+        }
     }
 }
 

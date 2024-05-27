@@ -54,7 +54,7 @@ public class Goblin : _02.Scirpts.Ingame.Entity.AbstractEnemy
     }
     protected override IEnumerator Attack(AbstractConstruct target)
     {
-        while (target != null || target.hp < 0)
+        while (target != null && !(target.hp < 0))
         { 
             target.OnDamaged(this, damage);
             yield return new WaitForSeconds(1.0f);

@@ -448,6 +448,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3506668725992589073, guid: 0a3a60dde178a1b45ba6916d807cd5a5,
+        type: 3}
+      propertyPath: buildingPrefab.Array.data[0]
+      value: 
+      objectReference: {fileID: 161095633021880786, guid: de7ef4aca471735499cb5b87ee51e7fa,
+        type: 3}
+    - target: {fileID: 3506668725992589073, guid: 0a3a60dde178a1b45ba6916d807cd5a5,
+        type: 3}
+      propertyPath: buildingPrefab.Array.data[1]
+      value: 
+      objectReference: {fileID: 161095633021880786, guid: 9e12902ba6bcbf14a9775dade4f2774a,
+        type: 3}
+    - target: {fileID: 3506668725992589073, guid: 0a3a60dde178a1b45ba6916d807cd5a5,
+        type: 3}
+      propertyPath: buildingPrefab.Array.data[2]
+      value: 
+      objectReference: {fileID: 161095633021880786, guid: 9542ad4e063bb1849a2932e66eb869f1,
+        type: 3}
+    - target: {fileID: 3506668725992589073, guid: 0a3a60dde178a1b45ba6916d807cd5a5,
+        type: 3}
+      propertyPath: buildingPrefab.Array.data[3]
+      value: 
+      objectReference: {fileID: 161095633021880786, guid: 323e43f8fc87e584a96327c40bef6d62,
+        type: 3}
     - target: {fileID: 5377780732323162864, guid: 0a3a60dde178a1b45ba6916d807cd5a5,
         type: 3}
       propertyPath: m_Name

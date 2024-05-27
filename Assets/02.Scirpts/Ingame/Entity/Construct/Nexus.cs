@@ -6,12 +6,6 @@ using UnityEngine.Rendering;
 
 public class Nexus : _02.Scirpts.Ingame.Entity.AbstractConstruct
 {
-    [HideInInspector] public int hp;
-
-    private int maxhp = 300;
-    private int[] size;
-    private int level = 1;
-
     //처음 시작할 때 변수 초기화 (OnEnable을 써야할지 질문해야함) 
     public void Start()
     {
@@ -35,7 +29,7 @@ public class Nexus : _02.Scirpts.Ingame.Entity.AbstractConstruct
     }
 
     //업그레이드 이벤트가 발생했을 때
-    public override void Upgrade()
+    public override void OnUpgrade()
     {
         float hprate = hp / maxhp;
 
@@ -47,7 +41,7 @@ public class Nexus : _02.Scirpts.Ingame.Entity.AbstractConstruct
     }
 
     //공격받는 이벤트가 발생했을 때
-    public override void Damaged(int damage)
+    public override void OnDamaged(int damage)
     {
         hp -= damage;
 

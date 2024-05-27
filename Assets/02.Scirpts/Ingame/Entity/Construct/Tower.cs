@@ -3,13 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tower : AbstractConstruct
+public class Tower : _02.Scirpts.Ingame.Entity.AbstractConstruct
 {
-    [HideInInspector] public int hp;
-
-    private int maxhp = 300;
-    private int[] size = new int[2] { 2, 2 };
-    private int level = 1;
+    public void Start()
+    {
+        hp = 300;
+        maxhp = 300;
+        size = new int[2] { 3, 3 };
+        level = 1;
+    }
 
     //처음 만들어질 때 변수 초기화
     public override void ConstructTower()
@@ -30,9 +32,9 @@ public class Tower : AbstractConstruct
     }
 
     //업그레이드 이벤트가 발생했을 때
-    public override void Upgrade()
+    public override void OnUpgrade()
     {
-        float hprate = hp / maxhp;
+        float hprate = (float)hp / maxhp;
 
         switch (level)
         {
@@ -55,7 +57,7 @@ public class Tower : AbstractConstruct
     }
 
     //공격받는 이벤트가 발생했을 때
-    public override void Damaged(int damage)
+    public override void OnDamaged(int damage)
     {
         hp -= damage;
 

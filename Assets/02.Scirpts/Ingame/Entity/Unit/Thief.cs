@@ -6,7 +6,7 @@ using UnityEngine;
 public class Thief : _02.Scirpts.Ingame.Entity.AbstractEnemy
 {
     AbstractConstruct Target;
-
+    // 건물 사이로 이동하니 라인짤 때 obstacle의 영향 안받도록 해줘야 한다.
     void Start()
     {
         init();

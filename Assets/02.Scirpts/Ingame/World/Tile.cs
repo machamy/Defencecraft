@@ -27,6 +27,7 @@ namespace _02.Scirpts.Ingame
         private int i, j;
         private float size;
 
+
         public bool IsInitialized { private set; get; } = false;
 
         [SerializeField] private TileInfo tileInfo = TileInfo.None;
@@ -36,6 +37,11 @@ namespace _02.Scirpts.Ingame
         /// 건축가능 여부
         /// </summary>
         public bool IsConstructable => tileInfo == TileInfo.None || Construct != null;
+
+        /// <summary>
+        /// 이동가능 여부
+        /// </summary>
+        public bool IsWalkable => Construct != null && !(tileInfo == TileInfo.Obstacle);
 
         public AbstractConstruct Construct;
 

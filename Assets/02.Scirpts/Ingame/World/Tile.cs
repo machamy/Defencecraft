@@ -36,7 +36,7 @@ namespace _02.Scirpts.Ingame
         /// <summary>
         /// 건축가능 여부
         /// </summary>
-        public bool IsConstructable => tileInfo == TileInfo.None || Construct != null;
+        public bool IsConstructable => tileInfo == TileInfo.None && Construct != null;
 
         /// <summary>
         /// 이동가능 여부

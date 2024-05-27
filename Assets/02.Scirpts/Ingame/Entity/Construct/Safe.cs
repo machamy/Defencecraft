@@ -58,14 +58,9 @@ public class Safe : _02.Scirpts.Ingame.Entity.AbstractConstruct
     }
 
     //공격받는 이벤트가 발생했을 때
-    public override void OnDamaged(int damage)
+    public override void OnDamaged(Entity attacker, int damage)
     {
-        hp -= damage;
-
+        base.OnDamaged(attacker, damage);
         Debug.Log($"Safe hit, hp = {hp}");
-
-        //hp가 바닥난다면 파괴
-        if (hp < 0)
-            DestroyTower();
     }
 }

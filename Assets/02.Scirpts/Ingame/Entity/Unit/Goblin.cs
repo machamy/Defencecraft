@@ -56,7 +56,7 @@ public class Goblin : _02.Scirpts.Ingame.Entity.AbstractEnemy
     {
         while (target != null || target.hp < 0)
         { 
-            target.OnDamaged(damage);
+            target.OnDamaged(this, damage);
             yield return new WaitForSeconds(1.0f);
         }
         

@@ -14,7 +14,7 @@ public class GameManager : Singleton<GameManager>
     
     public UnityEvent OnGamePaused;
     public UnityEvent OnGameResumed;
-    
+
     /// <summary>
     /// 게임 속도를 조정합니다.
     /// </summary>

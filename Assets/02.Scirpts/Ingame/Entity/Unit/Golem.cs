@@ -56,7 +56,7 @@ public class Golem : _02.Scirpts.Ingame.Entity.AbstractEnemy
     {
         if (target != null)
         {
-            target.OnDamaged(damage);
+            target.OnDamaged(this, damage);
             yield return new WaitForSeconds(1.0f);
         }
         else

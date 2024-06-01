@@ -9,8 +9,8 @@ using UnityEngine;
 /// </summary>
 public class DialogueController : MonoBehaviour
 {
-    [SerializeField] private TextMeshPro NameTMP;
-    [SerializeField] private TextMeshPro TextTMP;
+    [SerializeField] private TextMeshProUGUI NameTMP;
+    [SerializeField] private TextMeshProUGUI TextTMP;
 
     private bool isTyping;
     public float typeDelay;

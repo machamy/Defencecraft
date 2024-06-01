@@ -63,9 +63,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e37b2db7c66096f438220f11f447a3fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  issConstructMode: 1
-  buildingprefab: {fileID: 161095633021880786, guid: de7ef4aca471735499cb5b87ee51e7fa,
-    type: 3}
+  isConstructMode: 1
+  buildingPrefab:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  buildingTypeIndex: 0
+  mouseToPlanePos: {x: 0, y: 0, z: 0}
 --- !u!156049354 &528554460220638378
 Grid:
   m_ObjectHideFlags: 0
@@ -73,7 +78,7 @@ Grid:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5377780732323162864}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CellSize: {x: 1, y: 1, z: 1}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 2

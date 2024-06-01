@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text text_RemainEnemy;
     [SerializeField] private Text text_RemainWave;
 
+    public DialogueController DialogueController;
 
     public void Awake()
     {

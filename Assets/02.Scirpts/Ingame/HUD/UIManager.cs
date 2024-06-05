@@ -16,11 +16,18 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text text_RemainEnemy;
     [SerializeField] private Text text_RemainWave;
 
+
+    public Canvas Canvas;
     public DialogueController DialogueController;
 
     public void Awake()
     {
         RegisterUIUpdate();
+    }
+
+    public void Start()
+    {
+        Canvas = FindObjectOfType<Canvas>();
     }
 
     /// <summary>

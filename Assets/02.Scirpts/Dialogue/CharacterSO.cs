@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using _02.Scirpts.Dictionary;
@@ -10,9 +11,17 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewCharacterSO", menuName = "Scriptable Object/Dialogue/Character")]
 public class CharacterSO : ScriptableObject
 {
+    private static Dictionary<string, CharacterSO> _characterDict = new Dictionary<string, CharacterSO>();
+    public static CharacterSO GetBySOName(string name) => _characterDict[name];
+
     public Sprite fullSprite;
 
     [SerializeField]private SerializableDict<Face, Sprite> faceDict;
+
+    private void Awake()
+    {
+        _characterDict.Add(name,this);
+    }
 
     public Sprite GetFace(Face face)
     {

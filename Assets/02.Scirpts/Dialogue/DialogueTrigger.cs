@@ -8,7 +8,7 @@ namespace _02.Scirpts.Dialogue
     /// </summary>
     public class DialogueTrigger : MonoBehaviour
     {
-        public DialogueScriptSO[] scripts;
+        // public DialogueScriptSO[] scripts;
         public DialogueController Controller;
 
         public void Trigger(int idx)

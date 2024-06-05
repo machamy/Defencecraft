@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a027d2749a098644a5e18ec6eceba3f, type: 3}
-  m_Name: NewCharacterSO
+  m_Name: TestCharicter2
   m_EditorClassIdentifier: 
-  fullSprite: {fileID: 0}
+  fullSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   faceDict:
     data:
     - key: 1

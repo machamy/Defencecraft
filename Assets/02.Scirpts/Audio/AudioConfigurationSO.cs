@@ -8,7 +8,7 @@ namespace _02.Scirpts.Audio
     /// 오디오 설정 저장 클래스
     /// https://github.com/UnityTechnologies/open-project-1/blob/release/UOP1_Project/Assets/Scripts/Audio/AudioData/AudioConfigurationSO.cs
     /// </summary>
-    [CreateAssetMenu(fileName = "NewAudioConfig", menuName = "Scriptable Object/Audio/AudioConfig" )]
+    [CreateAssetMenu(fileName = "NewAudioConfig", menuName = "Audio/AudioConfig" )]
     public class AudioConfigurationSO : ScriptableObject
     {
         public AudioMixerGroup MixerGroup = null;

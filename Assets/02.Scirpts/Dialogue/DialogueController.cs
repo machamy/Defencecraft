@@ -13,7 +13,7 @@ public class DialogueController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI NameTMP;
     [SerializeField] private TextMeshProUGUI TextTMP;
 
-    [SerializeField] private CharacterSO defaultCharacterSo;
+    // [SerializeField] private CharacterSO defaultCharacterSo;
 
     public bool isActive = false;
 
@@ -44,12 +44,12 @@ public class DialogueController : MonoBehaviour
     /// <summary>
     /// 스탠딩 풀
     /// </summary>
-    private StandingPool _standingPool;
+    [SerializeField]private StandingPoolSO _standingPoolSo;
 
     public void Awake()
     {
-        _standingPool.SetParent(this.transform);
-        _standingPool.init(2);
+        _standingPoolSo.SetParent(this.transform);
+        _standingPoolSo.init(2);
         _standingDict = new Dictionary<string, Standing>();
         msgIdx = 0;
     }
@@ -60,17 +60,33 @@ public class DialogueController : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 이전프레임 터치했는지
+    /// </summary>
+    private bool isTouched = false;
+
     public void Update()
     {
-        if (isTouchEnabled && Input.touchCount > 0)
-        {
-            if (!isActive)
+        // Debug.Log($"{isTouchEnabled} && {Input.touchCount} {Input.GetMouseButton(0)}");
+        if (isTouchEnabled)
+            if(Input.touchCount > 0 || Input.GetMouseButton(0))
             {
-                StartDialogue();
-                return;
+                if (isTouched) // 꾹 누르는거 무시
+                    return;
+                
+                if (!isActive)
+                {
+                    StartDialogue();
+                    isActive = true;
+                    return;
+                }
+                OnTouch();
+                isTouched = true;
             }
-            OnTouch();
-        }
+            else
+            {
+                isTouched = false;
+            }
     }
 
     /// <summary>
@@ -101,6 +117,7 @@ public class DialogueController : MonoBehaviour
             Debug.LogWarning("대본이 설정되지 않음");
             return;
         }
+        Debug.Log($"[{this.GetType().Name}] Dialogue({DialogueScriptSo.name}) Started");
         _dialogueEnumerator = DialogueScriptSo.ScriptEnumerator(this);
     }
 
@@ -130,6 +147,8 @@ public class DialogueController : MonoBehaviour
         StartCoroutine(TypeRoutine(msg));
     }
 
+    public void Display(Standing standing, string msg = "") => Display(standing.name, msg);
+
     private Dictionary<string, Standing> _standingDict;
 
     
@@ -144,9 +163,9 @@ public class DialogueController : MonoBehaviour
         Standing result;
         if (!_standingDict.TryGetValue(name, out result))
         {
-            result = _standingPool.Get();
+            result = _standingPoolSo.Get();
             result.name = name;
-            result.CharacterSO = defaultCharacterSo;
+            // result.CharacterSO = defaultCharacterSo;
         }
         return result;
     }
@@ -154,7 +173,7 @@ public class DialogueController : MonoBehaviour
     public Standing CreateStanding(string name, CharacterSO characterSo)
     {
         Standing result;
-        result = _standingPool.Get();
+        result = _standingPoolSo.Get();
         result.name = name;
         result.CharacterSO = characterSo;
         return result;
@@ -175,7 +194,7 @@ public class DialogueController : MonoBehaviour
         // 스탠딩 제거
         foreach (var standingsValue in _standingDict.Values)
         {
-            _standingPool.Return(standingsValue);
+            _standingPoolSo.Return(standingsValue);
         }
         _standingDict.Clear();
     }
@@ -195,6 +214,7 @@ public class DialogueController : MonoBehaviour
     {
         currentTypeIdx = 0;
         var wait = new WaitForSeconds(typeDelay);
+        isTyping = true;
         while (currentTypeIdx < msg.Length && isTyping)
         {
             TextTMP.text = msg.Substring(0, currentTypeIdx+1);

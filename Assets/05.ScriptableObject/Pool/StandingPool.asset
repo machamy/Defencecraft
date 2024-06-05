@@ -9,13 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a027d2749a098644a5e18ec6eceba3f, type: 3}
-  m_Name: TestCharicter
+  m_Script: {fileID: 11500000, guid: 8565501af4e3466a8b72efbba03d4d53, type: 3}
+  m_Name: StandingPool
   m_EditorClassIdentifier: 
-  fullSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  faceDict:
-    data:
-    - key: 1
-      value: {fileID: 0}
-    - key: 0
-      value: {fileID: 0}
+  _factory: {fileID: 11400000, guid: baa3bb0a998d96c44ab802406fb27138, type: 2}

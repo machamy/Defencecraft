@@ -9,13 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a027d2749a098644a5e18ec6eceba3f, type: 3}
-  m_Name: TestCharicter2
+  m_Script: {fileID: 11500000, guid: 5e622e92bbab465c8b74f67e4c4e2b58, type: 3}
+  m_Name: StandingFactory
   m_EditorClassIdentifier: 
-  fullSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  faceDict:
-    data:
-    - key: 1
-      value: {fileID: 0}
-    - key: 0
-      value: {fileID: 0}
+  standingPrefab: {fileID: 2302494789504010690, guid: cae3decc40aebda40991c5270d9ac249,
+    type: 3}

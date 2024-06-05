@@ -5,7 +5,7 @@ namespace _02.Scirpts.Audio
     /// <summary>
     /// 음악을 재생하는 중개자
     /// </summary>
-    [CreateAssetMenu(fileName = "NewAudioChannel", menuName = "Scriptable Object/Event/AudioChannel")]
+    [CreateAssetMenu(fileName = "NewAudioChannel", menuName = "Event/AudioChannel")]
     public class AudioChannelSO : ScriptableObject
     {
         public AudioPlayAction OnAudioPlayRequested;

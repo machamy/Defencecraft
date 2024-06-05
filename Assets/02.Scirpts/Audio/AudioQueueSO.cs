@@ -8,7 +8,7 @@ namespace _02.Scirpts.Audio
     /// <summary>
     /// 음악 데이터가 저장되는 SO
     /// </summary>
-    [CreateAssetMenu(fileName = "NewAudioQueue", menuName = "Scriptable Object/Audio/AudioQueue")]
+    [CreateAssetMenu(fileName = "NewAudioQueue", menuName = "Audio/AudioQueue")]
     public class AudioQueueSO : ScriptableObject
     {
         public bool looping = false;

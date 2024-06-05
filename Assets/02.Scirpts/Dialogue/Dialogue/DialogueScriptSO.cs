@@ -8,6 +8,7 @@ namespace _02.Scirpts.Dialogue
     // [CreateAssetMenu(fileName = "newDialogueScript", menuName = "ScriptableObject/DialogueScript/CreateScriptA")]
     public abstract class DialogueScriptSO: ScriptableObject
     {
+        protected int idx = 0;
 
         /// <summary>
         /// 

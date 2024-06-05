@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace _02.Scirpts.Dialogue
 {
-    public class StandingPool : ComponentPoolSO<Standing>
+    [CreateAssetMenu(fileName = "NewStandingPool", menuName = "Dialogue/StandingPool")]
+    public class StandingPoolSO : ComponentPoolSO<Standing>
     {
         [SerializeField] private StandingFactorySO _factory;
         public override IFactory<Standing> Factory {

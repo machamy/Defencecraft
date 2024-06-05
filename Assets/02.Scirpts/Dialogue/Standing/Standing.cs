@@ -4,7 +4,13 @@ namespace _02.Scirpts.Dialogue
 {
     public class Standing : MonoBehaviour
     {
-        public string CharacterName;
+        // public string CharacterName;
         public CharacterSO CharacterSO;
+
+
+        public void SetFace(Face face)
+        {
+            
+        }
     }
 }

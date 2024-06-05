@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _02.Scirpts.Audio
 {
-    [CreateAssetMenu(fileName = "SoundEmitterPoolSO", menuName = "Scriptable Object/SoundEmitter/SoundEmitterPoolSO" )]
+    [CreateAssetMenu(fileName = "SoundEmitterPoolSO", menuName = "SoundEmitter/SoundEmitterPoolSO" )]
     public class SoundEmitterPoolSO : ComponentPoolSO<SoundEmitter>
     {
         [SerializeField] private SoundEmitterFactorySO _factory;

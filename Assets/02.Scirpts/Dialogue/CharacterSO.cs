@@ -8,7 +8,7 @@ using UnityEngine;
 /// <summary>
 /// 캐릭터의 스프라이트, 표정등을 저장하는 클래스
 /// </summary>
-[CreateAssetMenu(fileName = "NewCharacterSO", menuName = "Scriptable Object/Dialogue/Character")]
+[CreateAssetMenu(fileName = "NewCharacterSO", menuName = "Dialogue/Character")]
 public class CharacterSO : ScriptableObject
 {
     private static Dictionary<string, CharacterSO> _characterDict = new Dictionary<string, CharacterSO>();

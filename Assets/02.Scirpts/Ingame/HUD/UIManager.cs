@@ -4,7 +4,7 @@ using _02.Scirpts.Events;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
     [SerializeField] private GameObject go_ingameParent;
     [SerializeField] private GameObject go_pauseParent;

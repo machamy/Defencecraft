@@ -1,3 +1,4 @@
+using System;
 using _02.Scirpts.Ingame;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,6 +15,12 @@ public class GameManager : Singleton<GameManager>
     
     public UnityEvent OnGamePaused;
     public UnityEvent OnGameResumed;
+
+    public void Start()
+    {
+        // 대충 UIManager Singleton 인스턴스 생성하기
+        UIManager.Instance.GetInstanceID();
+    }
 
     /// <summary>
     /// 게임 속도를 조정합니다.

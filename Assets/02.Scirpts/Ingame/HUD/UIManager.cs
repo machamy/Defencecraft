@@ -52,15 +52,16 @@ public class UIManager : Singleton<UIManager>
 
     public void RegisterUIUpdate()
     {
-        // 넥서스 데미지 이벤트 감지
-        EntityDamageChannel.OnDamageEvent += (attacker, damaged, damage) =>
-        {
-            if (damaged is Nexus nexus)
+        if(EntityDamageChannel is not null)
+            // 넥서스 데미지 이벤트 감지
+            EntityDamageChannel.OnDamageEvent += (attacker, damaged, damage) =>
             {
-                StartCoroutine(LateUpdateCoroutine(() => HealthTextUpdate(nexus)));
-            }
-                
-        };
+                if (damaged is Nexus nexus)
+                {
+                    StartCoroutine(LateUpdateCoroutine(() => HealthTextUpdate(nexus)));
+                }
+                    
+            };
         
         // TODO : 골드 변화 이벤트 감지 후 GoldTextUpdate() 구독
         // TODO : 적 사망 감지 후 RemainEntityTextUpdate() 구독

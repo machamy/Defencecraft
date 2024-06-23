@@ -3,6 +3,9 @@ using _02.Scirpts.Ingame;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// 게임의 전체적인 것을 총괄하는 클래스
+/// </summary>
 public class GameManager : Singleton<GameManager>
 {
 

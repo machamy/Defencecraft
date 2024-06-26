@@ -10,7 +10,7 @@ public class Tower : _02.Scirpts.Ingame.Entity.AbstractConstruct
 {
     public Scanner scanner;
     public GameObject bulletPrefab;
-    public float bulletSpeed;
+    public float bulletSpeed = 1f;
     public float bulletDelay = 1f;
     public int damage;
 
@@ -91,30 +91,25 @@ public class Tower : _02.Scirpts.Ingame.Entity.AbstractConstruct
 
     public void Attack()
     {
-        //타겟이 받은게 없다면 return
+        //타겟이 받은게 없다면 return 
         if (!scanner.nearestTarget)
             return;
 
         // 오브젝트 풀링 기능
-        // Transform bullet = GameManager.Instance.pool.Get(prefabId).transform;
+        GameObject bullet = Instantiate(bulletPrefab);
 
         //scanner에서 target 정보 받기
-        Vector3 targetpos = scanner.nearestTarget.position;
+        Vector3 targetpos = scanner.nearestTarget.transform.position;
         Vector3 dir = targetpos - transform.position;
         dir = dir.normalized;
 
         //bullet init
-        Transform bullet = bulletPrefab.transform;
-        bullet.position = transform.position;
-        bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
-        bulletPrefab.GetComponent<Bullet>().Init(damage, Vector3.zero);
+        Transform bullettransform = bullet.transform;
+        bullettransform.position = transform.position;
+        bullettransform.rotation = Quaternion.FromToRotation(Vector3.up, dir);
+        bullet.GetComponent<Bullet>().Init(damage, dir, scanner.nearestTarget);
 
 
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (!collision.collider.CompareTag("Enemy"))
-            return;
-    }
 }

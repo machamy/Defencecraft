@@ -1,24 +1,55 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     public float damage;
-
+    Transform target;
     Rigidbody rigid;
+    Vector3 dir;
+    bool isready = false;
 
     private void Awake()
     {
         rigid = GetComponent<Rigidbody>();
     }
 
-    public void Init(float damage, Vector3 dir)
+
+    private void Update()
     {
-        //ÃÑ¾Ë µ¥¹ÌÁö
+        if (target == null)
+        {
+            transform.Translate(Vector3.forward * 3f * Time.deltaTime);
+            return;
+        }
+
+        dir = target.position - transform.position;
+        transform.rotation = Quaternion.LookRotation(dir);
+
+        transform.Translate(Vector3.forward * 3f * Time.deltaTime);
+    }
+
+    public void Init(float damage, Vector3 dir, Transform target)
+    {
+        //ì´ì•Œ ë°ë¯¸ì§€
         this.damage = damage;
 
-        //ÃÑ¾Ë ¼Óµµ
+        //ì´ì•Œ ì†ë„
         rigid.velocity = dir * 3f;
+
+        //ëª©í‘œ ì§€ì 
+        this.target = target;
+
+        isready = true;
+
+
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Enemy"))
+            Destroy(gameObject);
     }
 }

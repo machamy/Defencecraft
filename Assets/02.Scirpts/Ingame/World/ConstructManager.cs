@@ -1,25 +1,27 @@
 using _02.Scirpts.Ingame.Entity;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Reflection.Emit;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 using static UnityEditor.PlayerSettings;
 
 namespace _02.Scirpts.Ingame
 {
     public class ConstructManager : MonoBehaviour
     {
-        public bool isConstructMode = true; //ConstructMode 일때만 Update문 진행
+        public bool isConstructMode = false; //ConstructMode 일때만 Update문 진행
 
         private bool isBuildable = true; // 마우스를 땐 위치의 건설 가능 여부
 
         //건설하고자 하는 건물의 정보
         [SerializeField] public GameObject[] buildingPrefab = new GameObject[4];
-        public int buildingTypeIndex = 0;
+        public int buildingTypeIndex = 0; // 0은 x 1은 타워 2는 금고 3은 벽
 
-        private GameObject ghostbuilding; //드래그 시 마우스를 따라가는 반투명 가이드 건물
+        private GameObject building; //설치하고자 하는 건물 오브잭트
 
         AbstractConstruct buildingScript; //건설하고자 하는 건물의 스크립트
 
@@ -32,7 +34,67 @@ namespace _02.Scirpts.Ingame
             worldscript = GetComponent<World>();
         }
 
-        void GetMousePosition()
+
+        void ActivateConstructMode()
+        {
+            isConstructMode = true;
+            //화면 톤 다운
+            //버튼 모양 변경
+            //시간 멈춤
+        }
+
+        void DeActivateConstructMode()
+        {
+            isConstructMode = false; 
+            //화면 톤 업
+            //버튼 모양 초기화
+            //시간 진행
+        }
+
+        public void TowerBuildBtn()
+        {
+            if (isConstructMode && buildingTypeIndex == 1) //버튼이 한번 더 클릭되었을 때 건설모드 종료
+            {
+                DeActivateConstructMode();
+                return;
+            }
+
+            if(!isConstructMode)
+                ActivateConstructMode();
+
+            buildingTypeIndex = 1;
+        }
+
+        public void SafeBuildBtn()
+        {
+            Debug.Log("금고 버튼 눌림");
+            if (isConstructMode && buildingTypeIndex == 2) //버튼이 한번 더 클릭되었을 때 건설모드 종료
+            {
+                DeActivateConstructMode();
+                return;
+            }
+
+            if (!isConstructMode)
+                ActivateConstructMode();
+
+            buildingTypeIndex = 2;
+        }
+
+        public void WallBuildBtn()
+        {
+            if (isConstructMode && buildingTypeIndex == 3) //버튼이 한번 더 클릭되었을 때 건설모드 종료
+            {
+                DeActivateConstructMode();
+                return;
+            }
+
+            if (!isConstructMode)
+                ActivateConstructMode();
+
+            buildingTypeIndex = 3;
+        }
+
+        void UpdateMousePosition()
         {
             //마우스 위치 불러오기
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -50,48 +112,77 @@ namespace _02.Scirpts.Ingame
         void SetTileConstruct(int x, int y, GameObject building)
         {
             //건설 불가 지역으로 설정
-            for (int i = x; i < buildingScript.size[0]; i++)
+            for (int i = 0; i < buildingScript.size[0]; i++)
             {
-                for (int j = y; j < buildingScript.size[0]; j++)
+                for (int j = 0; j < buildingScript.size[1]; j++)
                 {
                     //타일정보 받아오기
                     Tile tile = worldscript.GetTile(x + i, y + j);
 
                     //건설 불가 지역으로 설정
-                    tile.Construct = building.GetComponent<AbstractConstruct>();
-                    Debug.Log(tile.Construct);
+                    tile.Construct = buildingScript;
                 }
             }
         }
 
-
-        private void Start()
+        void CheckTile(int tilenum_x, int tilenum_z, int[] size)
         {
+            //해당 좌표에 타일이 있다면 tile 정보 불러오기
+            if ((tilenum_x >= 0 && tilenum_x + size[0] < 21) && (tilenum_z >= 0 && tilenum_z + size[1] < 21))
+            {
+                for (int i = 0; i<size[0]; i++)
+                {
+                    for (int j = 0; j<size[1]; j++)
+                    {
+                        //타일정보 받아오기
+                        Tile tile = worldscript.GetTile(tilenum_x + i, tilenum_z + j);
 
+                        //건설가능한 지역인지 확인
+                        if (!tile.IsConstructable)
+                        {
+                            isBuildable = false;
+                            break;
+                        }
+                    }
+
+                    if (!isBuildable)
+                    {
+                        break;
+                    }
+                }
+            }
+            else //타일이 없다면 파괴
+            {
+                isBuildable = false;
+            }
         }
 
         private void Update()
         {
             if (isConstructMode)
             {
+                //UI 요소 안에 마우스가 있으면 리턴
+                if (EventSystem.current.IsPointerOverGameObject())
+                {
+                    return;
+                }
+
                 //마우스 내려갈때 ConstructPrefab 생성
                 if (Input.GetMouseButtonDown(0))
                 {
-                    Debug.Log("마우스 내려감");            
-                    ghostbuilding = Instantiate(buildingPrefab[buildingTypeIndex]);
-                   
-                    buildingScript = ghostbuilding.GetComponent<AbstractConstruct>();
+                    building = Instantiate(buildingPrefab[buildingTypeIndex]);
+                    buildingScript = building.GetComponent<AbstractConstruct>();
+                    //고스트 빌딩은 빌딩 상테
                     //새로 클릭 할때마다 초기화
                     isBuildable = true;
-                
                 }
 
                 //마우스 드래그중 반투명 건물이 마우스 따라다니게 하기
                 if (Input.GetMouseButton(0))
                 {
-                    GetMousePosition();
+                    UpdateMousePosition();
                     //반투명 건물의 위치 변경
-                    ghostbuilding.transform.position = mouseToPlanePos;
+                    building.transform.position = mouseToPlanePos;
                 }
 
                 //마우스를 땠을때
@@ -101,51 +192,25 @@ namespace _02.Scirpts.Ingame
                     int tilenum_x = Mathf.RoundToInt(mouseToPlanePos.x) / 5;
                     int tilenum_z = Mathf.RoundToInt(mouseToPlanePos.z) / 5;
 
-                    //해당 좌표에 타일이 있다면 tile 정보 불러오기
-                    if ((tilenum_x >= 0 && tilenum_x + buildingScript.size[0] < 21) && (tilenum_z >= 0 && tilenum_z + buildingScript.size[0] < 21))
-                    {
-                        for (int i = tilenum_x; i < buildingScript.size[0]; i++)
-                        {
-                            for (int j = tilenum_z; j < buildingScript.size[0]; j++)
-                            {
-                                //타일정보 받아오기
-                                Tile tile = worldscript.GetTile(i, j);
-
-                                //건설가능한 지역인지 확인
-                                if (!tile.IsConstructable)
-                                {
-                                    isBuildable = false;
-                                    break;
-                                }
-                            }
-
-                            if (!isBuildable)
-                            {
-                                break;
-                            }
-                        }
-                    }
-                    else //타일이 없다면 파괴
-                    {
-                        isBuildable = false;
-                    }
+                    //타일 정보 확인
+                    Debug.Log(buildingScript);
+                    CheckTile(tilenum_x, tilenum_z, buildingScript.size);
 
                     //건설 가능 판별이 났다면 건설
                     if (isBuildable)
                     {
-                        //건설
-                        GameObject building = Instantiate(buildingPrefab[buildingTypeIndex], new Vector3(mouseToPlanePos.x, 0, mouseToPlanePos.z), Quaternion.Euler(0f, 0f, 0f));
-
                         Tile tile = worldscript.GetTile(tilenum_x, tilenum_z);
 
                         SetTileConstruct(tilenum_x, tilenum_z, building);
                     }
                     else
                     {
-                        Destroy(ghostbuilding);
+                        Destroy(building);
                     }
                 }
             }
+            else
+                return;
         }
 
     }

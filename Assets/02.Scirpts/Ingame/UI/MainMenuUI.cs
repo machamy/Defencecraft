@@ -10,11 +10,6 @@ namespace _02.Scirpts.Ingame.UI
         [SerializeField] private BaseButton button_Credit;
         [SerializeField] private BaseButton button_Setting;
 
-        public void onAwake()
-        {
-            
-        }
-
 
     }
 }

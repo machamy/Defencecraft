@@ -1,7 +1,6 @@
 using _02.Scirpts.Ingame.Entity;
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Reflection.Emit;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -22,6 +21,11 @@ namespace _02.Scirpts.Ingame
         public int buildingTypeIndex = 0; // 0은 x 1은 타워 2는 금고 3은 벽
 
         private GameObject building; //설치하고자 하는 건물 오브잭트
+        SpriteRenderer buildingSpriteRenderer;
+
+        public GameObject buildableTile; //건설 가능여부를 알려주는 발판 
+        Sprite[] buildableTileImage = new Sprite[2];
+        int buildableTimeIndex = 0; //0은 설치 불가, 1은 설치 가능
 
         AbstractConstruct buildingScript; //건설하고자 하는 건물의 스크립트
 
@@ -171,8 +175,14 @@ namespace _02.Scirpts.Ingame
                 if (Input.GetMouseButtonDown(0))
                 {
                     building = Instantiate(buildingPrefab[buildingTypeIndex]);
+                    buildableTile.SetActive(true);
                     buildingScript = building.GetComponent<AbstractConstruct>();
                     //고스트 빌딩은 빌딩 상테
+                    buildingSpriteRenderer = building.GetComponent<SpriteRenderer>();
+                    Color color = buildingSpriteRenderer.color;
+                    color.a = 0.5f;
+                    buildingSpriteRenderer.color = color;
+                    
                     //새로 클릭 할때마다 초기화
                     isBuildable = true;
                 }
@@ -183,17 +193,37 @@ namespace _02.Scirpts.Ingame
                     UpdateMousePosition();
                     //반투명 건물의 위치 변경
                     building.transform.position = mouseToPlanePos;
+                    buildableTile.transform.position = mouseToPlanePos;
+
+                    int tilenum_x = Mathf.RoundToInt(mouseToPlanePos.x) / 5;
+                    int tilenum_z = Mathf.RoundToInt(mouseToPlanePos.z) / 5;
+
+                    CheckTile(tilenum_x, tilenum_z, buildingScript.size);
+
+                    //건설 가능 여부 이미지 변경
+                    if(isBuildable && buildableTimeIndex == 0)
+                    {
+                        buildableTile.GetComponent<SpriteRenderer>().sprite = buildableTileImage[1];
+                        buildableTimeIndex = 1;
+                    }else if(!isBuildable && buildableTimeIndex == 1)
+                    {
+                        buildableTile.GetComponent<SpriteRenderer>().sprite = buildableTileImage[0];
+                        buildableTimeIndex = 0;
+                    }
+
                 }
 
                 //마우스를 땠을때
                 if (Input.GetMouseButtonUp(0))
                 {
+                    //건설 가능 여부 이미지 비활성화
+                    buildableTile.SetActive(false);
+
                     //좌표 불러오기
                     int tilenum_x = Mathf.RoundToInt(mouseToPlanePos.x) / 5;
                     int tilenum_z = Mathf.RoundToInt(mouseToPlanePos.z) / 5;
 
                     //타일 정보 확인
-                    Debug.Log(buildingScript);
                     CheckTile(tilenum_x, tilenum_z, buildingScript.size);
 
                     //건설 가능 판별이 났다면 건설
@@ -202,6 +232,10 @@ namespace _02.Scirpts.Ingame
                         Tile tile = worldscript.GetTile(tilenum_x, tilenum_z);
 
                         SetTileConstruct(tilenum_x, tilenum_z, building);
+
+                        Color color = buildingSpriteRenderer.color;
+                        color.a = 1f;
+                        buildingSpriteRenderer.color = color;
                     }
                     else
                     {

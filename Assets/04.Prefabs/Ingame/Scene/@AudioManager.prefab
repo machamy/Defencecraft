@@ -52,5 +52,11 @@ MonoBehaviour:
   _masterVolume: 1
   _musicVolume: 1
   _sfxVolume: 1
+  MainVolumeChannelSO: {fileID: 11400000, guid: 2b3c7070c7d06fd46a821a7e832bbf76,
+    type: 2}
+  EffectVolumeChannelSO: {fileID: 11400000, guid: c603057b178e44840b8967c7fc9f90a2,
+    type: 2}
+  MusicVolumeChannelSO: {fileID: 11400000, guid: d666c4a8b9e382b4bb4504a7c1cb0bc0,
+    type: 2}
   testQueueSo: {fileID: 11400000, guid: fe89592a2a5fdd242a1a64ed6197cecc, type: 2}
   TestConfig: {fileID: 11400000, guid: b0f0893dfdf4df64ab3f5e1ebe14e992, type: 2}

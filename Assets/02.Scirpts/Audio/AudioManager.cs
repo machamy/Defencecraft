@@ -29,6 +29,9 @@ public class AudioManager : MonoBehaviour
     [Range(0f, 1f)]
     [SerializeField] private float _sfxVolume = 1f;
 
+    [SerializeField] private AudioVolumeChannelSO MainVolumeChannelSO;
+    [SerializeField] private AudioVolumeChannelSO EffectVolumeChannelSO;
+    [SerializeField] private AudioVolumeChannelSO MusicVolumeChannelSO;
 
     private SoundEmitter musicEmitter = null;
 
@@ -46,9 +49,26 @@ public class AudioManager : MonoBehaviour
         emitterPoolSO.init(_initSize);
         emitterPoolSO.SetParent(this.transform);
         
+    }
+
+    private void OnEnable()
+    {
         EffectChannel.OnAudioPlayRequested += PlayAudioQ;
         MusicChannel.OnAudioPlayRequested += PlayMusic;
+        MainVolumeChannelSO.OnVolumeChanged += ChangeMasterVolume;
+        EffectVolumeChannelSO.OnVolumeChanged += ChangeSfxVolume;
+        MusicVolumeChannelSO.OnVolumeChanged += ChangeMusicVolume;
     }
+
+    private void OnDisable()
+    {
+        EffectChannel.OnAudioPlayRequested -= PlayAudioQ;
+        MusicChannel.OnAudioPlayRequested -= PlayMusic;
+        MainVolumeChannelSO.OnVolumeChanged -= ChangeMasterVolume;
+        EffectVolumeChannelSO.OnVolumeChanged -= ChangeSfxVolume;
+        MusicVolumeChannelSO.OnVolumeChanged -= ChangeMusicVolume;
+    }
+
 
     private void Start()
     {

@@ -14,7 +14,7 @@ namespace _02.Scirpts.Audio
         /// 
         /// </summary>
         /// <param name="volume">0.0~1.0</param>
-        public void RaisePlayEvent(float volume)
+        public void RaiseVolumeEvent(float volume)
         {
             OnVolumeChanged?.Invoke(volume);
         }

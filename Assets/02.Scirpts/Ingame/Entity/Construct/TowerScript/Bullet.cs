@@ -8,7 +8,6 @@ public class Bullet : MonoBehaviour
     Transform target;
     Rigidbody rigid;
     Vector3 dir;
-    bool isready = false;
 
     private void Awake()
     {
@@ -40,11 +39,6 @@ public class Bullet : MonoBehaviour
 
         //목표 지점
         this.target = target;
-
-        isready = true;
-
-
-
     }
 
     private void OnCollisionEnter(Collision collision)

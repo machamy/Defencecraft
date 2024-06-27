@@ -14,7 +14,6 @@ public class Scanner : MonoBehaviour
     {
         targets = Physics.OverlapSphere(transform.position, scanRange, targetLayer);
         nearestTarget = GetNearest();
-        Debug.Log(targets);
     }
 
     Transform GetNearest()

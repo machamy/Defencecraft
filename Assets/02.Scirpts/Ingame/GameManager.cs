@@ -21,8 +21,6 @@ public class GameManager : Singleton<GameManager>
 
     public void Start()
     {
-        // 대충 UIManager Singleton 인스턴스 생성하기
-        UIManager.Instance.GetInstanceID();
     }
 
     /// <summary>

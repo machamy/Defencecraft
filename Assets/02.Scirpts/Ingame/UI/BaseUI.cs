@@ -1,7 +1,31 @@
-﻿namespace _02.Scirpts.Ingame.UI
+﻿using System;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace _02.Scirpts.Ingame.UI
 {
-    public class BaseUI
+    public class BaseUI : MonoBehaviour
     {
+
+        [SerializeField] private bool isFocused;
+        [SerializeField] private bool removeUIOnFocusClicked = true;
+
+        private GameObject go_instance;
         
+        public bool IsFocused
+        {
+            get => isFocused;
+            set => isFocused = value;
+        }
+
+        public GameObject getInstance()
+        {
+            if (go_instance == null)
+            {
+                go_instance = Instantiate(gameObject, FindObjectOfType(typeof(Canvas)).GameObject().transform);
+            }
+            return go_instance;
+        }
     }
 }

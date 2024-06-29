@@ -14,8 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fullSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   faceDict:
-    data:
+    dataList:
     - key: 1
-      value: {fileID: 0}
+      value: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+    - key: 3
+      value: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+    - key: 5
+      value: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
     - key: 0
-      value: {fileID: 0}
+      value: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  tsetst:
+  - {x: 0.03, y: 0, z: 0}
+  ss:
+    key: 0
+    value: {fileID: 0}

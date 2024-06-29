@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
         
         foreach (UIPrefabType prefabType in Enum.GetValues(typeof(UIPrefabType)))
         {
-            GameObject prefab = _prefabDict.Get(prefabType);
+            GameObject prefab = _prefabDict[prefabType];
             _uiGameObjectDict[prefabType] = prefab.GetComponent<BaseUI>().getInstance();
             _uiGameObjectDict[prefabType].SetActive(false);
         }
@@ -144,6 +144,7 @@ public class UIManager : MonoBehaviour
 
     public enum UIPrefabType
     {
+        None,
         UI_MainMenu,
         UI_FocusContainer,
         UI_Credit,

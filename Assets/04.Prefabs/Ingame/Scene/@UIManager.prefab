@@ -44,5 +44,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d358c2364ab4007b74ed4fcb9b2bb83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  go_ingameParent: {fileID: 0}
-  go_pauseParent: {fileID: 0}
+  _prefabDict:
+    data:
+    - key: 0
+      value: {fileID: 1891371346936468330, guid: 5791ef7a622111843bb1beee23129f6f,
+        type: 3}
+    - key: 1
+      value: {fileID: 2693817355989765052, guid: aa8f8ec24d33a7d4ebb8789f2af62778,
+        type: 3}
+    - key: 2
+      value: {fileID: 6063638198821771136, guid: f5692c3071f1b274b95f8a29e7830d78,
+        type: 3}
+    - key: 3
+      value: {fileID: 134672335321322533, guid: 821d5788140af0743966f70c64f36cd5,
+        type: 3}
+    - key: 4
+      value: {fileID: 5830414910648089146, guid: e13495b1636b70c4eb78af0d58e80b26,
+        type: 3}
+    - key: 5
+      value: {fileID: 134672335321322533, guid: 963cf636a0d3d684d95a75d409b94a0d,
+        type: 3}

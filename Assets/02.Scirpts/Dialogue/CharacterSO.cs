@@ -18,6 +18,10 @@ public class CharacterSO : ScriptableObject
 
     [SerializeField]private SerializableDict<Face, Sprite> faceDict;
 
+    public List<Vector3> tsetst;
+
+    public SerializableData<Face, Sprite> ss;
+    
     private void Awake()
     {
         _characterDict.Add(name,this);
@@ -25,7 +29,7 @@ public class CharacterSO : ScriptableObject
 
     public Sprite GetFace(Face face)
     {
-        Sprite result = faceDict.Get(face);
+        Sprite result = faceDict[face];
         return result;
     }
 }

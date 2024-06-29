@@ -12,6 +12,7 @@ namespace _02.Scirpts.Ingame.HUD.Button
         public void OnPointerClick(PointerEventData eventData)
         {
             OnClickEvent.Invoke();
+            
         }
     }
 }

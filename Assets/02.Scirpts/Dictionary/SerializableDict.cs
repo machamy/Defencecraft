@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _02.Scirpts.Dictionary
 {
@@ -9,33 +13,63 @@ namespace _02.Scirpts.Dictionary
     /// <typeparam name="K">키값</typeparam>
     /// <typeparam name="V">밸류</typeparam>
     [Serializable]
-    public class SerializableDict<K,V>
+    public class SerializableDict<K,V> :Dictionary<K,V>, ISerializationCallbackReceiver
     {
         public static V Null = default;
-        public List<SerializableData<K, V>> data;
-
-        public V Get(K key)
+        public List<SerializableData<K, V>> dataList = new List<SerializableData<K, V>>();
+        
+        // public V Get(K key)
+        // {
+        //     foreach (var d in data)
+        //     {
+        //         if (Equals(d.key,key))
+        //             return d.value;
+        //     }
+        //
+        //     return Null;
+        // }
+        //
+        // public void Set(K key, V val)
+        // {
+        //     foreach (var d in data)
+        //     {
+        //         if (Equals(d.key, key))
+        //         {
+        //             d.value = val;
+        //             return;
+        //         }
+        //     }
+        //     data.Add(new SerializableData<K, V>(key,val));
+        // }
+        //
+        
+        /// <summary>
+        /// 리스트 -> 딕셔너리
+        /// </summary>
+        public void OnBeforeSerialize()
         {
-            foreach (var d in data)
+            dataList.Clear();
+            foreach (KeyValuePair<K, V> pair in this)
             {
-                if (Equals(d.key,key))
-                    return d.value;
+                dataList.Add(new SerializableData<K, V>(pair.Key,pair.Value));
             }
-
-            return Null;
         }
 
-        public void Set(K key, V val)
+        /// <summary>
+        /// 딕셔너리 -> 리스트
+        /// </summary>
+        public void OnAfterDeserialize()
         {
-            foreach (var d in data)
+            this.Clear();
+            foreach (var data in dataList)
             {
-                if (Equals(d.key, key))
+                if (this.Keys.Contains(data.key))
+                    data.key = default(K);
+                if (!TryAdd(data.key,data.value))
                 {
-                    d.value = val;
-                    return;
-                }
+                    Debug.LogWarning($"같은 키 값은 들어갈 수 없습니다 (key: {data.key})");
+                };
             }
-            data.Add(new SerializableData<K, V>(key,val));
         }
     }
 

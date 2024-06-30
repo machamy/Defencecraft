@@ -150,7 +150,10 @@ public class UIManager : MonoBehaviour
         UI_Credit,
         UI_DifficultySelect,
         UI_Setting,
-        UI_Confirm
+        UI_Confirm,
+        UI_Map,
+        UI_Campaign,
+        UI_GameOver
     }
     
     

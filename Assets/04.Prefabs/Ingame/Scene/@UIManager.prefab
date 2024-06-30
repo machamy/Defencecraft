@@ -64,3 +64,12 @@ MonoBehaviour:
     - key: 6
       value: {fileID: 134672335321322533, guid: 963cf636a0d3d684d95a75d409b94a0d,
         type: 3}
+    - key: 7
+      value: {fileID: 5205880858736035189, guid: 28a5211982d023444b6f3e73fb8662be,
+        type: 3}
+    - key: 8
+      value: {fileID: 8662221482273455430, guid: 32563c1cb517c5d4f8bb54c4832bbb1b,
+        type: 3}
+    - key: 9
+      value: {fileID: 134672335321322533, guid: 963cf636a0d3d684d95a75d409b94a0d,
+        type: 3}

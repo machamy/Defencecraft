@@ -25,6 +25,7 @@ namespace _02.Scirpts.Ingame.UI
             {
                 go_instance = Instantiate(gameObject, FindObjectOfType(typeof(Canvas)).GameObject().transform);
             }
+            
             return go_instance;
         }
     }

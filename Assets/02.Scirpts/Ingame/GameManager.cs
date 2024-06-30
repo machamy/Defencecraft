@@ -21,6 +21,7 @@ public class GameManager : Singleton<GameManager>
 
     public void Start()
     {
+        UIManager.Instance.GetInstanceID();
     }
 
     /// <summary>

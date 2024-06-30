@@ -7,10 +7,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
-
-    private static UIManager instance;
 
     private Stack<BaseUI> _uiStack = new();
     
@@ -21,30 +19,20 @@ public class UIManager : MonoBehaviour
 
     public void Awake()
     {
-
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-        
-        DontDestroyOnLoad(gameObject);
-
         _uiGameObjectDict = new();
         
         foreach (UIPrefabType prefabType in Enum.GetValues(typeof(UIPrefabType)))
         {
+            if (prefabType == UIPrefabType.None)
+                continue;
             GameObject prefab = _prefabDict[prefabType];
+            Debug.Log(prefabType.ToString());
             _uiGameObjectDict[prefabType] = prefab.GetComponent<BaseUI>().getInstance();
             _uiGameObjectDict[prefabType].SetActive(false);
         }
         
+        
         AddUI(UIPrefabType.UI_MainMenu);
-        
-        
     }
 
 
@@ -59,22 +47,22 @@ public class UIManager : MonoBehaviour
     public void ClickStart()
     {
         MoveScene("MapScene");
-        instance.removeUI();
+        Instance.removeUI();
     }
     
     public void OpenSettingUI()
     {
-        instance.AddUI(UIPrefabType.UI_Setting);
+        Instance.AddUI(UIPrefabType.UI_Setting);
     }
 
     public void OpenCreditUI()
     { 
-        instance.AddUI(UIPrefabType.UI_Credit);
+        Instance.AddUI(UIPrefabType.UI_Credit);
     }
 
     public void ClickFocusContainer()
     {
-        instance.removeUI();
+        Instance.removeUI();
     }
     
     
@@ -82,7 +70,7 @@ public class UIManager : MonoBehaviour
 
     public void ClickDifficulty()
     {
-        instance.AddUI(UIPrefabType.UI_DifficultySelect);
+        Instance.AddUI(UIPrefabType.UI_DifficultySelect);
     }
 
     public void SwapDifficulty(int i)
@@ -93,14 +81,14 @@ public class UIManager : MonoBehaviour
     public void EnterMap()
     {
         MoveScene("GameScene");
-        instance.removeUI();
+        Instance.removeUI();
     }
     
     // 게임 화면
 
     public void ClickOption()
     {
-        instance.AddUI(UIPrefabType.UI_Setting);
+        Instance.AddUI(UIPrefabType.UI_Setting);
         
     }
     

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
@@ -16,6 +17,8 @@ namespace _02.Scirpts.Ingame
 
         private bool isBuildable = true; // 마우스를 땐 위치의 건설 가능 여부
 
+        private bool canBuild = false;
+
         //건설하고자 하는 건물의 정보
         [SerializeField] public GameObject[] buildingPrefab = new GameObject[4];
         public int buildingTypeIndex = 0; // 0은 x 1은 타워 2는 금고 3은 벽
@@ -24,7 +27,8 @@ namespace _02.Scirpts.Ingame
         SpriteRenderer buildingSpriteRenderer;
 
         public GameObject buildableTile; //건설 가능여부를 알려주는 발판 
-        Sprite[] buildableTileImage = new Sprite[2];
+        
+        public Sprite[] buildableTileImage = new Sprite[2];
         int buildableTimeIndex = 0; //0은 설치 불가, 1은 설치 가능
 
         AbstractConstruct buildingScript; //건설하고자 하는 건물의 스크립트
@@ -32,6 +36,8 @@ namespace _02.Scirpts.Ingame
         public Vector3 mouseToPlanePos; //바닥과 마우스가 만나는 위치를 담는 벡터 (5의 배수로만 존재)
 
         World worldscript;
+
+        Animator animator;
 
         private void Awake()
         {
@@ -102,7 +108,7 @@ namespace _02.Scirpts.Ingame
         {
             //마우스 위치 불러오기
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Plane groundPlane = new Plane(Vector3.up, new Vector3(0f, 0.2f, 0f)); //땅에 닿는 위치가 y 높이는 0.2f
+            Plane groundPlane = new Plane(Vector3.up, new Vector3(0f, 0f, 0f)); //땅에 닿는 위치가 y 높이는 0.2f
 
             float rayDistance;
 
@@ -110,7 +116,7 @@ namespace _02.Scirpts.Ingame
                 mouseToPlanePos = ray.GetPoint(rayDistance);
 
             //5의 배수로만 이동하게끔 수정
-            mouseToPlanePos = new Vector3(Mathf.Round(mouseToPlanePos.x / 5) * 5, Mathf.Round(mouseToPlanePos.y), Mathf.Round(mouseToPlanePos.z / 5) * 5);
+            mouseToPlanePos = new Vector3(Mathf.Round((mouseToPlanePos.x) / 5f) * 5, Mathf.Round(mouseToPlanePos.y), Mathf.Round((mouseToPlanePos.z)/ 5f) * 5);
         }
 
         void SetTileConstruct(int x, int y, GameObject building)
@@ -131,6 +137,7 @@ namespace _02.Scirpts.Ingame
 
         void CheckTile(int tilenum_x, int tilenum_z, int[] size)
         {
+            isBuildable = true;
             //해당 좌표에 타일이 있다면 tile 정보 불러오기
             if ((tilenum_x >= 0 && tilenum_x + size[0] < 21) && (tilenum_z >= 0 && tilenum_z + size[1] < 21))
             {
@@ -165,35 +172,35 @@ namespace _02.Scirpts.Ingame
         {
             if (isConstructMode)
             {
-                //UI 요소 안에 마우스가 있으면 리턴
-                if (EventSystem.current.IsPointerOverGameObject())
-                {
-                    return;
-                }
 
                 //마우스 내려갈때 ConstructPrefab 생성
                 if (Input.GetMouseButtonDown(0))
                 {
+                    //UI 요소 안에 마우스가 있으면 리턴
+                    if (EventSystem.current.IsPointerOverGameObject())
+                    {
+                        return;
+                    }
                     building = Instantiate(buildingPrefab[buildingTypeIndex]);
                     buildableTile.SetActive(true);
+
                     buildingScript = building.GetComponent<AbstractConstruct>();
                     //고스트 빌딩은 빌딩 상테
                     buildingSpriteRenderer = building.GetComponent<SpriteRenderer>();
                     Color color = buildingSpriteRenderer.color;
                     color.a = 0.5f;
                     buildingSpriteRenderer.color = color;
-                    
-                    //새로 클릭 할때마다 초기화
-                    isBuildable = true;
+                   
+                    canBuild = true;
                 }
 
                 //마우스 드래그중 반투명 건물이 마우스 따라다니게 하기
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButton(0) && canBuild)
                 {
                     UpdateMousePosition();
                     //반투명 건물의 위치 변경
-                    building.transform.position = mouseToPlanePos;
-                    buildableTile.transform.position = mouseToPlanePos;
+                    building.transform.position = new Vector3(mouseToPlanePos.x + 2.5f, 1f, mouseToPlanePos.z + 2.5f);
+                    buildableTile.transform.position = new Vector3(mouseToPlanePos.x+2.5f, 1f, mouseToPlanePos.z+2.5f);
 
                     int tilenum_x = Mathf.RoundToInt(mouseToPlanePos.x) / 5;
                     int tilenum_z = Mathf.RoundToInt(mouseToPlanePos.z) / 5;
@@ -214,10 +221,11 @@ namespace _02.Scirpts.Ingame
                 }
 
                 //마우스를 땠을때
-                if (Input.GetMouseButtonUp(0))
+                if (Input.GetMouseButtonUp(0) && canBuild)
                 {
                     //건설 가능 여부 이미지 비활성화
                     buildableTile.SetActive(false);
+                    canBuild = false;
 
                     //좌표 불러오기
                     int tilenum_x = Mathf.RoundToInt(mouseToPlanePos.x) / 5;
@@ -229,18 +237,26 @@ namespace _02.Scirpts.Ingame
                     //건설 가능 판별이 났다면 건설
                     if (isBuildable)
                     {
-                        Tile tile = worldscript.GetTile(tilenum_x, tilenum_z);
-
-                        SetTileConstruct(tilenum_x, tilenum_z, building);
 
                         Color color = buildingSpriteRenderer.color;
                         color.a = 1f;
                         buildingSpriteRenderer.color = color;
+
+                        animator = buildingScript.GetComponent<Animator>();
+                        animator.SetBool("Isinstall", true);
+
+                        Tile tile = worldscript.GetTile(tilenum_x, tilenum_z);
+
+                        SetTileConstruct(tilenum_x, tilenum_z, building);
+
+                        
                     }
                     else
                     {
                         Destroy(building);
                     }
+
+                    ;
                 }
             }
             else

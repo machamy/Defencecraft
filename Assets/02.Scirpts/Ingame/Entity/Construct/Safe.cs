@@ -10,7 +10,7 @@ public class Safe : _02.Scirpts.Ingame.Entity.AbstractConstruct
     {
         hp = 300;
         maxhp = 300;
-        size = new int[2] { 3, 3 };
+        size = new int[2] {2, 2 };
         level = 1;
     }
 

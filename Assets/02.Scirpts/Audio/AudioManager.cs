@@ -151,9 +151,8 @@ public class AudioManager : MonoBehaviour
             emitter.OnSoundFinished += StopCleanEmitter;
         }
     }
-    
-    
-    
+
+
     private void SetGroupVolume(string name, float val)
     {
         if (!audioMixer.SetFloat(name, NormalizedToMixerVal(val)))

@@ -15,4 +15,5 @@ MonoBehaviour:
   looping: 0
   ClipGroup:
     queueType: 2
-    _clips: []
+    _clips:
+    - {fileID: 8300000, guid: 01f24608c204b0e4695d00f26b48a335, type: 3}

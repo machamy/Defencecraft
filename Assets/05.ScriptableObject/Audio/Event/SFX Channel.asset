@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51040b84b7d34e00bd002cc4b9db8986, type: 3}
   m_Name: SFX Channel
   m_EditorClassIdentifier: 
+  DefualtAudioConfig: {fileID: 11400000, guid: e09637834544e5140910d11a7816bc90, type: 2}

@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51040b84b7d34e00bd002cc4b9db8986, type: 3}
   m_Name: Music Channel
   m_EditorClassIdentifier: 
+  DefualtAudioConfig: {fileID: 11400000, guid: a6aaa16023469bd478e601c8aea58025, type: 2}

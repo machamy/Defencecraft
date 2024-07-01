@@ -9,7 +9,10 @@ namespace _02.Scirpts.Audio
     public class AudioChannelSO : ScriptableObject
     {
         public AudioPlayAction OnAudioPlayRequested;
+        [SerializeField] private AudioConfigurationSO DefualtAudioConfig;
 
+        public void RaisePlayEventDefault(AudioQueueSO audioQueueSo, Vector3 position = default) =>
+            RaisePlayEvent(audioQueueSo, DefualtAudioConfig, position);
         public void RaisePlayEvent(AudioQueueSO audioQueue, AudioConfigurationSO config, Vector3 position = default)
         {
             OnAudioPlayRequested?.Invoke(audioQueue,config,position);

@@ -6,12 +6,47 @@ using UnityEngine.EventSystems;
 
 public class Safe : _02.Scirpts.Ingame.Entity.AbstractConstruct
 {
+    Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+
+    }
+
     public void Start()
     {
         hp = 300;
         maxhp = 300;
         size = new int[2] {2, 2 };
         level = 1;
+    }
+
+    private void Update()
+    {
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            //UI 요소 안에 마우스가 있으면 리턴
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+            // 카메라에서 클릭 위치로의 레이캐스트 생성
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            // 레이캐스트가 콜라이더에 닿았는지 확인
+            if (Physics.Raycast(ray, out hit))
+            {
+                // 클릭된 오브젝트가 자신인지 확인
+                if (hit.collider.gameObject == gameObject)
+                {
+                    // 함수 실행
+                    OnUpgrade();
+                }
+            }
+        }
     }
 
     //처음 만들어질 때 변수 초기화
@@ -40,9 +75,13 @@ public class Safe : _02.Scirpts.Ingame.Entity.AbstractConstruct
         switch (level)
         {
             case 1:
+                animator.SetInteger("Level", level + 1);
+                animator.SetTrigger("Upgrade");
                 maxhp = 500;
                 break;
             case 2:
+                animator.SetInteger("Level", level + 1);
+                animator.SetTrigger("Upgrade");
                 maxhp = 1000;
                 break;
             default:

@@ -717,20 +717,7 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7574493634766869963, guid: b9aa394bc11b6ae41b90e3dd3598e624,
-          type: 3}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: ChangeMusicVolume
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &3447502872236732847
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,8 +1293,6 @@ MonoBehaviour:
   isFocused: 0
   removeUIOnFocusClicked: 1
   _setting: {fileID: 11400000, guid: 0f0c221a99e9cba429fc0bad1b6cb540, type: 2}
-  _audioManager: {fileID: 7574493634766869963, guid: b9aa394bc11b6ae41b90e3dd3598e624,
-    type: 3}
   masterVolumeChannel: {fileID: 11400000, guid: 2b3c7070c7d06fd46a821a7e832bbf76,
     type: 2}
   musicVolumeChannel: {fileID: 11400000, guid: d666c4a8b9e382b4bb4504a7c1cb0bc0, type: 2}
@@ -1479,20 +1464,7 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7574493634766869963, guid: b9aa394bc11b6ae41b90e3dd3598e624,
-          type: 3}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: ChangeSfxVolume
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &8109986613343943874
 GameObject:
   m_ObjectHideFlags: 0
@@ -1852,20 +1824,7 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7574493634766869963, guid: b9aa394bc11b6ae41b90e3dd3598e624,
-          type: 3}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: ChangeMasterVolume
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &8689770328842441450
 GameObject:
   m_ObjectHideFlags: 0

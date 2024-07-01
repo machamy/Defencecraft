@@ -96,11 +96,15 @@ public class Tower : _02.Scirpts.Ingame.Entity.AbstractConstruct
                 animator.SetInteger("Level", level+1);
                 animator.SetTrigger("Upgrade");
                 maxhp = 500;
+                level++;
+                hp = Mathf.RoundToInt(maxhp * hprate);
                 break;
             case 2:
                 animator.SetInteger("Level", level + 1);
                 animator.SetTrigger("Upgrade");
                 maxhp = 1000;
+                level++;
+                hp = Mathf.RoundToInt(maxhp * hprate);
                 break;
             default:
                 //업그레이드 불가 상태입니다. 표시
@@ -108,8 +112,6 @@ public class Tower : _02.Scirpts.Ingame.Entity.AbstractConstruct
                 break;
 
         };
-        hp = Mathf.RoundToInt(maxhp * hprate);
-        level++;
         Debug.Log($"Tower upgrade complete, hp = {hp}");
 
     }
@@ -139,7 +141,7 @@ public class Tower : _02.Scirpts.Ingame.Entity.AbstractConstruct
         Transform bullettransform = bullet.transform;
         bullettransform.position = transform.position;
         bullettransform.rotation = Quaternion.FromToRotation(Vector3.up, dir);
-        bullet.GetComponent<Bullet>().Init(damage, dir, scanner.nearestTarget);
+        bullet.GetComponent<Bullet>().Init(damage, dir, scanner.nearestTarget, level);
 
 
     }

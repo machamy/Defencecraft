@@ -26,7 +26,6 @@ public class UIManager : Singleton<UIManager>
             if (prefabType == UIPrefabType.None)
                 continue;
             GameObject prefab = _prefabDict[prefabType];
-            Debug.Log(prefabType.ToString());
             _uiGameObjectDict[prefabType] = prefab.GetComponent<BaseUI>().getInstance();
             _uiGameObjectDict[prefabType].SetActive(false);
         }
@@ -47,7 +46,9 @@ public class UIManager : Singleton<UIManager>
     public void ClickStart()
     {
         MoveScene("MapScene");
-        Instance.removeUI();
+        RemoveAllUI();
+        
+        Instance.AddUI(UIPrefabType.UI_Map);
     }
     
     public void OpenSettingUI()
@@ -62,7 +63,7 @@ public class UIManager : Singleton<UIManager>
 
     public void ClickFocusContainer()
     {
-        Instance.removeUI();
+        Instance.RemoveUI();
     }
     
     
@@ -81,7 +82,7 @@ public class UIManager : Singleton<UIManager>
     public void EnterMap()
     {
         MoveScene("GameScene");
-        Instance.removeUI();
+        Instance.RemoveUI();
     }
     
     // 게임 화면
@@ -108,7 +109,7 @@ public class UIManager : Singleton<UIManager>
         _uiStack.Push(goUI.GetComponent<BaseUI>());
     }
 
-    public void removeUI()
+    public void RemoveUI()
     {
         BaseUI baseUI = _uiStack.Pop();
 
@@ -130,17 +131,25 @@ public class UIManager : Singleton<UIManager>
         baseUI.gameObject.SetActive(false);
     }
 
+    public void RemoveAllUI()
+    {
+        while (_uiStack.Count > 0)
+        {
+            RemoveUI();
+        }
+    }
+
     public enum UIPrefabType
     {
         None,
         UI_MainMenu,
+        UI_Map,
+        UI_Campaign,
         UI_FocusContainer,
         UI_Credit,
         UI_DifficultySelect,
         UI_Setting,
         UI_Confirm,
-        UI_Map,
-        UI_Campaign,
         UI_GameOver
     }
     

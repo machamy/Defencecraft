@@ -31,6 +31,7 @@ namespace _02.Scirpts.Audio
 
             _audioSource.transform.position = pos;
             _audioSource.loop = isLoop;
+            setting.ApplyTo(_audioSource);
             _audioSource.Play();
 
             if (!isLoop)

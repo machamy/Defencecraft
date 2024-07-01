@@ -18,6 +18,11 @@ public class UIManager : Singleton<UIManager>
 
     private Dictionary<UIPrefabType, GameObject> _uiGameObjectDict;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioChannelSO sfxSoundChannel;
+    [SerializeField] private AudioConfigurationSO sfxConfig;
+    [SerializeField] private AudioQueueSO ButtonClickSound;
+
     public void Awake()
     {
         _uiGameObjectDict = new();
@@ -54,6 +59,7 @@ public class UIManager : Singleton<UIManager>
     
     public void OpenSettingUI()
     {
+        PlayClickSound();
         Instance.AddUI(UIPrefabType.UI_Setting);
     }
 
@@ -103,7 +109,12 @@ public class UIManager : Singleton<UIManager>
         Instance.AddUI(UIPrefabType.UI_Setting);
         
     }
-    
+
+
+    public void PlayClickSound()
+    {
+        sfxSoundChannel.RaisePlayEvent(ButtonClickSound,sfxConfig);
+    }
 
     public void AddUI(UIPrefabType uiPrefabType)
     {

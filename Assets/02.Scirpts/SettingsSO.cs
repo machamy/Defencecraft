@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace _02.Scirpts
 {
@@ -15,11 +16,7 @@ namespace _02.Scirpts
         [Range(0f, 1f)] public float masterVolume = 0.7f;
         [Range(0f, 1f)] public float musicVolume = 0.7f;
         [Range(0f, 1f)] public float sfxVolume = 0.7f;
-        
-        
-        
-        
-        
+
         public void Save()
         {
             PlayerPrefs.SetFloat("volume_master", masterVolume);
@@ -31,6 +28,7 @@ namespace _02.Scirpts
 
         public void Load()
         {
+            Debug.Log("[SettingSO] Loading Data");
             masterVolume = PlayerPrefs.GetFloat("volume_master", masterVolume);
             musicVolume=PlayerPrefs.GetFloat("volume_music", musicVolume);
             sfxVolume=PlayerPrefs.GetFloat("volume_sfx", sfxVolume);

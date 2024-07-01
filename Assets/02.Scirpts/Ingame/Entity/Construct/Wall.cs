@@ -103,4 +103,38 @@ public class Wall : _02.Scirpts.Ingame.Entity.AbstractConstruct
         Debug.Log($"Wall hit, hp = {hp}");
     }
 
+    IEnumerator DestroyCoroutine()
+    {
+        isready = false;
+        animator.SetTrigger("Destroy");
+        yield return null;
+
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+        // 애니메이션이 끝날때까지 반복
+        while (stateInfo.normalizedTime < 1.0f)
+        {
+            yield return null;
+            stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        }
+
+        SetTileNull(Mathf.RoundToInt(transform.position.x / 5f), Mathf.RoundToInt(transform.position.z / 5f));
+        Destroy(gameObject);
+    }
+
+    void SetTileNull(int x, int y)
+    {
+        //건설 불가 지역으로 설정
+        for (int i = 0; i < size[0]; i++)
+        {
+            for (int j = 0; j < size[1]; j++)
+            {
+                //타일정보 받아오기
+                Tile tile = worldscript.GetTile(x + i, y + j);
+
+                //건설 가능 지역으로 설정
+                tile.Construct = null;
+            }
+        }
+    }
 }

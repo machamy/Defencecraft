@@ -44,7 +44,7 @@ public class Bullet : MonoBehaviour
         this.damage = damage;
 
         //총알 속도
-        rigid.velocity = dir * 3f;
+        rigid.velocity = dir;
 
         //목표 지점
         this.target = target;

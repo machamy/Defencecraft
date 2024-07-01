@@ -102,17 +102,17 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    void ChangeMasterVolume(float value)
+    public void ChangeMasterVolume(float value)
     {
         _setting.masterVolume = _masterVolume = value;
         SetGroupVolume("MasterVolume",value);
     }
-    void ChangeMusicVolume(float value)
+    public void ChangeMusicVolume(float value)
     {
         _setting.musicVolume = _musicVolume = value;
         SetGroupVolume("MusicVolume",value);
     }
-    void ChangeSfxVolume(float value)
+    public void ChangeSfxVolume(float value)
     {
         _setting.sfxVolume = _sfxVolume = value;
         SetGroupVolume("SfxVolume",value);

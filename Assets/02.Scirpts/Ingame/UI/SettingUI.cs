@@ -11,9 +11,6 @@ namespace _02.Scirpts.Ingame.UI
         /// <summary>
         /// 설정 SO
         /// </summary>
-        /// <remarks>
-        /// 값 불러오기만 함. 설정은 AudioManager통해서 하기.
-        /// </remarks>
         [SerializeField] private SettingsSO _setting;
         
         [SerializeField] private AudioVolumeChannelSO masterVolumeChannel;
@@ -34,6 +31,10 @@ namespace _02.Scirpts.Ingame.UI
         private void OnDisable()
         {
             _setting.Save();
+            
+            masterVolumeChannel.RaiseVolumeEvent(masterVolSlider.value);
+            musicVolumeChannel.RaiseVolumeEvent(musicVolSlider.value);
+            sfxVolumeChannel.RaiseVolumeEvent(sfxVolSlider.value);
         }
 
         private void InitializeVolumes()

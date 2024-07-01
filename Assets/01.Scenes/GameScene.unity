@@ -795,13 +795,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 520747971}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 650360829}
-  m_Father: {fileID: 825417428}
+  m_Father: {fileID: 920817539}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1268,9 +1268,9 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!224 &825417428 stripped
+--- !u!224 &920817539 stripped
 RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7617066322040244843, guid: 5ed49d16455e9c3419ef91bbdc9cb36c,
+  m_CorrespondingSourceObject: {fileID: 3943794718003563475, guid: 5ed49d16455e9c3419ef91bbdc9cb36c,
     type: 3}
   m_PrefabInstance: {fileID: 1776188926264647509}
   m_PrefabAsset: {fileID: 0}
@@ -1380,13 +1380,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1336671557}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 671549668}
-  m_Father: {fileID: 825417428}
+  m_Father: {fileID: 920817539}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1436,19 +1436,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1336671560}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1343045794}
-        m_TargetAssemblyTypeName: _02.Scirpts.Ingame.ConstructManager, Assembly-CSharp
-        m_MethodName: SafeBuildBtn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1336671560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1555,13 +1543,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1765080709}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 86446860}
-  m_Father: {fileID: 825417428}
+  m_Father: {fileID: 920817539}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2146,13 +2134,13 @@ PrefabInstance:
         type: 3}
       propertyPath: buildingPrefab.Array.data[2]
       value: 
-      objectReference: {fileID: 161095633021880786, guid: 9542ad4e063bb1849a2932e66eb869f1,
+      objectReference: {fileID: 1153912845795710514, guid: 5f804dd3a9029174a8a8c4ab912f0e5f,
         type: 3}
     - target: {fileID: 3506668725992589073, guid: 0a3a60dde178a1b45ba6916d807cd5a5,
         type: 3}
       propertyPath: buildingPrefab.Array.data[3]
       value: 
-      objectReference: {fileID: 161095633021880786, guid: 323e43f8fc87e584a96327c40bef6d62,
+      objectReference: {fileID: 2232492531366019292, guid: df5b194d038ac354a989cda6de115f25,
         type: 3}
     - target: {fileID: 3506668725992589073, guid: 0a3a60dde178a1b45ba6916d807cd5a5,
         type: 3}
@@ -2440,17 +2428,17 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 7617066322040244843, guid: 5ed49d16455e9c3419ef91bbdc9cb36c,
+    - targetCorrespondingSourceObject: {fileID: 3943794718003563475, guid: 5ed49d16455e9c3419ef91bbdc9cb36c,
         type: 3}
-      insertIndex: -1
+      insertIndex: 7
       addedObject: {fileID: 1765080710}
-    - targetCorrespondingSourceObject: {fileID: 7617066322040244843, guid: 5ed49d16455e9c3419ef91bbdc9cb36c,
+    - targetCorrespondingSourceObject: {fileID: 3943794718003563475, guid: 5ed49d16455e9c3419ef91bbdc9cb36c,
         type: 3}
-      insertIndex: -1
+      insertIndex: 8
       addedObject: {fileID: 1336671558}
-    - targetCorrespondingSourceObject: {fileID: 7617066322040244843, guid: 5ed49d16455e9c3419ef91bbdc9cb36c,
+    - targetCorrespondingSourceObject: {fileID: 3943794718003563475, guid: 5ed49d16455e9c3419ef91bbdc9cb36c,
         type: 3}
-      insertIndex: -1
+      insertIndex: 9
       addedObject: {fileID: 520747972}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ed49d16455e9c3419ef91bbdc9cb36c, type: 3}

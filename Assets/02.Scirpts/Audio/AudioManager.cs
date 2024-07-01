@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02.Scirpts;
 using _02.Scirpts.Audio;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -18,6 +19,8 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] private AudioChannelSO EffectChannel = default;
     [SerializeField] private AudioChannelSO MusicChannel = default;
+
+    [SerializeField] private SettingsSO _setting;
     
     
     [Header("Audio control")]
@@ -72,6 +75,15 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
+#if UNITY_EDITOR
+        if (_setting)
+        {
+            _masterVolume = _setting.masterVolume;
+            _musicVolume = _setting.musicVolume;
+            _sfxVolume = _setting.sfxVolume;
+        }
+#endif
+
         ChangeMasterVolume(_masterVolume);
         ChangeMusicVolume(_musicVolume);
         ChangeSfxVolume(_sfxVolume);
@@ -92,17 +104,17 @@ public class AudioManager : MonoBehaviour
 
     void ChangeMasterVolume(float value)
     {
-        _masterVolume = value;
+        _setting.masterVolume = _masterVolume = value;
         SetGroupVolume("MasterVolume",value);
     }
     void ChangeMusicVolume(float value)
     {
-        _musicVolume = value;
+        _setting.musicVolume = _musicVolume = value;
         SetGroupVolume("MusicVolume",value);
     }
     void ChangeSfxVolume(float value)
     {
-        _sfxVolume = value;
+        _setting.sfxVolume = _sfxVolume = value;
         SetGroupVolume("SfxVolume",value);
     }
 

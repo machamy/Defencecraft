@@ -48,6 +48,7 @@ MonoBehaviour:
   _initSize: 10
   EffectChannel: {fileID: 11400000, guid: aadb55bad5ce5d44abbfa9561e25e5f0, type: 2}
   MusicChannel: {fileID: 11400000, guid: b0c1b5c1f4cb30242b20de0636305e6a, type: 2}
+  _setting: {fileID: 11400000, guid: 0f0c221a99e9cba429fc0bad1b6cb540, type: 2}
   audioMixer: {fileID: 24100000, guid: 627c252478f307e4f99098f9964502b6, type: 2}
   _masterVolume: 1
   _musicVolume: 1

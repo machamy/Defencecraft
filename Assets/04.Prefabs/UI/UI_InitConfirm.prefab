@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5975160878176238499}
   - component: {fileID: 7364978426751763844}
   m_Layer: 5
-  m_Name: UI_Confirm
+  m_Name: UI_InitConfirm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -172,20 +172,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 758740547048418494}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6784615367788662154, guid: 5bafc2b39855e6940b3bf98a236f8ff8,
-          type: 3}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: InitializeGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &3033666721451941239
 GameObject:
   m_ObjectHideFlags: 0

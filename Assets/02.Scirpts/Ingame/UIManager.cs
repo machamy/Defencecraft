@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using _02.Scirpts.Audio;
 using _02.Scirpts.Dictionary;
 using _02.Scirpts.Ingame.UI;
 using Unity.VisualScripting;
@@ -61,7 +62,17 @@ public class UIManager : Singleton<UIManager>
         Instance.AddUI(UIPrefabType.UI_Credit);
     }
 
+    public void OpenInintializer()
+    {
+        Instance.AddUI(UIPrefabType.UI_InitConfirm);
+    }
+
     public void ClickFocusContainer()
+    {
+        Instance.RemoveUI();
+    }
+
+    public void ExitUI()
     {
         Instance.RemoveUI();
     }
@@ -138,6 +149,7 @@ public class UIManager : Singleton<UIManager>
             RemoveUI();
         }
     }
+    
 
     public enum UIPrefabType
     {
@@ -149,6 +161,7 @@ public class UIManager : Singleton<UIManager>
         UI_Credit,
         UI_DifficultySelect,
         UI_Setting,
+        UI_InitConfirm,
         UI_Confirm,
         UI_GameOver
     }

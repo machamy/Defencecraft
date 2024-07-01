@@ -15,11 +15,13 @@ public class EditorInitializer : MonoBehaviour
 
     public void Awake()
     {
-        if(!activate)
+        if (!activate)
             return;
         var array = GameObject.FindGameObjectsWithTag("seperater");
-        GameObject ManagerSeperater = array.First((o => o.name.ToLower().Contains("manager")));
-        if (ManagerSeperater == null)
+        GameObject ManagerSeperater;
+        if (array.Length > 0 || array.Any(e => e.name.ToLower().Contains("manager")))
+            ManagerSeperater = array.First((o => o.name.ToLower().Contains("manager")));
+        else
             ManagerSeperater = new GameObject("--- Manager ---");
         
         foreach (var manager in Managers)

@@ -2,6 +2,13 @@
 
 namespace _02.Scirpts
 {
+    
+    /// <summary>
+    /// 설정값 공유용 SO
+    /// </summary>
+    /// <remarks>
+    /// 여기 있는 값은 실시간으로 변경되더라도 반영되지 않음
+    /// </remarks>
     [CreateAssetMenu(menuName = "ScriptableObject/SettingSO", fileName = "SettingsSO")]
     public class SettingsSO : ScriptableObject
     {

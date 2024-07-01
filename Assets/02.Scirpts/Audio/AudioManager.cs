@@ -75,12 +75,14 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
+#if UNITY_EDITOR
         if (_setting)
         {
             _masterVolume = _setting.masterVolume;
             _musicVolume = _setting.musicVolume;
             _sfxVolume = _setting.sfxVolume;
         }
+#endif
 
         ChangeMasterVolume(_masterVolume);
         ChangeMusicVolume(_musicVolume);

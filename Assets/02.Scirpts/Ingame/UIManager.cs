@@ -14,9 +14,7 @@ public class UIManager : Singleton<UIManager>
     private Stack<BaseUI> _uiStack = new();
     
     [SerializeField]
-    private SerializableDict<UIPrefabType, GameObject> _prefabDict;
-
-    private Dictionary<UIPrefabType, GameObject> _uiGameObjectDict;
+    private SerializableDict<UIPrefabType, GameObject> _uiGameObjectDict;
 
     [Header("Sounds")]
     [SerializeField] private AudioChannelSO sfxSoundChannel;
@@ -25,14 +23,11 @@ public class UIManager : Singleton<UIManager>
 
     public void Awake()
     {
-        _uiGameObjectDict = new();
-        
+
         foreach (UIPrefabType prefabType in Enum.GetValues(typeof(UIPrefabType)))
         {
             if (prefabType == UIPrefabType.None)
                 continue;
-            GameObject prefab = _prefabDict[prefabType];
-            _uiGameObjectDict[prefabType] = prefab.GetComponent<BaseUI>().getInstance();
             _uiGameObjectDict[prefabType].SetActive(false);
         }
         
@@ -120,10 +115,14 @@ public class UIManager : Singleton<UIManager>
     {
 
         GameObject goUI = _uiGameObjectDict[uiPrefabType];
+        BaseUI baseUI = goUI.GetComponent<BaseUI>();
         
-        if (uiPrefabType != UIPrefabType.UI_MainMenu)
+        if (baseUI.IsFocused)
         {
-            _uiGameObjectDict[UIPrefabType.UI_FocusContainer].SetActive(true);
+            GameObject goFocus = _uiGameObjectDict[UIPrefabType.UI_FocusContainer];
+            goFocus.SetActive(true);
+            
+            moveFocusContainerForwardTo(goUI);
         }
 
         goUI.SetActive(true);
@@ -136,11 +135,13 @@ public class UIManager : Singleton<UIManager>
         BaseUI baseUI = _uiStack.Pop();
 
         bool needFocusRemoval = true;
+
         foreach (BaseUI remainBaseUI in _uiStack)
         {
             if (remainBaseUI.IsFocused)
             {
                 needFocusRemoval = false;
+                moveFocusContainerForwardTo(remainBaseUI.GameObject());
                 break;
             }
         }
@@ -148,6 +149,7 @@ public class UIManager : Singleton<UIManager>
         if (needFocusRemoval)
         {
             _uiGameObjectDict[UIPrefabType.UI_FocusContainer].SetActive(false);
+            moveFocusContainerToFirst();
         }
 
         baseUI.gameObject.SetActive(false);
@@ -157,10 +159,24 @@ public class UIManager : Singleton<UIManager>
     {
         while (_uiStack.Count > 0)
         {
-            RemoveUI();
+            BaseUI baseUI = _uiStack.Pop();
+            baseUI.gameObject.SetActive(false);
         }
     }
-    
+
+
+    private void moveFocusContainerForwardTo(GameObject goUI)
+    {
+        GameObject goFocus = _uiGameObjectDict[UIPrefabType.UI_FocusContainer];
+        goFocus.transform.SetSiblingIndex(goUI.transform.GetSiblingIndex() - 1);
+    }
+
+    private void moveFocusContainerToFirst()
+    {
+        GameObject goFocus = _uiGameObjectDict[UIPrefabType.UI_FocusContainer];
+        goFocus.transform.SetAsFirstSibling();
+    }
+
 
     public enum UIPrefabType
     {

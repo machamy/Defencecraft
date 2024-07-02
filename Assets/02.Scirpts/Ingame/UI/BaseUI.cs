@@ -19,14 +19,10 @@ namespace _02.Scirpts.Ingame.UI
             set => isFocused = value;
         }
 
-        public GameObject getInstance()
+        public bool RemoveUIFocusClicked
         {
-            if (go_instance == null)
-            {
-                go_instance = Instantiate(gameObject, FindObjectOfType(typeof(Canvas)).GameObject().transform);
-            }
-            
-            return go_instance;
+            get => removeUIOnFocusClicked;
+            set => removeUIOnFocusClicked = value;
         }
     }
 }

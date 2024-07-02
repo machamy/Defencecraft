@@ -12,10 +12,10 @@ public class EditorInitializer : MonoBehaviour
 #if UNITY_EDITOR
     public List<GameObject> Managers;
     public bool activate = false;
-
+    private static bool activated = false;
     public void Awake()
     {
-        if (!activate)
+        if (!activate || activated)
             return;
         var array = GameObject.FindGameObjectsWithTag("seperater");
         GameObject ManagerSeperater;
@@ -32,6 +32,8 @@ public class EditorInitializer : MonoBehaviour
             obj.name = manager.name;
             obj.transform.SetSiblingIndex(ManagerSeperater.transform.GetSiblingIndex() + 1);
         }
+
+        activated = true;
     }
     #endif
 }

@@ -78,9 +78,9 @@ public class AudioManager : MonoBehaviour
 #if UNITY_EDITOR
         if (_setting)
         {
-            _masterVolume = _setting.masterVolume;
-            _musicVolume = _setting.musicVolume;
-            _sfxVolume = _setting.sfxVolume;
+            _masterVolume = _setting.MasterVolume;
+            _musicVolume = _setting.MusicVolume;
+            _sfxVolume = _setting.SfxVolume;
         }
 #endif
 
@@ -102,19 +102,19 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void ChangeMasterVolume(float value)
+    private void ChangeMasterVolume(float value)
     {
-        _setting.masterVolume = _masterVolume = value;
+       _masterVolume = value;
         SetGroupVolume("MasterVolume",value);
     }
-    public void ChangeMusicVolume(float value)
+    private void ChangeMusicVolume(float value)
     {
-        _setting.musicVolume = _musicVolume = value;
+        _musicVolume = value;
         SetGroupVolume("MusicVolume",value);
     }
-    public void ChangeSfxVolume(float value)
+    private void ChangeSfxVolume(float value)
     {
-        _setting.sfxVolume = _sfxVolume = value;
+        _sfxVolume = value;
         SetGroupVolume("SfxVolume",value);
     }
 

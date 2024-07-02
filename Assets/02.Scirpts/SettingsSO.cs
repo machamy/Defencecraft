@@ -1,4 +1,5 @@
 ﻿using System;
+using _02.Scirpts.Audio;
 using UnityEngine;
 
 namespace _02.Scirpts
@@ -8,14 +9,49 @@ namespace _02.Scirpts
     /// 설정값 공유용 SO
     /// </summary>
     /// <remarks>
-    /// 여기 있는 값은 실시간으로 변경되더라도 반영되지 않음
+    /// 사운드 변경은 대문자로 시작하는 프라퍼티를 수정하면 자동으로 된다.
     /// </remarks>
     [CreateAssetMenu(menuName = "ScriptableObject/SettingSO", fileName = "SettingsSO")]
     public class SettingsSO : ScriptableObject
     {
-        [Range(0f, 1f)] public float masterVolume = 0.7f;
-        [Range(0f, 1f)] public float musicVolume = 0.7f;
-        [Range(0f, 1f)] public float sfxVolume = 0.7f;
+        [SerializeField][Range(0f, 1f)] private float masterVolume = 0.7f;
+        [SerializeField][Range(0f, 1f)] private float musicVolume = 0.7f;
+        [SerializeField][Range(0f, 1f)] private float sfxVolume = 0.7f;
+
+        public float MasterVolume
+        {
+            get => masterVolume;
+            set
+            {
+                masterVolume = value;
+                masterVolumeChannel.RaiseVolumeEvent(value);
+            }
+        }
+
+        public float MusicVolume
+        {
+            get => musicVolume;
+            set
+            {
+                musicVolume = value;
+                musicVolumeChannel.RaiseVolumeEvent(value);
+            }
+        }
+
+        public float SfxVolume
+        {
+            get => sfxVolume;
+            set
+            {
+                sfxVolume = value;
+                sfxVolumeChannel.RaiseVolumeEvent(value);
+            }
+        }
+
+        [SerializeField] private AudioVolumeChannelSO masterVolumeChannel;
+        [SerializeField] private AudioVolumeChannelSO musicVolumeChannel;
+        [SerializeField] private AudioVolumeChannelSO sfxVolumeChannel;
+
 
         public void Save()
         {

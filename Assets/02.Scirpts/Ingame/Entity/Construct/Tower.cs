@@ -85,7 +85,7 @@ public class Tower : _02.Scirpts.Ingame.Entity.AbstractConstruct
         //    TowerSettingBtn[i].gameObject.SetActive(true);
         // }
         if(level == 3) { DestroyTower(); }
-        OnUpgrade();
+        else OnUpgrade();
     }
 
     void DestroyBtn()

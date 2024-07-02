@@ -405,6 +405,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5242360276497185964, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5371573756272961908, guid: edef74ad212a67b438508285ccb56f44,
         type: 3}
       propertyPath: isFocused

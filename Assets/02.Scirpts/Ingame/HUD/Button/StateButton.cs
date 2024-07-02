@@ -13,7 +13,7 @@ namespace _02.Scirpts.Ingame.HUD.Button
 
         private int n;
         [SerializeField] private List<UnityEvent> events;
-        [SerializeField] private List<Color> buttonSprites;
+        [SerializeField] private List<Sprite> buttonSprites;
         
 
         private void Awake()
@@ -35,7 +35,7 @@ namespace _02.Scirpts.Ingame.HUD.Button
 
         private void changeSprite()
         {
-            GetComponent<Image>().color = buttonSprites[n];
+            GetComponent<Image>().sprite = buttonSprites[n];
         }
     }
 }

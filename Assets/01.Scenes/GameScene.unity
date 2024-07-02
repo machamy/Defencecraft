@@ -1491,6 +1491,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6264660657598353876, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: _uiGameObjectDict.dataList.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6264660657598353876, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: _uiGameObjectDict.dataList.Array.data[9].key
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6264660657598353876, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: _uiGameObjectDict.dataList.Array.data[9].value
+      value: 
+      objectReference: {fileID: 7350699112821710925}
     - target: {fileID: 6945372151505477602, guid: edef74ad212a67b438508285ccb56f44,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1606,6 +1621,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: edef74ad212a67b438508285ccb56f44, type: 3}
+--- !u!1 &7350699112821710925 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5242360276497185964, guid: edef74ad212a67b438508285ccb56f44,
+    type: 3}
+  m_PrefabInstance: {fileID: 7350699112821710924}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8715864944744018819
 PrefabInstance:
   m_ObjectHideFlags: 0

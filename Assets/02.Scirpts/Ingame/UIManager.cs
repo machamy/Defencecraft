@@ -24,15 +24,13 @@ public class UIManager : Singleton<UIManager>
     public void Awake()
     {
 
-        foreach (UIPrefabType prefabType in Enum.GetValues(typeof(UIPrefabType)))
-        {
-            if (prefabType == UIPrefabType.None)
-                continue;
-            _uiGameObjectDict[prefabType].SetActive(false);
-        }
+        // foreach (UIPrefabType prefabType in Enum.GetValues(typeof(UIPrefabType)))
+        // {
+        //     if (prefabType == UIPrefabType.None)
+        //         continue;
+        //     _uiGameObjectDict[prefabType].SetActive(false);
+        // }
         
-        
-        AddUI(UIPrefabType.UI_MainMenu);
     }
 
 
@@ -190,7 +188,8 @@ public class UIManager : Singleton<UIManager>
         UI_Setting,
         UI_InitConfirm,
         UI_Confirm,
-        UI_GameOver
+        UI_GameOver,
+        UI_Ingame
     }
     
     

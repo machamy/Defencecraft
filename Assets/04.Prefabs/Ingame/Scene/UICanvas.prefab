@@ -144,6 +144,10 @@ MonoBehaviour:
       value: {fileID: 2672140907165651221}
     - key: 10
       value: {fileID: 2672140907165651221}
+    - key: 11
+      value: {fileID: 5242360276497185964}
+    - key: 9
+      value: {fileID: 1736517279396473603}
   sfxSoundChannel: {fileID: 11400000, guid: aadb55bad5ce5d44abbfa9561e25e5f0, type: 2}
   sfxConfig: {fileID: 11400000, guid: b0f0893dfdf4df64ab3f5e1ebe14e992, type: 2}
   ButtonClickSound: {fileID: 11400000, guid: e160f049c76ced54ab4e1063cb2de01c, type: 2}
@@ -415,6 +419,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 963cf636a0d3d684d95a75d409b94a0d, type: 3}
+--- !u!1 &1736517279396473603 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 134672335321322533, guid: 963cf636a0d3d684d95a75d409b94a0d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1857500123696168742}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5416462199837557893 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5975160878176238499, guid: 963cf636a0d3d684d95a75d409b94a0d,
@@ -677,6 +687,12 @@ PrefabInstance:
 --- !u!224 &1638611663453513701 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3943794718003563475, guid: 5ed49d16455e9c3419ef91bbdc9cb36c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2307717431413402678}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5242360276497185964 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7549776953862312090, guid: 5ed49d16455e9c3419ef91bbdc9cb36c,
     type: 3}
   m_PrefabInstance: {fileID: 2307717431413402678}
   m_PrefabAsset: {fileID: 0}

@@ -53,6 +53,9 @@ public class GameManager : Singleton<GameManager>
             prevTimeScale = Time.timeScale;
             Time.timeScale = 0f;
             OnGamePaused.Invoke();
+            // Debug.Log(gameObject.GetInstanceID());
+            //Debug.Log(gameObject.GetInstanceID());
+            // TODO : 인스턴스 ID가 다르게 나온다.
         }
         else
         {

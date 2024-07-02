@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections;
 using _02.Scirpts.Events;
+using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
-namespace _02.Scirpts.Ingame.HUD
+namespace _02.Scirpts.Ingame.UI
 {
-    public class HUDController : MonoBehaviour
+    public class IngameUI : BaseUI
     {
         
         [SerializeField] private GameObject go_ingameParent;
@@ -15,10 +14,10 @@ namespace _02.Scirpts.Ingame.HUD
 
         private EntityDamageSO EntityDamageChannel;
         
-        [SerializeField] private Text text_Health;
-        [SerializeField] private Text text_Gold;
-        [SerializeField] private Text text_RemainEnemy;
-        [SerializeField] private Text text_RemainWave;
+        [SerializeField] private TextMeshProUGUI text_Health;
+        [SerializeField] private TextMeshProUGUI text_Gold;
+        [SerializeField] private TextMeshProUGUI text_RemainEnemy;
+        [SerializeField] private TextMeshProUGUI text_RemainWave;
 
 
         public Canvas Canvas;
@@ -32,6 +31,9 @@ namespace _02.Scirpts.Ingame.HUD
         public void Start()
         {
             Canvas = FindObjectOfType<Canvas>();
+            //Debug.Log(GameManager.Instance.GetInstanceID());
+            GameManager.Instance.OnGamePaused.AddListener(OnPaused);
+            GameManager.Instance.OnGameResumed.AddListener(OnResumed);
         }
         
 
@@ -100,5 +102,7 @@ namespace _02.Scirpts.Ingame.HUD
             callback.Invoke();
             yield return null;
         }
+        
+
     }
 }

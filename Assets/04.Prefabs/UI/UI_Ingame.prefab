@@ -666,7 +666,8 @@ MonoBehaviour:
   events:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6551249957906497351, guid: 315edd7b84d361c4f909f4f14c0aee22,
+          type: 3}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: SetGameSpeed
         m_Mode: 4
@@ -680,7 +681,8 @@ MonoBehaviour:
         m_CallState: 2
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6551249957906497351, guid: 315edd7b84d361c4f909f4f14c0aee22,
+          type: 3}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: SetGameSpeed
         m_Mode: 4
@@ -694,7 +696,8 @@ MonoBehaviour:
         m_CallState: 2
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6551249957906497351, guid: 315edd7b84d361c4f909f4f14c0aee22,
+          type: 3}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: SetGameSpeed
         m_Mode: 4
@@ -831,17 +834,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 6551249957906497351, guid: 315edd7b84d361c4f909f4f14c0aee22,
+          type: 3}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: Pause
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &4136136535035807058
 GameObject:
@@ -1804,7 +1808,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3099004150754812532
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2103,9 +2107,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3943794718003563475}
-  - component: {fileID: 8657153165612715377}
-  - component: {fileID: 3299257556082107325}
-  - component: {fileID: 550567052436771153}
+  - component: {fileID: 5198869735291129360}
   m_Layer: 5
   m_Name: UI_Ingame
   m_TagString: Untagged
@@ -2132,35 +2134,12 @@ RectTransform:
   - {fileID: 5667281018380505941}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -410, y: -176}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!223 &8657153165612715377
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7549776953862312090}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
-  m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
---- !u!114 &3299257556082107325
+--- !u!114 &5198869735291129360
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2169,37 +2148,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 7549776953862312090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Script: {fileID: 11500000, guid: 82a55dcbe9494c0b992509625bb3a162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 2000, y: 900}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 1
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
---- !u!114 &550567052436771153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7549776953862312090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
+  isFocused: 0
+  removeUIOnFocusClicked: 0
+  go_ingameParent: {fileID: 5343636806206703421}
+  go_pauseParent: {fileID: 6342336574550023681}
+  text_Health: {fileID: 4950118616787914264}
+  text_Gold: {fileID: 6742159499368775021}
+  text_RemainEnemy: {fileID: 2764945149827361273}
+  text_RemainWave: {fileID: 8573479726907535734}
+  Canvas: {fileID: 0}
+  DialogueController: {fileID: 8418927050573087073}
 --- !u!1 &7940483802662655575
 GameObject:
   m_ObjectHideFlags: 0
@@ -2524,3 +2485,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 5229418562681842924}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8418927050573087073 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4342782814403046797, guid: 09963f1edf6f942469c5bfbbc56ccdac,
+    type: 3}
+  m_PrefabInstance: {fileID: 5229418562681842924}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4998853365d17440864db689dc6e533, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -20,8 +20,6 @@ namespace _02.Scirpts.Ingame.HUD.Button
             changeSprite();
             OnPointerDownEvent.AddListener((eventData) => OnPressDown());
             OnPointerUpEvent.AddListener((eventData) => OnPressUp());
-            
-            Debug.Log("등록한 곳 ID : " + );
         }
 
         private void OnPressDown()

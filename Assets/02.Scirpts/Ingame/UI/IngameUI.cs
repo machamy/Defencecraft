@@ -2,6 +2,7 @@
 using System.Collections;
 using _02.Scirpts.Events;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace _02.Scirpts.Ingame.UI
@@ -23,6 +24,8 @@ namespace _02.Scirpts.Ingame.UI
         public Canvas Canvas;
         public DialogueController DialogueController;
 
+        private GameManager _gameManager;
+        
         public void Awake()
         {
             RegisterUIUpdate();
@@ -31,9 +34,9 @@ namespace _02.Scirpts.Ingame.UI
         public void Start()
         {
             Canvas = FindObjectOfType<Canvas>();
-            //Debug.Log(GameManager.Instance.GetInstanceID());
-            GameManager.Instance.OnGamePaused.AddListener(OnPaused);
-            GameManager.Instance.OnGameResumed.AddListener(OnResumed);
+            _gameManager = GameManager.Instance;
+            _gameManager.OnGamePaused.AddListener(OnPaused);
+            _gameManager.OnGameResumed.AddListener(OnResumed);
         }
         
 
@@ -43,8 +46,8 @@ namespace _02.Scirpts.Ingame.UI
         /// <param name="paused"></param>
         public void OnPaused()
         {
-            go_ingameParent.SetActive(true);
-            go_pauseParent.SetActive(false);
+            go_ingameParent.SetActive(false);
+            go_pauseParent.SetActive(true);
         }
         
         
@@ -53,8 +56,8 @@ namespace _02.Scirpts.Ingame.UI
         /// </summary>
         public void OnResumed()
         {
-            go_ingameParent.SetActive(false);
-            go_pauseParent.SetActive(true);
+            go_ingameParent.SetActive(true);
+            go_pauseParent.SetActive(false);
         }
 
 

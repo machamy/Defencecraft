@@ -29,7 +29,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private SettingsSO _settingsSo;
     public void Start()
     {
-        UIManager.Instance.GetInstanceID();
+        Debug.Log(GetInstanceID());
     }
 
     /// <summary>
@@ -49,13 +49,11 @@ public class GameManager : Singleton<GameManager>
     {
         if (pause)
         {
-            isPaused = true;
+            isPaused = true; 
             prevTimeScale = Time.timeScale;
             Time.timeScale = 0f;
             OnGamePaused.Invoke();
-            // Debug.Log(gameObject.GetInstanceID());
-            //Debug.Log(gameObject.GetInstanceID());
-            // TODO : 인스턴스 ID가 다르게 나온다.
+            // TODO : 항상 이렇게 해야하나?
         }
         else
         {
@@ -64,7 +62,7 @@ public class GameManager : Singleton<GameManager>
             OnGameResumed.Invoke();
         }
     }
-    
+
     /// <summary>
     /// 볼륨 초기화
     /// </summary>

@@ -21,27 +21,32 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private AudioConfigurationSO sfxConfig;
     [SerializeField] private AudioQueueSO ButtonClickSound;
 
-    public void Awake()
-    {
 
-        // foreach (UIPrefabType prefabType in Enum.GetValues(typeof(UIPrefabType)))
-        // {
-        //     if (prefabType == UIPrefabType.None)
-        //         continue;
-        //     _uiGameObjectDict[prefabType].SetActive(false);
-        // }
-        
-    }
-
-
-    
     public void MoveScene(String sceneName)
     {
         SceneManager.LoadScene(sceneName);
     }
 
+    #region Global
+    public void ClickOption()
+    {
+        Instance.AddUI(UIPrefabType.UI_Setting);
+    }
     
-    // 시작 화면
+    public void ClickFocusContainer()
+    {
+        Instance.RemoveUI();
+    }
+    
+    public void ExitUI()
+    {
+        Instance.RemoveUI();
+    }
+    
+    #endregion
+    
+    
+    #region MainMenu
     public void ClickStart()
     {
         MoveScene("MapScene");
@@ -65,20 +70,10 @@ public class UIManager : Singleton<UIManager>
     {
         Instance.AddUI(UIPrefabType.UI_InitConfirm);
     }
-
-    public void ClickFocusContainer()
-    {
-        Instance.RemoveUI();
-    }
-
-    public void ExitUI()
-    {
-        Instance.RemoveUI();
-    }
+    #endregion
     
     
-    // 맵 화면
-
+    #region Map
     public void ClickDifficulty()
     {
         Instance.AddUI(UIPrefabType.UI_DifficultySelect);
@@ -94,15 +89,22 @@ public class UIManager : Singleton<UIManager>
         MoveScene("GameScene");
         Instance.RemoveUI();
     }
-    
-    // 게임 화면
+    #endregion
 
-    public void ClickOption()
+
+    #region Ingame
+
+    public void PauseClicked()
     {
-        Instance.AddUI(UIPrefabType.UI_Setting);
-        
+        GameManager.Instance.Pause(true);
+    }
+    
+    public void PlayClicked()
+    {
+        GameManager.Instance.Pause(false);
     }
 
+    #endregion
 
     public void PlayClickSound()
     {

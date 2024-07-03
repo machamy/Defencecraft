@@ -1556,6 +1556,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 195763653148307603, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: events.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SettingIngameClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 267792671359508164, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1928411423713707918, guid: edef74ad212a67b438508285ccb56f44,
         type: 3}
       propertyPath: m_SpriteState.m_PressedSprite
@@ -1601,6 +1611,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1959059077397371937, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2800009565715300991, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2858046412055796068, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5467473014878161981, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6213543416216011358, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6213543416216011358, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6945372151505477602, guid: edef74ad212a67b438508285ccb56f44,
         type: 3}
@@ -1707,7 +1747,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: UICanvas
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7749169324316454716, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9047510693058833220, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1928411423713707918, guid: edef74ad212a67b438508285ccb56f44, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

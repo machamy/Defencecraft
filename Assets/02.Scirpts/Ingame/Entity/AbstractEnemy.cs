@@ -12,17 +12,22 @@ namespace _02.Scirpts.Ingame.Entity
         protected float speed;
         protected int damage;
         protected bool iscollision = false;
-        private void Start()
-        {
 
-        }
+        protected Vector3[] path;
+
+
+
         protected void init()
         {
             rigid = GetComponent<Rigidbody>();
             rigid.velocity = Vector3.zero;
+            
         }
+
+        protected abstract void OnPathFound(Vector3[] newpath, bool pathSuccessful);
+        
         protected abstract void Idle();
-        protected abstract void Move(AbstractConstruct target);
+        protected abstract IEnumerator Move(AbstractConstruct target);
         protected abstract IEnumerator Attack(AbstractConstruct target);
         
         protected abstract void Damaged(int damage);

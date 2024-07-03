@@ -5,11 +5,19 @@ using UnityEngine;
 
 public class Thief : _02.Scirpts.Ingame.Entity.AbstractEnemy
 {
-    AbstractConstruct Target;
+    [SerializeField]
+    AbstractConstruct target;
+
+    int targetIndex;
+
     // 건물 사이로 이동하니 라인짤 때 obstacle의 영향 안받도록 해줘야 한다.
-    void Start()
+    void Awake()
     {
         init();
+
+        //modifying
+        //PathRequestManager.RequestPath(transform.position, target.transform.position, OnPathFound);
+
         hp = 30;
         speed = 8.0f;
         damage = 30;
@@ -21,7 +29,7 @@ public class Thief : _02.Scirpts.Ingame.Entity.AbstractEnemy
         if (true && !iscollision)//시야에 있을 때
         {
             //Target = 시야에 있는 것
-            Move(Target);
+            Move(target);
         }
 
         if (hp < 0)
@@ -34,7 +42,7 @@ public class Thief : _02.Scirpts.Ingame.Entity.AbstractEnemy
     {
         if (collision.gameObject.CompareTag("building"))
         {
-            StartCoroutine(Attack(Target));
+            StartCoroutine(Attack(target));
             iscollision = true;
             rigid.isKinematic = true;
         }
@@ -44,11 +52,25 @@ public class Thief : _02.Scirpts.Ingame.Entity.AbstractEnemy
         throw new System.NotImplementedException();
     }
 
-    protected override void Move(AbstractConstruct target)
+    protected override IEnumerator Move(AbstractConstruct target)
     {
-        Vector3 dirVec = target.transform.position - transform.position;
-        Vector3 nextVec = dirVec.normalized * speed * Time.fixedDeltaTime;
-        rigid.MovePosition(rigid.position + nextVec);
+        Vector3 currentWaypoint = path[0];
+
+        while (true)
+        {
+            if (transform.position == currentWaypoint)
+            {
+                targetIndex++;
+                if (targetIndex >= path.Length)
+                {
+                    yield break;
+                }
+                currentWaypoint = path[targetIndex];
+            }
+
+            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed);
+            yield return null;
+        }
     }
     protected override IEnumerator Attack(AbstractConstruct target)
     {
@@ -71,16 +93,26 @@ public class Thief : _02.Scirpts.Ingame.Entity.AbstractEnemy
 
     protected override void Search()
     {
-        Target = FindObjectOfType<Nexus>();
+        target = FindObjectOfType<Nexus>();
         //if(시야에 확인되는 것이 있을 때){}
-        Target = FindObjectOfType<AbstractConstruct>();
-        if(Target != null)
+        target = FindObjectOfType<AbstractConstruct>();
+        if(target != null)
         {
-            Debug.Log(Target.name + " has detected!");
+            Debug.Log(target.name + " has detected!");
         }
         else
         {
             Debug.Log("nothing detected!");
+        }
+    }
+
+    protected override void OnPathFound(Vector3[] newpath, bool pathSuccessful)
+    {
+        if (pathSuccessful)
+        {
+            path = newpath;
+            StopCoroutine("Move");
+            StartCoroutine("Move");
         }
     }
 }

@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 161095633021880786}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.004, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 15, y: 1, z: 15}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -119,5 +119,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 1
+  gCost: 0
+  hCost: 0
+  Parent: {fileID: 0}
   tileInfo: 0
   Construct: {fileID: 0}

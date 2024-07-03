@@ -10,8 +10,8 @@ namespace _02.Scirpts.Ingame
     {
         None = 0,
         NotConstructable = 1, // 1 << 0, // 건축 불가 지형
-        Obstacle = 2  // 1 << 1,         // 장애물 지형(통과 불가)
-        
+        Obstacle = 2,  // 1 << 1,         // 장애물 지형(통과 불가)
+                       // 
         //All = 1 << 10 - 1
     }
 
@@ -19,13 +19,23 @@ namespace _02.Scirpts.Ingame
     /// 월드의 타일 하나하나.
     /// 위치와 정보를 저장한다.
     /// </summary>
-    public class Tile : MonoBehaviour
+    public class Tile : MonoBehaviour, IHeapItem<Tile>
     {
         [Header("디버그")]
         [SerializeField] private bool debug = false;
         
         private int i, j;
         private float size;
+        
+        public int gCost = 0;
+        public int hCost;
+        public int fCost{ get{ return gCost + hCost;}}
+        public Tile Parent;
+        int heapIndex;
+
+        MeshRenderer meshRenderer;
+
+        Vector3 worldPos;
 
 
         public bool IsInitialized { private set; get; } = false;
@@ -41,7 +51,12 @@ namespace _02.Scirpts.Ingame
         /// <summary>
         /// 이동가능 여부
         /// </summary>
-        public bool IsWalkable => Construct != null && !(tileInfo == TileInfo.Obstacle);
+        public bool IsWalkable => Construct == null && !(tileInfo == TileInfo.Obstacle);
+
+        /// <summary>
+        /// 건축물 여부
+        /// </summary>
+        public bool IsConstructed => Construct != null;
 
         public AbstractConstruct Construct;
 
@@ -53,31 +68,41 @@ namespace _02.Scirpts.Ingame
         /// <param name="size"></param>
         /// <param name="isConstructable"></param>
         /// <param name="chaneState">해당 값으로 크기와 위치를 변경할지 여부</param>
-        public void Init(int i, int j, float size, TileInfo tileInfo = TileInfo.None, bool chaneState = true)
+        public void Init(Vector3 _worldPos, int i, int j, float size, TileInfo tileInfo = TileInfo.None, bool chaneState = true)
         {
+            this.worldPos = _worldPos;
             this.i = i;
             this.j = j;
             this.size = size;
             this.tileInfo = tileInfo;
             Construct = null;
             IsInitialized = true;
+            
             if (chaneState)
             {
                 transform.localPosition = new Vector3(i * size, 0, j * size);
                 transform.localScale = new Vector3(size, transform.localScale.y, size);
             }
+            Colorize();
         }
 
         public void SetConstructable()
         {
-            // isConstructable = true;
+            //isConstructable = true;
         }
 
         public void SetUnConstructable()
         {
-            // isConstructable = false;
+            //isConstructable = false;
         }
-
+        public int getTileX()
+        {
+            return i;
+        }
+        public int getTileY()
+        {
+            return j;
+        }
 
         /// <summary>
         /// 하양 : 일반 타일
@@ -85,7 +110,34 @@ namespace _02.Scirpts.Ingame
         /// 빨강 : 이동 불가 타일
         /// </summary>
         private readonly Color[] _debugColors = new[] { Color.white, Color.yellow, Color.red };
-        
+        private void Colorize()
+        {
+            MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+
+            if (TileInfo == TileInfo.None)
+            {
+                meshRenderer.material.color = Color.white;
+            }
+
+            else if(TileInfo == TileInfo.NotConstructable)
+            {
+                meshRenderer.material.color = Color.yellow;
+            }
+
+            else if(TileInfo == TileInfo.Obstacle)
+            {
+                meshRenderer.material.color = Color.red;
+            }
+            else
+            {
+                Debug.Log("something failed");
+            }
+        }
+        public void change_color(Color color)
+        {
+            MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+            meshRenderer.material.color = color;
+        }
         
         /// <summary>
         /// 디버그 옵션 확인
@@ -103,23 +155,49 @@ namespace _02.Scirpts.Ingame
         {
             this.debug = true;
             MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
-            meshRenderer.enabled = true;
-            if (Application.isPlaying)
+            if (meshRenderer != null)
             {
-                meshRenderer.material.color = _debugColors[(int)TileInfo];
+                meshRenderer.enabled = true;
+                if (Application.isPlaying)
+                {
+                    meshRenderer.material.color = _debugColors[(int)TileInfo];
+                }
             }
+
         }
 
         private void DisableDebug()
         {
             this.debug = false;
             MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
-            meshRenderer.enabled = false;
+            if (meshRenderer != null)
+                meshRenderer.enabled = false;
         }
 
         private void OnValidate()
         {
             CheckDebug(debug);
+        }
+
+        public int HeapIndex
+        {
+            get
+            {
+                return heapIndex;
+            }
+            set
+            {
+                heapIndex = value;
+            }
+        }
+        public int CompareTo(Tile tileToCompare)
+        {
+            int compare = fCost.CompareTo(tileToCompare.fCost);
+            if( compare == 0)
+            {
+                compare = hCost.CompareTo(tileToCompare.hCost);
+            }
+            return -compare;
         }
     }
 }

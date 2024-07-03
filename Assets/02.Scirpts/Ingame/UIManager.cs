@@ -107,6 +107,16 @@ public class UIManager : Singleton<UIManager>
         Instance._uiGameObjectDict[UIPrefabType.UI_Setting].GetComponent<SettingUI>().setGameQuitButtonVisibility(true);
     }
 
+    public void OpenGameQuitConfirm()
+    {
+        Instance.AddUI(UIPrefabType.UI_Confirm);
+    }
+
+    public void QuitGame()
+    {
+        Instance.MoveScene("MapScene");
+    }
+
     #endregion
 
     public void PlayClickSound()

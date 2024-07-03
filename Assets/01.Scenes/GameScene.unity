@@ -1566,6 +1566,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1736517279396473603, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1928411423713707918, guid: edef74ad212a67b438508285ccb56f44,
         type: 3}
       propertyPath: m_SpriteState.m_PressedSprite
@@ -1750,6 +1755,11 @@ PrefabInstance:
     - target: {fileID: 7749169324316454716, guid: edef74ad212a67b438508285ccb56f44,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647519606562026039, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9047510693058833220, guid: edef74ad212a67b438508285ccb56f44,

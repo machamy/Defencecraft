@@ -108,9 +108,9 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 4adb27975bd7b3f4c9cb64ff5d82dd89,
       type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: ec360a3c615c5c448ad19f5574574594, type: 3}
+    m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 21300000, guid: ec360a3c615c5c448ad19f5574574594, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: ec360a3c615c5c448ad19f5574574594, type: 3}
+    m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -125,7 +125,7 @@ MonoBehaviour:
       - m_Target: {fileID: 6784615367788662154, guid: 5bafc2b39855e6940b3bf98a236f8ff8,
           type: 3}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OpenInintializer
+        m_MethodName: OpenGameQuitConfirm
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1841,9 +1841,9 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 4adb27975bd7b3f4c9cb64ff5d82dd89,
       type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: ec360a3c615c5c448ad19f5574574594, type: 3}
+    m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 21300000, guid: ec360a3c615c5c448ad19f5574574594, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: ec360a3c615c5c448ad19f5574574594, type: 3}
+    m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted

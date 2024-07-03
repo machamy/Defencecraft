@@ -1323,7 +1323,7 @@ MonoBehaviour:
       - m_Target: {fileID: 6784615367788662154, guid: 5bafc2b39855e6940b3bf98a236f8ff8,
           type: 3}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: ClickOption
+        m_MethodName: SettingIngameClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

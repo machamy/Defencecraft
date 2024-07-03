@@ -663,6 +663,12 @@ MonoBehaviour:
   OnClickEvent:
     m_PersistentCalls:
       m_Calls: []
+  OnPointerDownEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onPointerUpEvent:
+    m_PersistentCalls:
+      m_Calls: []
   events:
   - m_PersistentCalls:
       m_Calls:
@@ -713,6 +719,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a414087e2771f44439b33f4d4b1b0bc3, type: 3}
   - {fileID: 21300000, guid: 20c2900d9f45e0542a8532821897e5c6, type: 3}
   - {fileID: 21300000, guid: af1a52296cdf0c546b6aa3721b3b0b5a, type: 3}
+  buttonPressedSprites:
+  - {fileID: 21300000, guid: 7b4143bd02816f94abff89a2a51bdf91, type: 3}
+  - {fileID: 21300000, guid: 095cb85ef6e3cb04da36e2fb05d07930, type: 3}
+  - {fileID: 21300000, guid: f5908b8b6822baa4386d5407a1841bc9, type: 3}
 --- !u!1 &3907286403556754509
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,8 +831,8 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: f37e2057ea40dc447bfb9e1cc9294693,
       type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 2b54e382ba7d35941a178119c8dd2592, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 2b54e382ba7d35941a178119c8dd2592, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 2b54e382ba7d35941a178119c8dd2592, type: 3}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted

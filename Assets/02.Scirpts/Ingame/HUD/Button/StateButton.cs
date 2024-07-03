@@ -14,22 +14,30 @@ namespace _02.Scirpts.Ingame.HUD.Button
         private int n;
         [SerializeField] private List<UnityEvent> events;
         [SerializeField] private List<Sprite> buttonSprites;
+        [SerializeField] private List<Sprite> buttonPressedSprites;
         
 
         private void Awake()
         {
             n = 0;
             changeSprite();
-            OnClickEvent.AddListener(() => OnPress());
+            OnPointerDownEvent.AddListener((eventData) => OnPressDown());
+            onPointerUpEvent.AddListener((eventData) => OnPressUp());
         }
 
-        private void OnPress()
+        private void OnPressDown()
+        {
+            GetComponent<Image>().sprite = buttonPressedSprites[n];
+        }
+
+        private void OnPressUp()
         {
             n++;
             if (n >= events.Count)
                 n = 0;
+            
             events[n].Invoke();
-            changeSprite();
+            GetComponent<Image>().sprite = buttonSprites[n];
         }
 
 

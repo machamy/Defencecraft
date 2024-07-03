@@ -13,6 +13,8 @@ namespace _02.Scirpts.Ingame.UI
         /// </summary>
         [SerializeField] private SettingsSO _setting;
 
+        [SerializeField] private GameObject _gameQuitButton;
+
         [SerializeField] private Slider masterVolSlider;
         [SerializeField] private Slider musicVolSlider;
         [SerializeField] private Slider sfxVolSlider;
@@ -40,6 +42,12 @@ namespace _02.Scirpts.Ingame.UI
             sfxVolSlider.onValueChanged.RemoveListener(SetSfxVolume);
             
             _setting.Save();
+        }
+
+
+        public void setGameQuitButtonVisibility(bool visible)
+        {
+            _gameQuitButton.SetActive(visible);
         }
 
 

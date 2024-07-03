@@ -666,7 +666,7 @@ MonoBehaviour:
   OnPointerDownEvent:
     m_PersistentCalls:
       m_Calls: []
-  onPointerUpEvent:
+  OnPointerUpEvent:
     m_PersistentCalls:
       m_Calls: []
   events:
@@ -1231,7 +1231,7 @@ GameObject:
   - component: {fileID: 5878611766250406934}
   - component: {fileID: 101094162370531152}
   - component: {fileID: 2137163086440588310}
-  - component: {fileID: 4235001305910586296}
+  - component: {fileID: 2500015421315947685}
   m_Layer: 5
   m_Name: Option
   m_TagString: Untagged
@@ -1296,7 +1296,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4235001305910586296
+--- !u!114 &2500015421315947685
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1305,42 +1305,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 4570487519777254181}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: bcc6675d1f754f528bbeb7ec98ac6fe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 8624d0903e7f4de42992161e8b472fce,
-      type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: f68a52dc4d3724242909c83bc6e9038c, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: f68a52dc4d3724242909c83bc6e9038c, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: f68a52dc4d3724242909c83bc6e9038c, type: 3}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 2137163086440588310}
-  m_OnClick:
+  OnClickEvent:
     m_PersistentCalls:
       m_Calls: []
+  OnPointerDownEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPointerUpEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  events:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6784615367788662154, guid: 5bafc2b39855e6940b3bf98a236f8ff8,
+          type: 3}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ClickOption
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  buttonSprites:
+  - {fileID: 21300000, guid: 8624d0903e7f4de42992161e8b472fce, type: 3}
+  buttonPressedSprites:
+  - {fileID: 21300000, guid: f68a52dc4d3724242909c83bc6e9038c, type: 3}
 --- !u!1 &5247156252195701989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1818,7 +1814,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3099004150754812532
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2082,9 +2078,9 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: a414087e2771f44439b33f4d4b1b0bc3,
       type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 7b4143bd02816f94abff89a2a51bdf91, type: 3}
+    m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 21300000, guid: 7b4143bd02816f94abff89a2a51bdf91, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 7b4143bd02816f94abff89a2a51bdf91, type: 3}
+    m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted

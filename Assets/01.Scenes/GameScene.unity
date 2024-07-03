@@ -790,6 +790,81 @@ Camera:
     type: 3}
   m_PrefabInstance: {fileID: 8715864944744018819}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1446424442 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2225904423492861260, guid: edef74ad212a67b438508285ccb56f44,
+    type: 3}
+  m_PrefabInstance: {fileID: 7350699112821710924}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1446424444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446424442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1446424445}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6784615367788662154, guid: 5bafc2b39855e6940b3bf98a236f8ff8,
+          type: 3}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ClickFocusContainer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1446424445 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6208445175037842252, guid: edef74ad212a67b438508285ccb56f44,
+    type: 3}
+  m_PrefabInstance: {fileID: 7350699112821710924}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446424442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1997284867
 GameObject:
   m_ObjectHideFlags: 0
@@ -1481,31 +1556,52 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1736517279396473603, guid: edef74ad212a67b438508285ccb56f44,
+    - target: {fileID: 1928411423713707918, guid: edef74ad212a67b438508285ccb56f44,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3063569523108341225, guid: edef74ad212a67b438508285ccb56f44,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6264660657598353876, guid: edef74ad212a67b438508285ccb56f44,
-        type: 3}
-      propertyPath: _uiGameObjectDict.dataList.Array.size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6264660657598353876, guid: edef74ad212a67b438508285ccb56f44,
-        type: 3}
-      propertyPath: _uiGameObjectDict.dataList.Array.data[9].key
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 6264660657598353876, guid: edef74ad212a67b438508285ccb56f44,
-        type: 3}
-      propertyPath: _uiGameObjectDict.dataList.Array.data[9].value
+      propertyPath: m_SpriteState.m_PressedSprite
       value: 
-      objectReference: {fileID: 7350699112821710925}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928411423713707918, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_SpriteState.m_DisabledSprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928411423713707918, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928411423713707918, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928411423713707918, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6784615367788662154, guid: 5bafc2b39855e6940b3bf98a236f8ff8,
+        type: 3}
+    - target: {fileID: 1928411423713707918, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928411423713707918, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenSettingUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928411423713707918, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928411423713707918, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6945372151505477602, guid: edef74ad212a67b438508285ccb56f44,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1611,22 +1707,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: UICanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 8647519606562026039, guid: edef74ad212a67b438508285ccb56f44,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2225904423492861260, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1446424444}
   m_SourcePrefab: {fileID: 100100000, guid: edef74ad212a67b438508285ccb56f44, type: 3}
---- !u!1 &7350699112821710925 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5242360276497185964, guid: edef74ad212a67b438508285ccb56f44,
-    type: 3}
-  m_PrefabInstance: {fileID: 7350699112821710924}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8715864944744018819
 PrefabInstance:
   m_ObjectHideFlags: 0

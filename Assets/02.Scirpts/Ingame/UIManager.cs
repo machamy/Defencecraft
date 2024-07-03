@@ -28,11 +28,7 @@ public class UIManager : Singleton<UIManager>
     }
 
     #region Global
-    public void ClickOption()
-    {
-        Instance.AddUI(UIPrefabType.UI_Setting);
-    }
-    
+
     public void ClickFocusContainer()
     {
         Instance.RemoveUI();
@@ -54,11 +50,12 @@ public class UIManager : Singleton<UIManager>
         
         Instance.AddUI(UIPrefabType.UI_Map);
     }
-    
+
     public void OpenSettingUI()
     {
         PlayClickSound();
         Instance.AddUI(UIPrefabType.UI_Setting);
+        _uiGameObjectDict[UIPrefabType.UI_Setting].GetComponent<SettingUI>().setGameQuitButtonVisibility(false);
     }
 
     public void OpenCreditUI()
@@ -104,6 +101,12 @@ public class UIManager : Singleton<UIManager>
         GameManager.Instance.Pause(false);
     }
 
+    public void SettingIngameClicked()
+    {
+        Instance.AddUI(UIPrefabType.UI_Setting);
+        Instance._uiGameObjectDict[UIPrefabType.UI_Setting].GetComponent<SettingUI>().setGameQuitButtonVisibility(true);
+    }
+
     #endregion
 
     public void PlayClickSound()
@@ -132,6 +135,10 @@ public class UIManager : Singleton<UIManager>
 
     public void RemoveUI()
     {
+
+        if (_uiStack.Count == 0)
+            return;
+        
         BaseUI baseUI = _uiStack.Pop();
 
         bool needFocusRemoval = true;

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace _02.Scirpts.Ingame.HUD.Button
@@ -22,7 +19,9 @@ namespace _02.Scirpts.Ingame.HUD.Button
             n = 0;
             changeSprite();
             OnPointerDownEvent.AddListener((eventData) => OnPressDown());
-            onPointerUpEvent.AddListener((eventData) => OnPressUp());
+            OnPointerUpEvent.AddListener((eventData) => OnPressUp());
+            
+            Debug.Log("등록한 곳 ID : " + );
         }
 
         private void OnPressDown()

@@ -9,7 +9,7 @@ namespace _02.Scirpts.Ingame.HUD.Button
         
         [SerializeField] protected UnityEvent<PointerEventData> OnClickEvent;
         [SerializeField] protected UnityEvent<PointerEventData> OnPointerDownEvent;
-        [SerializeField] protected UnityEvent<PointerEventData> onPointerUpEvent;
+        [SerializeField] protected UnityEvent<PointerEventData> OnPointerUpEvent;
         
         public void OnPointerClick(PointerEventData eventData)
         {
@@ -23,7 +23,7 @@ namespace _02.Scirpts.Ingame.HUD.Button
 
         public void OnPointerUp(PointerEventData eventData)
         {
-            onPointerUpEvent.Invoke(eventData);
+            OnPointerUpEvent.Invoke(eventData);
         }
     }
 }

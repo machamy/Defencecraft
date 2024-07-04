@@ -31,7 +31,9 @@ public class UIManager : Singleton<UIManager>
 
     public void ClickFocusContainer()
     {
-        Instance.RemoveUI();
+        BaseUI _nowUI = _uiStack.Peek();
+        if(_nowUI.RemoveUIFocusClicked)
+            Instance.RemoveUI();
     }
     
     public void ExitUI()

@@ -58,6 +58,12 @@ namespace _02.Scirpts.Ingame
         /// </summary>
         public bool IsConstructed => Construct != null;
 
+        /// <summary>
+        /// 장애물 지형인지 체크(THIEF를 위한)
+        /// </summary>
+        public bool IsObstacle => tileInfo == TileInfo.Obstacle;
+
+
         public AbstractConstruct Construct;
 
         /// <summary>

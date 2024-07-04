@@ -35,7 +35,7 @@ namespace _02.Scirpts.Ingame
         /// </summary>
         public float TileSize => tileSize;
 
-        private void Start()
+        private void Awake()
         {
             Initialize();
             CheckDebug(debug);
@@ -80,8 +80,17 @@ namespace _02.Scirpts.Ingame
                     Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * TileSize + TileSize/2) + Vector3.forward * (y * TileSize + TileSize/2);
                     Tile tile = Instantiate(Tile, worldPoint, Quaternion.identity).GetComponent<Tile>();
                     
-                    tile.Init(worldPoint, x, y, tileSize, (x == 0 || y == 0 ? TileInfo.NotConstructable : TileInfo.None));
-                    
+                    if(x == 1 && y ==5 || x==2 && y ==5 || x ==3 && y== 5)
+                    {
+                        tile.Init(worldPoint, x, y, tileSize, (TileInfo.Obstacle));
+
+                    }
+                    else
+                    {
+                        tile.Init(worldPoint, x, y, tileSize, (x == 0 || y == 0 ? TileInfo.NotConstructable : TileInfo.None));
+
+                    }
+
                     map[x, y] = tile;
                     
                     tile.name = $"Tile({x},{y})[C : {tile.IsConstructable}]";

@@ -8,30 +8,35 @@ public class PathRequestManager : MonoBehaviour
     Queue<PathRequest> pathRequestQueue = new Queue<PathRequest>();
     PathRequest currentPathRequest;
 
+    static bool _isThief;
     static PathRequestManager instance;
     PathFinding pathfinding;
 
-    bool isProcessingPath;
+    bool isProcessingPath = false;
 
-    void Awake()
+    void Start()
     {
         instance = this;
+
+        print(instance.name);
+
         pathfinding = GetComponent<PathFinding>();
     }
-    public static void RequestPath(Vector3 pathStart, Vector3 pathEnd, Action<Vector3[], bool> callback)
+    public static void RequestPath(Vector3 pathStart, Vector3 pathEnd, Action<Vector3[], bool> callback, bool IsThief)
     {
         PathRequest newRequest = new PathRequest(pathStart, pathEnd, callback);
+        _isThief = IsThief;
         instance.pathRequestQueue.Enqueue(newRequest);
-        instance.TryProcessNext();
+        instance.TryProcessNext(IsThief);
     }
 
-    void TryProcessNext()
+    void TryProcessNext(bool IsThief)
     {
         if(!isProcessingPath && pathRequestQueue.Count > 0)
         {
             currentPathRequest = pathRequestQueue.Dequeue();
             isProcessingPath = true;
-            pathfinding.StartFindPath(currentPathRequest.pathStart, currentPathRequest.pathEnd);
+            pathfinding.StartFindPath(currentPathRequest.pathStart, currentPathRequest.pathEnd, IsThief);
 
         }
     }
@@ -40,7 +45,8 @@ public class PathRequestManager : MonoBehaviour
     {
         currentPathRequest.callback(path, success);
         isProcessingPath = false;
-        TryProcessNext();
+
+        TryProcessNext(_isThief);
     }
     struct PathRequest { 
         public Vector3 pathStart;

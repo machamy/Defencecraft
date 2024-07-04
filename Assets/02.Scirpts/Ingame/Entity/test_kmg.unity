@@ -674,6 +674,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1057537544}
+  - component: {fileID: 1057537547}
   - component: {fileID: 1057537545}
   - component: {fileID: 1057537546}
   m_Layer: 0
@@ -727,6 +728,18 @@ MonoBehaviour:
   height: 10
   tileSize: 2
   tileBase: {fileID: 161095633021880786, guid: a9fbeb1209ab7d049a40da9cb3d2ddb6, type: 3}
+--- !u!114 &1057537547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057537542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 224d5983f172beb4d8ef4a3c69c5455a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1288570340
 GameObject:
   m_ObjectHideFlags: 0

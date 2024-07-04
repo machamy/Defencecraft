@@ -2,36 +2,60 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
 public class Goblin : _02.Scirpts.Ingame.Entity.AbstractEnemy
  {
     [SerializeField]
-    AbstractConstruct target;
-    
+    private AbstractConstruct target;
+    bool isOnSearch = true;
+    bool onPathEnd = false;
+    Vector3[] path;
     int targetIndex;
-    void Awake()
+    void Start()
     {
         init();
-        
-        //modifying
-        //PathRequestManager.RequestPath(transform.position, target.transform.position, OnPathFound);
         hp = 50;
-        speed = 4.0f;
+        speed = 5f;
         damage = 20;
+
         Search();
+
+        //move along path
+        PathRequestManager.RequestPath(transform.position, target.transform.position, OnPathFound, false);
+        
+        // make path same height with enemy
+        for (int i = 0; i < path.Length; i++)
+        {
+            path[i].y = transform.position.y;
+        }
     }
     
     void FixedUpdate()
     {
-        if(true && !iscollision)//시야에 있을 때
+
+        if (!target && !iscollision && isOnSearch)//시야에 있을 때
         {
-            //Target = 시야에 있는 것
-            Move(target);
+            isOnSearch = false;
+            Search();
+            PathRequestManager.RequestPath(transform.position, target.transform.position, OnPathFound, false);
         }
 
-        if(hp < 0)
+        if(transform.position == path[path.Length-1])
+        {
+            onPathEnd = true;
+        }
+        if(onPathEnd)
+        {
+            //move to target after path
+            Vector3 dirVec = target.transform.position - transform.position;
+            Vector3 nextVec = dirVec.normalized * speed * Time.deltaTime;
+            rigid.MovePosition(rigid.position + nextVec);
+        }
+
+        if (hp < 0)
         {
             Dead();
         }
@@ -43,6 +67,7 @@ public class Goblin : _02.Scirpts.Ingame.Entity.AbstractEnemy
         {
             iscollision = true;
             rigid.isKinematic = true;
+            onPathEnd = false;
             StartCoroutine(Attack(target));
         }
     }
@@ -51,31 +76,40 @@ public class Goblin : _02.Scirpts.Ingame.Entity.AbstractEnemy
         throw new System.NotImplementedException();
     }
 
-    protected override IEnumerator Move(AbstractConstruct target)
+    protected override IEnumerator AlongPath()
     {
         Vector3 currentWaypoint = path[0];
-
+        
         while (true)
         {
             if(transform.position == currentWaypoint)
             {
                 targetIndex++;
+
                 if (targetIndex >= path.Length) 
                 {
                     yield break;
                 }
                 currentWaypoint = path[targetIndex];
+
             }
-            
-            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed);  
+
+            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed*Time.deltaTime);  
             yield return null;
         }
     }
+
     protected override IEnumerator Attack(AbstractConstruct target)
     {
         while (target != null && !(target.hp < 0))
         { 
             target.OnDamaged(this, damage);
+            print(target.hp);
+            if(target.hp < 0)
+            {
+                iscollision = false;
+                isOnSearch = true;
+            }
             yield return new WaitForSeconds(1.0f);
         }
         
@@ -92,9 +126,13 @@ public class Goblin : _02.Scirpts.Ingame.Entity.AbstractEnemy
 
     protected override void Search()
     {
-        target = FindObjectOfType<Nexus>();
+        AbstractConstruct target = FindObjectOfType<Nexus>();
         //if(시야에 확인되는 것이 있을 때){}
-        target = FindObjectOfType<AbstractConstruct>();
+        if(true)
+        {
+            target = FindObjectOfType<AbstractConstruct>();
+        }
+
         if (target != null)
         {
             Debug.Log(target.name + " has detected!");
@@ -103,6 +141,7 @@ public class Goblin : _02.Scirpts.Ingame.Entity.AbstractEnemy
         {
             Debug.Log("nothing detected!");
         }
+        
     }
 
     protected override void OnPathFound(Vector3[] newpath, bool pathSuccessful)
@@ -110,10 +149,12 @@ public class Goblin : _02.Scirpts.Ingame.Entity.AbstractEnemy
         if (pathSuccessful)
         {
             path = newpath;
-            StopCoroutine("Move");
-            StartCoroutine("Move");
+            StopCoroutine("AlongPath");
+            StartCoroutine("AlongPath");
         }
     }
+
+    
 }
 
 

@@ -172,6 +172,11 @@ public class UIManager : Singleton<UIManager>
         baseUI.gameObject.SetActive(false);
     }
 
+    public GameObject GetUI(UIPrefabType type)
+    {
+        return _uiGameObjectDict[type];
+    }
+
     public void RemoveAllUI()
     {
         while (_uiStack.Count > 0)

@@ -9,12 +9,12 @@ namespace _02.Scirpts.Ingame.HUD.Button
     {
 
         private int n;
-        [SerializeField] private List<UnityEvent> events;
+        [SerializeField] protected List<UnityEvent> events;
         [SerializeField] private List<Sprite> buttonSprites;
         [SerializeField] private List<Sprite> buttonPressedSprites;
         
 
-        private void Awake()
+        protected void Awake()
         {
             n = 0;
             changeSprite();
@@ -33,7 +33,8 @@ namespace _02.Scirpts.Ingame.HUD.Button
             if (n >= events.Count)
                 n = 0;
             
-            events[n].Invoke();
+            if(events.Count > 0)
+                events[n].Invoke();
             GetComponent<Image>().sprite = buttonSprites[n];
         }
 

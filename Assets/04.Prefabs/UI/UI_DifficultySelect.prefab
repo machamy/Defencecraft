@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5975160878176238499}
-  - component: {fileID: 3274198623838765345}
+  - component: {fileID: 422476212381980330}
   m_Layer: 5
   m_Name: UI_DifficultySelect
   m_TagString: Untagged
@@ -37,7 +37,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3274198623838765345
+--- !u!114 &422476212381980330
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,11 +46,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 134672335321322533}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6aa01e625734190a2f87b100d045f3e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ca86ec57ee1470e9ba188061b0cec0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFocused: 1
+  isFocused: 0
   removeUIOnFocusClicked: 1
+  easyGameObject: {fileID: 8825604430046383429}
+  normalGameObject: {fileID: 2321439774645384404}
+  hardGameObject: {fileID: 6102415699189831662}
 --- !u!1 &1571298629448980063
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,7 +175,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 758740547048418494}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 422476212381980330}
+        m_TargetAssemblyTypeName: _02.Scirpts.Ingame.UI.DifficultyUI, Assembly-CSharp
+        m_MethodName: ClickedEnterButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2321439774645384404
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,10 +276,22 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 5950389191598976821}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 422476212381980330}
+        m_TargetAssemblyTypeName: _02.Scirpts.Ingame.UI.DifficultyUI, Assembly-CSharp
+        m_MethodName: setDifficulty
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5950389191598976821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -733,10 +760,22 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 2014442326288041286}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 422476212381980330}
+        m_TargetAssemblyTypeName: _02.Scirpts.Ingame.UI.DifficultyUI, Assembly-CSharp
+        m_MethodName: setDifficulty
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2014442326288041286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -990,10 +1029,22 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 2131031564097876878}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 422476212381980330}
+        m_TargetAssemblyTypeName: _02.Scirpts.Ingame.UI.DifficultyUI, Assembly-CSharp
+        m_MethodName: setDifficulty
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2131031564097876878
 MonoBehaviour:
   m_ObjectHideFlags: 0

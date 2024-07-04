@@ -91,4 +91,12 @@ public class GameManager : Singleton<GameManager>
         _settingsSo.Load(); // 초기 값 불러오기.
         SceneManager.LoadScene(0);
     }
+
+
+    public enum Difficulty
+    {
+        Easy=0,
+        Normal=1,
+        Hard=2
+    }
 }

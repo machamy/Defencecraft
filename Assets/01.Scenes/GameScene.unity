@@ -1637,6 +1637,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5620797316976730284, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
     - target: {fileID: 6213543416216011358, guid: edef74ad212a67b438508285ccb56f44,
         type: 3}
       propertyPath: m_AnchoredPosition.x

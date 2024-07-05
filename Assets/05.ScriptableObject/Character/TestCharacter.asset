@@ -7,7 +7,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a027d2749a098644a5e18ec6eceba3f, type: 3}
   m_Name: TestCharacter
@@ -21,7 +21,7 @@ MonoBehaviour:
       value: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
     - key: 5
       value: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-    - key: 0
+    - key: 2
       value: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   tsetst:
   - {x: 0.03, y: 0, z: 0}

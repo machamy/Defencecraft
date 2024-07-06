@@ -15,6 +15,15 @@ namespace _02.Scirpts.Ingame
         //All = 1 << 10 - 1
     }
 
+    public enum Direction
+    {
+        None = 0,
+        Down,
+        Up,
+        Left,
+        Right
+    }
+
     /// <summary>
     /// 월드의 타일 하나하나.
     /// 위치와 정보를 저장한다.
@@ -26,6 +35,20 @@ namespace _02.Scirpts.Ingame
         
         private int i, j;
         private float size;
+
+        [SerializeField] private Direction direction;
+        [SerializeField] private TileSpriteSO tileType;
+        
+
+        public Direction Direction
+        {
+            get => direction;
+            set
+            {
+                direction = value;
+                _spriteRenderer.sprite = tileType.GetSprite(value);
+            }
+        }
         
         public int gCost = 0;
         public int hCost;
@@ -34,6 +57,7 @@ namespace _02.Scirpts.Ingame
         int heapIndex;
 
         MeshRenderer meshRenderer;
+        private SpriteRenderer _spriteRenderer;
 
         Vector3 worldPos;
 
@@ -83,6 +107,7 @@ namespace _02.Scirpts.Ingame
             this.tileInfo = tileInfo;
             Construct = null;
             IsInitialized = true;
+            _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             
             if (chaneState)
             {
@@ -183,6 +208,8 @@ namespace _02.Scirpts.Ingame
         private void OnValidate()
         {
             CheckDebug(debug);
+            _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            _spriteRenderer.sprite = tileType.GetSprite(Direction);
         }
 
         public int HeapIndex
@@ -205,5 +232,6 @@ namespace _02.Scirpts.Ingame
             }
             return -compare;
         }
+        
     }
 }

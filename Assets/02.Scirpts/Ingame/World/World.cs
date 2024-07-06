@@ -79,6 +79,7 @@ namespace _02.Scirpts.Ingame
                 {
                     Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * TileSize + TileSize/2) + Vector3.forward * (y * TileSize + TileSize/2);
                     Tile tile = Instantiate(Tile, worldPoint, Quaternion.identity).GetComponent<Tile>();
+                    tile.transform.parent = this.transform;
                     
                     if(x == 1 && y ==5 || x==2 && y ==5 || x ==3 && y== 5)
                     {

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd6dbc9aaabf49139a2aec1847a088ce, type: 3}
   m_Name: LightTile
   m_EditorClassIdentifier: 
-  TileDefualt: {fileID: 0}
-  TileDown: {fileID: 0}
-  TileUp: {fileID: 0}
-  TileLeft: {fileID: 0}
-  TileRight: {fileID: 0}
-  Defualt: {fileID: 0}
+  TileDefualt: {fileID: 11400000, guid: 8d28982c7ced1a244a6a29d5b6b77071, type: 2}
+  TileDown: {fileID: 11400000, guid: d193d5795aa5e8741936ac783de066cd, type: 2}
+  TileUp: {fileID: 11400000, guid: 77c52f24b4b74b544a37ab0e844527ec, type: 2}
+  TileLeft: {fileID: 11400000, guid: 72a61d72415cdd34bae307518524be37, type: 2}
+  TileRight: {fileID: 11400000, guid: a6c7edd45ee64594aba2f05f2737e8e5, type: 2}
+  Defualt: {fileID: 21300000, guid: 55cd4d187a996314fa80701216e3cc27, type: 3}
   Down: {fileID: 21300000, guid: 1905e92bd16a9524982a5c3c2b4f000e, type: 3}
   Up: {fileID: 21300000, guid: de158116e8dcb4543a12a9be9f906427, type: 3}
   Left: {fileID: 21300000, guid: 57068508ca9727342ac65ef5eb94b4dc, type: 3}

@@ -17,11 +17,12 @@ namespace _02.Scirpts.Ingame
 
     public enum Direction
     {
-        None = 0,
+        All = 0,
         Down,
         Up,
         Left,
-        Right
+        Right,
+        None
     }
 
     /// <summary>
@@ -38,7 +39,15 @@ namespace _02.Scirpts.Ingame
 
         [SerializeField] private Direction direction;
         [SerializeField] private TileSpriteSO tileType;
-        
+
+        public TileSpriteSO TileType
+        {
+            get => tileType;
+            set
+            {
+                tileType = value;
+            }
+        }
 
         public Direction Direction
         {
@@ -55,8 +64,6 @@ namespace _02.Scirpts.Ingame
         public int fCost{ get{ return gCost + hCost;}}
         public Tile Parent;
         int heapIndex;
-
-        MeshRenderer meshRenderer;
         private SpriteRenderer _spriteRenderer;
 
         Vector3 worldPos;
@@ -98,16 +105,18 @@ namespace _02.Scirpts.Ingame
         /// <param name="size"></param>
         /// <param name="isConstructable"></param>
         /// <param name="chaneState">해당 값으로 크기와 위치를 변경할지 여부</param>
-        public void Init(Vector3 _worldPos, int i, int j, float size, TileInfo tileInfo = TileInfo.None, bool chaneState = true)
+        public void Init(Vector3 _worldPos, int i, int j, float size,Direction dir, TileInfo tileInfo = TileInfo.None, bool chaneState = true)
         {
+            _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             this.worldPos = _worldPos;
             this.i = i;
             this.j = j;
             this.size = size;
             this.tileInfo = tileInfo;
+            this.Direction = dir;
             Construct = null;
             IsInitialized = true;
-            _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            
             
             if (chaneState)
             {
@@ -143,7 +152,7 @@ namespace _02.Scirpts.Ingame
         private readonly Color[] _debugColors = new[] { Color.white, Color.yellow, Color.red };
         private void Colorize()
         {
-            MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+            SpriteRenderer meshRenderer = GetComponentInChildren<SpriteRenderer>();
 
             if (TileInfo == TileInfo.None)
             {
@@ -166,7 +175,7 @@ namespace _02.Scirpts.Ingame
         }
         public void change_color(Color color)
         {
-            MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+            SpriteRenderer meshRenderer = GetComponentInChildren<SpriteRenderer>();
             meshRenderer.material.color = color;
         }
         
@@ -176,10 +185,10 @@ namespace _02.Scirpts.Ingame
         /// <param name="debug"></param>
         public void CheckDebug(bool debug)
         {
-            if(debug)
-                EnableDebug();
-            else
-                DisableDebug();
+            // if(debug)
+            //     EnableDebug();
+            // else
+            //     DisableDebug();
         }
 
         private void EnableDebug()

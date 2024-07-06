@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using static UnityEngine.GraphicsBuffer;
 
 namespace _02.Scirpts.Ingame
@@ -16,7 +17,7 @@ namespace _02.Scirpts.Ingame
         [SerializeField] private bool debug = false;
         
 
-        private Tile[,] map;
+        private Tile[][] map;
 
         [Header("맵의 크기")] 
         [SerializeField] private int width = 10;
@@ -24,6 +25,12 @@ namespace _02.Scirpts.Ingame
         [Header("타일")]
         [SerializeField] private float tileSize;
         [SerializeField] private GameObject tileBase;
+        [SerializeField] private TileSpriteSO LightTile;
+        [SerializeField] private TileSpriteSO HeavyTile;
+        [Header("스프라이트 타일맵")]
+        [SerializeField] private Tilemap mainTileMap;
+        [Header("속성 타일맵")]
+        [SerializeField] private Tilemap subTileMap;
         public GameObject Tile { get { return tileBase; } set { tileBase = value; } }
 
 
@@ -53,7 +60,7 @@ namespace _02.Scirpts.Ingame
         /// <returns>해당 타일</returns>
         public Tile GetTile(int i, int j)
         {
-            return map[i,j];
+            return map[i][j];
         }
 
         public int MaxSize
@@ -70,33 +77,38 @@ namespace _02.Scirpts.Ingame
 
         void Initialize()
         {
-            map = new Tile[width, height];
-            Vector3 worldBottomLeft = transform.position - Vector3.right * (TileSize * width / 2) - Vector3.forward * (TileSize * height / 2);
-
-            for (int x = 0; x < Height; x++)
-            {
-                for (int y = 0; y < Width; y++)
-                {
-                    Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * TileSize + TileSize/2) + Vector3.forward * (y * TileSize + TileSize/2);
-                    Tile tile = Instantiate(Tile, worldPoint, Quaternion.identity).GetComponent<Tile>();
-                    tile.transform.parent = this.transform;
-                    
-                    if(x == 1 && y ==5 || x==2 && y ==5 || x ==3 && y== 5)
+            map = new Tile[height][];
+           // mainTileMap.CellToWorld
+           for (int i = 0; i < height; i++)
+           {
+               map[i] = new Tile[width];
+               for (int j = 0; j < width; j++)
+               {
+                   Vector3Int cell = new Vector3Int(i,j);
+                   TileBase unityTile =  mainTileMap.GetTile(cell);
+                   Vector3 worldPoint = mainTileMap.GetCellCenterWorld(cell);
+                   Tile tile = Instantiate(Tile,worldPoint, Quaternion.identity).GetComponent<Tile>();
+                   tile.transform.parent = this.transform;
+                   Direction dir;
+                    dir = LightTile.GetDir(unityTile);
+                    if (dir is not Direction.None)
                     {
-                        tile.Init(worldPoint, x, y, tileSize, (TileInfo.Obstacle));
-
+                        tile.TileType = LightTile;
                     }
                     else
-                    {
-                        tile.Init(worldPoint, x, y, tileSize, (x == 0 || y == 0 ? TileInfo.NotConstructable : TileInfo.None));
-
-                    }
-
-                    map[x, y] = tile;
+                   {
+                       dir = HeavyTile.GetDir(unityTile);
+                       tile.TileType = HeavyTile;
+                   }
+                   tile.Init(worldPoint, i, j, tileSize,dir,dir == Direction.All ? TileInfo.None : TileInfo.NotConstructable);
+                   
+                   map[i][j] = tile;
                     
-                    tile.name = $"Tile({x},{y})[C : {tile.IsConstructable}]";
-                }
-            }
+                   tile.name = $"{unityTile?.name} {tile.TileType.name}({i},{j})[direction : {dir}]";
+               }
+               
+           }
+
         }
         public List<Tile> GetNeighbours(Tile tile)
         {
@@ -113,7 +125,7 @@ namespace _02.Scirpts.Ingame
 
                     if (checkX >= 0 && checkX < width && checkY >= 0 && checkY < height)
                     {
-                        neighbours.Add(map[checkX,checkY]);
+                        neighbours.Add(map[checkX][checkY]);
                     }
                 }
             }
@@ -131,7 +143,7 @@ namespace _02.Scirpts.Ingame
             int y = Mathf.RoundToInt((height - 1) * percentY);
             Debug.Log(x+ ", "+y);
 
-            return map[x, y];
+            return map[x][y];
         }
 
         void CheckDebug(bool debug)
@@ -142,7 +154,7 @@ namespace _02.Scirpts.Ingame
             {
                 if(tile != null)
                 {
-                    tile.CheckDebug(debug);
+                    // tile.CheckDebug(debug);
                 }
             }
         }

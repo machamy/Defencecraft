@@ -103,7 +103,8 @@ namespace _02.Scirpts.Ingame
                     TileBase unitySubTile =  subTileMap.GetTile(cell);
                     TileInfo info = GetTileInfo(unitySubTile);
                     
-                    tile.Init(worldPoint, i, j, tileSize,dir,info);
+                    tile.Init(worldPoint, i, j, tileSize,type,dir,info);
+                    
                        
                     map[i][j] = tile;
                         
@@ -126,7 +127,7 @@ namespace _02.Scirpts.Ingame
             {
                 tileType = LightTile;
             }
-            else if((direction = HeavyTile.GetDir(unityTile)) == Direction.None)
+            else if((direction = HeavyTile.GetDir(unityTile)) is not Direction.None)
             {
                 direction = HeavyTile.GetDir(unityTile);
                 tileType = HeavyTile;

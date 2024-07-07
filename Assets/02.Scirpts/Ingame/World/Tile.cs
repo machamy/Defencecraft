@@ -110,13 +110,14 @@ namespace _02.Scirpts.Ingame
         /// <param name="size"></param>
         /// <param name="isConstructable"></param>
         /// <param name="chaneState">해당 값으로 크기와 위치를 변경할지 여부</param>
-        public void Init(Vector3 _worldPos, int i, int j, float size,Direction dir, TileInfo tileInfo = TileInfo.None, bool chaneState = true)
+        public void Init(Vector3 _worldPos, int i, int j, float size,TileSpriteSO type, Direction dir, TileInfo tileInfo = TileInfo.None, bool chaneState = true)
         {
             _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             this.worldPos = _worldPos;
             this.i = i;
             this.j = j;
             this.size = size;
+            TileType = type;
             this.tileInfo = tileInfo;
             this.Direction = dir;
             Construct = null;

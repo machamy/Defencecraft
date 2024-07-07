@@ -11,6 +11,7 @@ namespace _02.Scirpts.Ingame
         None = 0,
         NotConstructable = 1, // 1 << 0, // 건축 불가 지형
         Obstacle = 2,  // 1 << 1,         // 장애물 지형(통과 불가)
+        Void = 3 // 통과불가, 건축불가(맵밖)
                        // 
         //All = 1 << 10 - 1
     }
@@ -77,12 +78,16 @@ namespace _02.Scirpts.Ingame
         /// <summary>
         /// 건축가능 여부
         /// </summary>
-        public bool IsConstructable => tileInfo == TileInfo.None && Construct == null;
+        public bool IsConstructable => tileInfo != TileInfo.Void &&
+                                       tileInfo == TileInfo.None &&
+                                       Construct == null;
 
         /// <summary>
         /// 이동가능 여부
         /// </summary>
-        public bool IsWalkable => Construct == null && !(tileInfo == TileInfo.Obstacle);
+        public bool IsWalkable => Construct == null &&
+                                  tileInfo != TileInfo.Obstacle&&
+                                  tileInfo != TileInfo.Void;
 
         /// <summary>
         /// 건축물 여부

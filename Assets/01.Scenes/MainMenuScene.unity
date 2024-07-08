@@ -327,6 +327,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: '@InputManager'
       objectReference: {fileID: 0}
+    - target: {fileID: 772693663684302869, guid: 9b23940a227f87c4b832bfba70b20d6a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6119084724144267281, guid: 9b23940a227f87c4b832bfba70b20d6a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -414,6 +419,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SpriteState.m_DisabledSprite
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2204306120652154028, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2204306120652154028, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2204306120652154028, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2204306120652154028, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 3063569523108341225, guid: edef74ad212a67b438508285ccb56f44,
         type: 3}
@@ -550,6 +575,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7188307420801465017, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188307420801465017, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188307420801465017, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188307420801465017, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 7531431725894546229, guid: edef74ad212a67b438508285ccb56f44,
         type: 3}
       propertyPath: m_Name
@@ -559,6 +604,26 @@ PrefabInstance:
         type: 3}
       propertyPath: removeUIOnFocusClicked
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8860997535950208322, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8860997535950208322, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8860997535950208322, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8860997535950208322, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

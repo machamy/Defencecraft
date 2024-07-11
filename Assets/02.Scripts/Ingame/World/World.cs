@@ -50,6 +50,12 @@ namespace _02.Scirpts.Ingame
             Initialize();
             CheckDebug(debug);
         }
+
+        private void Start()
+        {
+            GameManager.Instance.world = this;
+        }
+
         void Update()
         {
             

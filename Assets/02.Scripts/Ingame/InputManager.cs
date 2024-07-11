@@ -5,6 +5,12 @@ using _02.Scirpts.Ingame;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// 
+/// </summary>
+/// <remarks>
+/// 이대로면인게임 안에서만 사용되어야할듯?
+/// </remarks>
 public class InputManager : MonoBehaviour
 {
 
@@ -30,6 +36,8 @@ public class InputManager : MonoBehaviour
     
     void Start()
     {
+        if (!qCamera)
+            return;
         camera = qCamera.GetComponentInChildren<Camera>();
         cameraTransform = camera.transform;
         touchStart = default;
@@ -40,8 +48,9 @@ public class InputManager : MonoBehaviour
     void Update()
     {
         //TODO 카메라 가동범위 제한
+        //TODO 현재 씬 확인 절차 필요(카메라 관련은 카메라 클래스로 옮기는게 나을듯
 #if UNITY_EDITOR
-        {
+        if(qCamera){
             float increment = Input.GetAxis("Mouse ScrollWheel");
             if(increment is <= -0.001f or >= 0.001f)
                 zoom(increment);

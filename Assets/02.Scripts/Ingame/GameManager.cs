@@ -27,9 +27,14 @@ public class GameManager : Singleton<GameManager>
 
     [Header("설정")] 
     [SerializeField] private SettingsSO _settingsSo;
+
+    public void SetSettingSO(SettingsSO so) => _settingsSo = so;
+    
+    
+    
     public void Start()
     {
-        Debug.Log(GetInstanceID());
+        EditorInitializer.activated = true;
     }
 
     /// <summary>

@@ -150,9 +150,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 6081947773017355031, guid: 6e7900bbfef811243820ecab8dd00aa1,
+    type: 3}
   damage: 0
-  worldscript: {fileID: 0}
+  buildingSetting: {fileID: 0}
+  buildingSettingPrefab: {fileID: 6206750875055935430, guid: 8b482e2c074234f41a09dd790846b313,
+    type: 3}
 --- !u!114 &5381522583757626050
 MonoBehaviour:
   m_ObjectHideFlags: 0

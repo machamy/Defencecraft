@@ -205,7 +205,7 @@ namespace _02.Scirpts.Ingame
                     int tilenum_x = Mathf.RoundToInt(mouseToPlanePos.x) / 5;
                     int tilenum_z = Mathf.RoundToInt(mouseToPlanePos.z) / 5;
 
-                    CheckTile(tilenum_x, tilenum_z, buildingScript.size);
+                    //CheckTile(tilenum_x, tilenum_z, buildingScript.size);
 
                     //건설 가능 여부 이미지 변경
                     if(isBuildable && buildableTimeIndex == 0)
@@ -232,7 +232,7 @@ namespace _02.Scirpts.Ingame
                     int tilenum_z = Mathf.RoundToInt(mouseToPlanePos.z) / 5;
 
                     //타일 정보 확인
-                    CheckTile(tilenum_x, tilenum_z, buildingScript.size);
+                    //CheckTile(tilenum_x, tilenum_z, buildingScript.size);
 
                     //건설 가능 판별이 났다면 건설
                     if (isBuildable)

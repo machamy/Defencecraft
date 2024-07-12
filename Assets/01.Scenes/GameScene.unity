@@ -861,7 +861,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Managers:
   - {fileID: 1769047290746362793, guid: 315edd7b84d361c4f909f4f14c0aee22, type: 3}
-  activate: 1
+  doActivate: 1
 --- !u!4 &694128033
 Transform:
   m_ObjectHideFlags: 0
@@ -18649,6 +18649,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1991960587 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3506668725992589073, guid: 0a3a60dde178a1b45ba6916d807cd5a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 369404661724862816}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e37b2db7c66096f438220f11f447a3fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1997284867
 GameObject:
   m_ObjectHideFlags: 0
@@ -19538,6 +19550,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 503585419929417276, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_Name
+      value: TowerBuildButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 644675662965084157, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_Name
+      value: WallBuildButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 750663689914578809, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1991960587}
+    - target: {fileID: 750663689914578809, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SafeBuildBtn
+      objectReference: {fileID: 0}
     - target: {fileID: 1736517279396473603, guid: edef74ad212a67b438508285ccb56f44,
         type: 3}
       propertyPath: m_IsActive
@@ -19633,6 +19665,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -120
+      objectReference: {fileID: 0}
+    - target: {fileID: 2119312593998449646, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_Name
+      value: SafeBuildButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 2222017261124377964, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1991960587}
+    - target: {fileID: 2222017261124377964, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TowerBuildBtn
       objectReference: {fileID: 0}
     - target: {fileID: 2800009565715300991, guid: edef74ad212a67b438508285ccb56f44,
         type: 3}
@@ -19778,6 +19825,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748641699107823685, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1991960587}
+    - target: {fileID: 7748641699107823685, guid: edef74ad212a67b438508285ccb56f44,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: WallBuildBtn
       objectReference: {fileID: 0}
     - target: {fileID: 7749169324316454716, guid: edef74ad212a67b438508285ccb56f44,
         type: 3}

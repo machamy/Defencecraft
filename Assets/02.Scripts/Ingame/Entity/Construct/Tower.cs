@@ -1,5 +1,6 @@
 ﻿using _02.Scirpts.Ingame;
 using _02.Scirpts.Ingame.Entity;
+using _02.Scirpts.Ingame.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -14,9 +15,6 @@ public class Tower : _02.Scirpts.Ingame.Entity.AbstractConstruct
     public GameObject[] TowerSettingBtn = new GameObject[3]; //업그레이드 버튼이 0 취소가 1 철거가 2
     public GameObject bulletPrefab;
     public int damage;
-    GameObject buildingSetting;
-    public GameObject buildingSettingPrefab;
-
     float bulletSpeed = 1f;
     float bulletDelay = 1f;
 
@@ -67,14 +65,6 @@ public class Tower : _02.Scirpts.Ingame.Entity.AbstractConstruct
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 
-                if (settingbtnactive)
-                {
-                    for (int i = 0; i < 3; i++)
-                    {
-                        TowerSettingBtn[i].gameObject.SetActive(false);
-                    }
-                }
-
                 // 레이캐스트가 콜라이더에 닿았는지 확인
                 if (Physics.Raycast(ray, out hit))
                 {
@@ -91,95 +81,9 @@ public class Tower : _02.Scirpts.Ingame.Entity.AbstractConstruct
         }
     }
 
-    //버튼에 기능 추가 함수
-    private void AddEventTrigger(GameObject obj, EventTriggerType eventType, System.Action<BaseEventData> action)
-    {
-        EventTrigger trigger = obj.GetComponent<EventTrigger>();
-        if (trigger == null)
-        {
-            trigger = obj.AddComponent<EventTrigger>();
-        }
-
-        EventTrigger.Entry entry = new EventTrigger.Entry();
-        entry.eventID = eventType;
-        entry.callback.AddListener((data) => action((BaseEventData)data));
-        trigger.triggers.Add(entry);
-    }
-
     void OnClicked()
     {
-        if (!settingbtnactive) //처음 클릭 되었을 시 btn prefab 생성 및 기능 부여
-        {
-            buildingSetting = Instantiate(buildingSettingPrefab);
-            TowerSettingBtn[0] = buildingSetting.transform.GetChild(0).gameObject;
-            TowerSettingBtn[1] = buildingSetting.transform.GetChild(1).gameObject;
-            TowerSettingBtn[2] = buildingSetting.transform.GetChild(2).gameObject;
-
-            AddEventTrigger(TowerSettingBtn[0], EventTriggerType.PointerUp, UpgradeBtn);
-            AddEventTrigger(TowerSettingBtn[1], EventTriggerType.PointerUp, CancelBtn);
-            AddEventTrigger(TowerSettingBtn[2], EventTriggerType.PointerUp, DestroyBtn);
-        }
-        settingbtnactive = true; 
-
-
-        for (int i= 0; i < 3;i++) //버튼 활성화
-        {
-            TowerSettingBtn[i].gameObject.SetActive(true);
-        }
-
-
-        RectTransform btnRect = buildingSetting.GetComponent<RectTransform>();
-
-        Vector2 screenPosition = Input.mousePosition;
-
-
-        // UI 캔버스의 로컬 좌표 얻기
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(btnRect, screenPosition, null, out Vector2 localPoint);
-
-        // UI 요소 이동
-        btnRect.anchoredPosition = localPoint;
-    }
-
-    public void DestroyBtn(BaseEventData eventData)
-    {
-        if (settingbtnactive)
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                TowerSettingBtn[i].gameObject.SetActive(false);
-            }
-        }
-
-        //재화 관련 추가
-
-        DestroyTower();
-    }
-
-    public void CancelBtn(BaseEventData eventData)
-    {
-        if (settingbtnactive)
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                TowerSettingBtn[i].gameObject.SetActive(false);
-            }
-        }
-    }
-
-    public void UpgradeBtn(BaseEventData eventData)
-    {
-        if (settingbtnactive)
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                TowerSettingBtn[i].gameObject.SetActive(false);
-            }
-        }
-
-        //재화 관련 추가
-
-
-        OnUpgrade();
+        UIManager.Instance.OnBuildingSetting(this.gameObject);
     }
 
     //처음 만들어질 때 변수 초기화
@@ -236,12 +140,10 @@ public class Tower : _02.Scirpts.Ingame.Entity.AbstractConstruct
         yield return null;
 
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        Debug.Log(stateInfo.IsName("Upgrade"));
 
         // 애니메이션이 끝날때까지 반복
         while (stateInfo.normalizedTime < 1.0f)
         {
-            Debug.Log("working");
             yield return null;
             stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         }
@@ -294,7 +196,7 @@ public class Tower : _02.Scirpts.Ingame.Entity.AbstractConstruct
             stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         }
 
-        SetTileNull(Mathf.RoundToInt((transform.position.x -2.5f) / 5f), Mathf.RoundToInt((transform.position.z - 2.5f)/ 5f));
+        //SetTileNull(Mathf.RoundToInt((transform.position.x -2.5f) / 5f), Mathf.RoundToInt((transform.position.z - 2.5f)/ 5f));
         Destroy(gameObject);
     }
 

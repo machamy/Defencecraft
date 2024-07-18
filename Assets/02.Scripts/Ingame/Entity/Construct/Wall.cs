@@ -54,13 +54,9 @@ public class Wall : _02.Scirpts.Ingame.Entity.AbstractConstruct
     }
     void OnClicked()
     {
-        // for(int i= 0; i < 3;i++)
-        //{
-        //    TowerSettingBtn[i].gameObject.SetActive(true);
-        // }
-        if (level == 3) { DestroyTower(); }
-        else  OnUpgrade();
+        UIManager.Instance.OnBuildingSetting(this.gameObject);
     }
+
     //처음 만들어질 때 변수 초기화
     public override void ConstructTower()
     {

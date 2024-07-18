@@ -30,10 +30,11 @@ public class Bullet : MonoBehaviour
                 return;
             }
 
-            dir = target.position - transform.position;
-            transform.rotation = Quaternion.LookRotation(dir);
+            // 목표 방향 계산
+            Vector3 dir = (target.position - transform.position).normalized;
 
-            transform.Translate(Vector3.forward * 3f * Time.deltaTime);
+            // 목표를 향해 이동 (이미지의 각도를 고정)
+            transform.Translate(dir * 3f * Time.deltaTime, Space.World);
         }
 
     }
@@ -60,6 +61,7 @@ public class Bullet : MonoBehaviour
 
     IEnumerator DestroyBullet()
     {
+        Debug.Log("destroying");
         isgenerated = false;
         rigid.velocity = Vector3.zero;
         animator.SetTrigger("Destroy");

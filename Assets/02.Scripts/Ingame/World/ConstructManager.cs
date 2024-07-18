@@ -7,6 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 using static UnityEditor.PlayerSettings;
 
 namespace _02.Scirpts.Ingame
@@ -17,7 +18,7 @@ namespace _02.Scirpts.Ingame
 
         private bool isBuildable = true; // 마우스를 땐 위치의 건설 가능 여부
 
-        private bool canBuild = false;
+        private bool canBuild = false; //UI요소 위에서 클릭시 생성되지 않게끔하는 변수
 
         //건설하고자 하는 건물의 정보
         [SerializeField] public GameObject[] buildingPrefab = new GameObject[4];
@@ -27,16 +28,16 @@ namespace _02.Scirpts.Ingame
         SpriteRenderer buildingSpriteRenderer;
 
         public GameObject buildableTile; //건설 가능여부를 알려주는 발판 
-        
         public Sprite[] buildableTileImage = new Sprite[2];
-        int buildableTimeIndex = 0; //0은 설치 불가, 1은 설치 가능
+        int buildableTileIndex = 0; //0은 설치 불가, 1은 설치 가능
 
         AbstractConstruct buildingScript; //건설하고자 하는 건물의 스크립트
 
         public Vector3 mouseToPlanePos; //바닥과 마우스가 만나는 위치를 담는 벡터 (5의 배수로만 존재)
 
-        World worldscript;
+        [SerializeField] public Button[] buildingSettingButtons = new Button[3];
 
+        World worldscript;
         Animator animator;
 
         private void Awake()
@@ -49,16 +50,22 @@ namespace _02.Scirpts.Ingame
         {
             isConstructMode = true;
             //화면 톤 다운
+            UIManager.Instance.SetCanvasToneDown();
             //버튼 모양 변경
-            //시간 멈춤
+
+            //게임 속도 조정
+            GameManager.Instance.SetGameSpeed(0.1f);
         }
 
         void DeActivateConstructMode()
         {
-            isConstructMode = false; 
-            //화면 톤 업
-            //버튼 모양 초기화
-            //시간 진행
+            isConstructMode = false;
+            //화면 톤 다운
+            UIManager.Instance.SetCanvasToneUp();
+            //버튼 모양 변경
+
+            //게임 속도 조정
+            GameManager.Instance.SetGameSpeed(1f);
         }
 
         public void TowerBuildBtn()
@@ -66,27 +73,30 @@ namespace _02.Scirpts.Ingame
             if (isConstructMode && buildingTypeIndex == 1) //버튼이 한번 더 클릭되었을 때 건설모드 종료
             {
                 DeActivateConstructMode();
+                buildingSettingButtons[1].OnDeselect(null);
                 return;
             }
 
             if(!isConstructMode)
                 ActivateConstructMode();
 
+            buildingSettingButtons[1].OnSelect(null);
             buildingTypeIndex = 1;
         }
 
         public void SafeBuildBtn()
         {
-            Debug.Log("금고 버튼 눌림");
             if (isConstructMode && buildingTypeIndex == 2) //버튼이 한번 더 클릭되었을 때 건설모드 종료
             {
                 DeActivateConstructMode();
+                buildingSettingButtons[2].OnDeselect(null);
                 return;
             }
 
             if (!isConstructMode)
                 ActivateConstructMode();
 
+            buildingSettingButtons[2].OnSelect(null);
             buildingTypeIndex = 2;
         }
 
@@ -95,12 +105,14 @@ namespace _02.Scirpts.Ingame
             if (isConstructMode && buildingTypeIndex == 3) //버튼이 한번 더 클릭되었을 때 건설모드 종료
             {
                 DeActivateConstructMode();
+                buildingSettingButtons[0].OnDeselect(null);
                 return;
             }
 
             if (!isConstructMode)
                 ActivateConstructMode();
 
+            buildingSettingButtons[0].OnSelect(null);
             buildingTypeIndex = 3;
         }
 
@@ -190,13 +202,17 @@ namespace _02.Scirpts.Ingame
                     Color color = buildingSpriteRenderer.color;
                     color.a = 0.5f;
                     buildingSpriteRenderer.color = color;
-                   
+
                     canBuild = true;
                 }
 
                 //마우스 드래그중 반투명 건물이 마우스 따라다니게 하기
                 if (Input.GetMouseButton(0) && canBuild)
                 {
+                    if (EventSystem.current.IsPointerOverGameObject())
+                    {
+                        return;
+                    }
                     UpdateMousePosition();
                     //반투명 건물의 위치 변경
                     building.transform.position = new Vector3(mouseToPlanePos.x + 2.5f, 1f, mouseToPlanePos.z + 2.5f);
@@ -208,14 +224,14 @@ namespace _02.Scirpts.Ingame
                     //CheckTile(tilenum_x, tilenum_z, buildingScript.size);
 
                     //건설 가능 여부 이미지 변경
-                    if(isBuildable && buildableTimeIndex == 0)
+                    if(isBuildable && buildableTileIndex == 0)
                     {
                         buildableTile.GetComponent<SpriteRenderer>().sprite = buildableTileImage[1];
-                        buildableTimeIndex = 1;
-                    }else if(!isBuildable && buildableTimeIndex == 1)
+                        buildableTileIndex = 1;
+                    }else if(!isBuildable && buildableTileIndex == 1)
                     {
                         buildableTile.GetComponent<SpriteRenderer>().sprite = buildableTileImage[0];
-                        buildableTimeIndex = 0;
+                        buildableTileIndex = 0;
                     }
 
                 }
@@ -223,6 +239,10 @@ namespace _02.Scirpts.Ingame
                 //마우스를 땠을때
                 if (Input.GetMouseButtonUp(0) && canBuild)
                 {
+                    if (EventSystem.current.IsPointerOverGameObject())
+                    {
+                        return;
+                    }
                     //건설 가능 여부 이미지 비활성화
                     buildableTile.SetActive(false);
                     canBuild = false;

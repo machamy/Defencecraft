@@ -16,6 +16,12 @@ public class Nexus : _02.Scirpts.Ingame.Entity.AbstractConstruct
         level = 1;
     }
 
+
+    public void Update()
+    {
+        base.Update();
+    }
+
     //넥서스는 게임이 생성될 때 지어지기 때문에 큰 의미 x
     public override void ConstructTower()
     {
@@ -39,6 +45,11 @@ public class Nexus : _02.Scirpts.Ingame.Entity.AbstractConstruct
 
         Debug.Log($"Nexus upgrade complete, hp = {hp}");
         
+    }
+
+    public override void OnClicked()
+    {
+        // Do Nothing
     }
 
     //공격받는 이벤트가 발생했을 때

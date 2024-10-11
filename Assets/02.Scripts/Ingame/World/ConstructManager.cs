@@ -248,8 +248,8 @@ namespace _02.Scirpts.Ingame
                     canBuild = false;
 
                     //좌표 불러오기
-                    int tilenum_x = Mathf.RoundToInt(mouseToPlanePos.x) / 5;
-                    int tilenum_z = Mathf.RoundToInt(mouseToPlanePos.z) / 5;
+                    // int tilenum_x = Mathf.RoundToInt(mouseToPlanePos.x) / 5;
+                    // int tilenum_z = Mathf.RoundToInt(mouseToPlanePos.z) / 5;
 
                     //타일 정보 확인
                     //CheckTile(tilenum_x, tilenum_z, buildingScript.size);
@@ -265,9 +265,9 @@ namespace _02.Scirpts.Ingame
                         animator = buildingScript.GetComponent<Animator>();
                         animator.SetBool("Isinstall", true);
 
-                        Tile tile = worldscript.GetTile(tilenum_x, tilenum_z);
+                        Tile tile = worldscript.TileFromWorldPoint(mouseToPlanePos);
 
-                        SetTileConstruct(tilenum_x, tilenum_z, building);
+                        SetTileConstruct(tile.getTileX(), tile.getTileY(), building);
 
                         
                     }

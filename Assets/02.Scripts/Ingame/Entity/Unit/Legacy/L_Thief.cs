@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Thief : _02.Scirpts.Ingame.Entity.AbstractEnemy
+public class L_Thief : _02.Scirpts.Ingame.Entity.AbstractEnemy
 {
     [SerializeField]
     private AbstractConstruct target;

@@ -1,42 +1,41 @@
 ﻿using _02.Scirpts.Ingame.Entity;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
-public class Golem : _02.Scirpts.Ingame.Entity.AbstractEnemy
-{
+
+public class L_Goblin : _02.Scirpts.Ingame.Entity.AbstractEnemy
+ {
     [SerializeField]
     private AbstractConstruct target;
     bool isOnSearch = true;
     bool onPathEnd = false;
     Vector3[] path;
-
     int targetIndex;
-
     void Start()
     {
         init();
-
-        hp = 100;
-        speed = 2.0f;
-        damage = 40;
+        hp = 50;
+        speed = 5f;
+        damage = 20;
 
         Search();
 
         //move along path
         PathRequestManager.RequestPath(transform.position, target.transform.position, OnPathFound, false);
-
+        
         // make path same height with enemy
         for (int i = 0; i < path.Length; i++)
         {
             path[i].y = transform.position.y;
         }
     }
-
+    
     void FixedUpdate()
     {
+
         if (!target && !iscollision && isOnSearch)//시야에 있을 때
         {
             isOnSearch = false;
@@ -44,16 +43,21 @@ public class Golem : _02.Scirpts.Ingame.Entity.AbstractEnemy
             PathRequestManager.RequestPath(transform.position, target.transform.position, OnPathFound, false);
         }
 
-        if (transform.position == path[path.Length - 1])
+        if(transform.position == path[path.Length-1])
         {
             onPathEnd = true;
         }
-        if (onPathEnd)
+        if(onPathEnd)
         {
             //move to target after path
             Vector3 dirVec = target.transform.position - transform.position;
             Vector3 nextVec = dirVec.normalized * speed * Time.deltaTime;
             rigid.MovePosition(rigid.position + nextVec);
+        }
+
+        if (hp < 0)
+        {
+            Dead();
         }
     }
 
@@ -75,36 +79,40 @@ public class Golem : _02.Scirpts.Ingame.Entity.AbstractEnemy
     protected override IEnumerator AlongPath()
     {
         Vector3 currentWaypoint = path[0];
-
+        
         while (true)
         {
-            if (transform.position == currentWaypoint)
+            if(transform.position == currentWaypoint)
             {
                 targetIndex++;
-                if (targetIndex >= path.Length)
+
+                if (targetIndex >= path.Length) 
                 {
                     yield break;
                 }
                 currentWaypoint = path[targetIndex];
+
             }
 
-            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed*Time.deltaTime);  
             yield return null;
         }
     }
+
     protected override IEnumerator Attack(AbstractConstruct target)
     {
         while (target != null && !(target.hp < 0))
-        {
+        { 
             target.OnDamaged(this, damage);
             print(target.hp);
-            if (target.hp < 0)
+            if(target.hp < 0)
             {
                 iscollision = false;
                 isOnSearch = true;
             }
             yield return new WaitForSeconds(1.0f);
         }
+        
     }
 
     protected override void Damaged(int damage)
@@ -123,8 +131,8 @@ public class Golem : _02.Scirpts.Ingame.Entity.AbstractEnemy
         if(true)
         {
             target = FindObjectOfType<AbstractConstruct>();
-
         }
+
         if (target != null)
         {
             Debug.Log(target.name + " has detected!");
@@ -146,5 +154,7 @@ public class Golem : _02.Scirpts.Ingame.Entity.AbstractEnemy
         }
     }
 
-   
+    
 }
+
+

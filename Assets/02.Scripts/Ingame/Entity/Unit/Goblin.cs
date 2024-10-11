@@ -1,58 +1,33 @@
 ﻿using _02.Scirpts.Ingame.Entity;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
 
-
-public class Goblin : _02.Scirpts.Ingame.Entity.AbstractEnemy
- {
+public class Goblin : AbstractEnemy
+{
     [SerializeField]
     private AbstractConstruct target;
-    bool isOnSearch = true;
-    bool onPathEnd = false;
-    Vector3[] path;
-    int targetIndex;
+    private bool isOnSearch = true;
+    private bool onPathEnd = false;
+    private Vector3[] path;
+    private int targetIndex;
+
     void Start()
     {
-        init();
-        hp = 50;
-        speed = 5f;
-        damage = 20;
-
-        Search();
-
-        //move along path
-        PathRequestManager.RequestPath(transform.position, target.transform.position, OnPathFound, false);
-        
-        // make path same height with enemy
-        for (int i = 0; i < path.Length; i++)
-        {
-            path[i].y = transform.position.y;
-        }
+        Initialize();
+        SearchAndRequestPath();
     }
-    
+
     void FixedUpdate()
     {
-
-        if (!target && !iscollision && isOnSearch)//시야에 있을 때
+        if (ShouldSearchForTarget())
         {
-            isOnSearch = false;
-            Search();
-            PathRequestManager.RequestPath(transform.position, target.transform.position, OnPathFound, false);
+            SearchAndRequestPath();
         }
 
-        if(transform.position == path[path.Length-1])
+        if (HasReachedPathEnd())
         {
-            onPathEnd = true;
-        }
-        if(onPathEnd)
-        {
-            //move to target after path
-            Vector3 dirVec = target.transform.position - transform.position;
-            Vector3 nextVec = dirVec.normalized * speed * Time.deltaTime;
-            rigid.MovePosition(rigid.position + nextVec);
+            MoveTowardsTarget();
         }
 
         if (hp < 0)
@@ -65,12 +40,10 @@ public class Goblin : _02.Scirpts.Ingame.Entity.AbstractEnemy
     {
         if (collision.gameObject.CompareTag("building"))
         {
-            iscollision = true;
-            rigid.isKinematic = true;
-            onPathEnd = false;
-            StartCoroutine(Attack(target));
+            HandleBuildingCollision();
         }
     }
+
     protected override void Idle()
     {
         throw new System.NotImplementedException();
@@ -79,46 +52,42 @@ public class Goblin : _02.Scirpts.Ingame.Entity.AbstractEnemy
     protected override IEnumerator AlongPath()
     {
         Vector3 currentWaypoint = path[0];
-        
+
         while (true)
         {
-            if(transform.position == currentWaypoint)
+            if (transform.position == currentWaypoint)
             {
                 targetIndex++;
-
-                if (targetIndex >= path.Length) 
+                if (targetIndex >= path.Length)
                 {
                     yield break;
                 }
                 currentWaypoint = path[targetIndex];
-
             }
 
-            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed*Time.deltaTime);  
+            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
             yield return null;
         }
     }
 
     protected override IEnumerator Attack(AbstractConstruct target)
     {
-        while (target != null && !(target.hp < 0))
-        { 
+        while (target != null && target.hp >= 0)
+        {
             target.OnDamaged(this, damage);
-            print(target.hp);
-            if(target.hp < 0)
+            if (target.hp < 0)
             {
-                iscollision = false;
-                isOnSearch = true;
+                ResetSearchState();
             }
             yield return new WaitForSeconds(1.0f);
         }
-        
     }
 
     protected override void Damaged(int damage)
     {
         hp -= damage;
     }
+
     protected override void Dead()
     {
         Destroy(gameObject);
@@ -126,35 +95,100 @@ public class Goblin : _02.Scirpts.Ingame.Entity.AbstractEnemy
 
     protected override void Search()
     {
-        AbstractConstruct target = FindObjectOfType<Nexus>();
-        //if(시야에 확인되는 것이 있을 때){}
-        if(true)
-        {
-            target = FindObjectOfType<AbstractConstruct>();
-        }
-
-        if (target != null)
-        {
-            Debug.Log(target.name + " has detected!");
-        }
-        else
-        {
-            Debug.Log("nothing detected!");
-        }
-        
+        UpdateKnownBuildings();
+        SetClosestPriorityTarget();
     }
 
-    protected override void OnPathFound(Vector3[] newpath, bool pathSuccessful)
+    protected override void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
         if (pathSuccessful)
         {
-            path = newpath;
+            path = newPath;
             StopCoroutine("AlongPath");
             StartCoroutine("AlongPath");
         }
     }
 
-    
+    private void Initialize()
+    {
+        init();
+        hp = 50;
+        speed = 5f;
+        damage = 20;
+        sightRadiusI = 5f;
+        sightRadiusII = 10f;
+    }
+
+    private bool ShouldSearchForTarget()
+    {
+        return !target && !iscollision && isOnSearch;
+    }
+
+    private void SearchAndRequestPath()
+    {
+        isOnSearch = false;
+        Search();
+        if (target != null)
+        {
+            PathRequestManager.RequestPath(transform.position, target.transform.position, OnPathFound, false);
+        }
+    }
+
+    private bool HasReachedPathEnd()
+    {
+        return target && !onPathEnd;
+    }
+
+    private void MoveTowardsTarget()
+    {
+        Vector3 direction = (target.transform.position - transform.position).normalized;
+        Vector3 nextPosition = direction * speed * Time.deltaTime;
+        rigid.MovePosition(rigid.position + nextPosition);
+    }
+
+    private void HandleBuildingCollision()
+    {
+        iscollision = true;
+        rigid.isKinematic = true;
+        onPathEnd = false;
+        StartCoroutine(Attack(target));
+    }
+
+    private void ResetSearchState()
+    {
+        iscollision = false;
+        isOnSearch = true;
+    }
+
+    private void UpdateKnownBuildings()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, sightRadiusII);
+        foreach (var hitCollider in hitColliders)
+        {
+            AbstractConstruct building = hitCollider.GetComponent<AbstractConstruct>();
+            if (building != null && !knownBuildings.Contains(building))
+            {
+                knownBuildings.Add(building);
+            }
+        }
+    }
+
+    private void SetClosestPriorityTarget()
+    {
+        AbstractConstruct closestPriorityTarget = null;
+        float closestDistance = float.MaxValue;
+
+        foreach (var building in knownBuildings)
+        {
+            float distance = Vector3.Distance(transform.position, building.transform.position);
+            if (distance <= sightRadiusI && (closestPriorityTarget == null || distance < closestDistance))
+            {
+                closestPriorityTarget = building;
+                closestDistance = distance;
+            }
+        }
+
+        target = closestPriorityTarget;
+        Debug.Log(target != null ? $"{target.name} has detected!" : "nothing detected!");
+    }
 }
-
-

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -15,9 +16,80 @@ namespace _02.Scirpts.Ingame
     {
         [Header("디버그")]
         [SerializeField] private bool debug = false;
+        [SerializeField] private bool doNotInitialize = false;
         
 
-        private Tile[][] map;
+        private CustomTilemap map;
+
+        [Serializable]
+        public class CustomTilemap : ISerializationCallbackReceiver, IEnumerable
+        {
+            [Serializable]
+            class TileRow
+            {
+                public Tile[] row;
+            }
+            [SerializeField]
+            private TileRow[] rows;
+
+            [SerializeField] private Tile[][] map;
+
+            [SerializeField]
+            private int width;
+            [SerializeField]
+            private int height;
+
+            public CustomTilemap(int width, int height)
+            {
+                Initialize(width, height);
+            }
+            
+            public void OnBeforeSerialize()
+            {
+                for (int i = 0; i < width; i++)
+                {
+                    rows[i].row = map[i];
+                }
+            }
+
+            public void OnAfterDeserialize()
+            {
+                for (int i = 0; i < width; i++)
+                {
+                    map[i] = rows[i].row;
+                }
+            }
+
+            public void Initialize(int width, int height)
+            {
+                this.width = width;
+                this.height = height;
+                map = new Tile[width][];
+                for (int i = 0; i < width; i++)
+                {
+                    map[i] = new Tile[height];
+                }
+            }
+
+            public Tile this[int i, int j]
+            {
+                get => map[i][j];
+                set => map[i][j] = value;
+            }
+
+            public Tile[] this[int i] => map[i];
+
+            public IEnumerator GetEnumerator()
+            {
+                foreach (var tiles in map)
+                {
+                    foreach (var tile in tiles)
+                    {
+                        yield return tile;
+                    }
+                }
+            }
+        }
 
         [Header("맵의 크기")] 
         [SerializeField] private int width = 10;
@@ -27,6 +99,8 @@ namespace _02.Scirpts.Ingame
         [SerializeField] private GameObject tileBase;
         [SerializeField] private TileSpriteSO LightTile;
         [SerializeField] private TileSpriteSO HeavyTile;
+        [Header("넥서스")]
+        [SerializeField] private Nexus nexus;
         [Header("스프라이트 타일맵")]
         [SerializeField] private Tilemap mainTileMap;
         [Header("속성 타일맵")]
@@ -47,7 +121,8 @@ namespace _02.Scirpts.Ingame
 
         private void Awake()
         {
-            Initialize();
+            if(!doNotInitialize)
+                Initialize();
             CheckDebug(debug);
         }
 
@@ -69,7 +144,7 @@ namespace _02.Scirpts.Ingame
         /// <returns>해당 타일</returns>
         public Tile GetTile(int i, int j)
         {
-            return map[i][j];
+            return map[i,j];
         }
 
         public int MaxSize
@@ -87,11 +162,10 @@ namespace _02.Scirpts.Ingame
         /// </summary>
         void Initialize()
         {
-            map = new Tile[height][];
+            map = new CustomTilemap(width,height);
             // mainTileMap.CellToWorld
             for (int i = 0; i < height; i++)
             {
-                map[i] = new Tile[width];
                 for (int j = 0; j < width; j++)
                 {
                     Vector3Int cell = new Vector3Int(i,j);
@@ -112,7 +186,7 @@ namespace _02.Scirpts.Ingame
                     tile.Init(worldPoint, i, j, tileSize,type,dir,info);
                     
                        
-                    map[i][j] = tile;
+                    map[i,j] = tile;
                         
                     tile.name = $"{unityTile?.name} {tile.TileType.name}({i},{j})[{info}||direction : {dir}]";
                 }
@@ -173,7 +247,7 @@ namespace _02.Scirpts.Ingame
 
                     if (checkX >= 0 && checkX < width && checkY >= 0 && checkY < height)
                     {
-                        neighbours.Add(map[checkX][checkY]);
+                        neighbours.Add(map[checkX,checkY]);
                     }
                 }
             }
@@ -181,17 +255,19 @@ namespace _02.Scirpts.Ingame
         }
         public Tile TileFromWorldPoint(Vector3 worldPosition)
         {
-            float percentX = (worldPosition.x) / ((width - 1) * TileSize);
-            float percentY = (worldPosition.z) / ((height - 1) * TileSize);
-
-            percentX = Mathf.Clamp01(percentX);
-            percentY = Mathf.Clamp01(percentY);
-
-            int x = Mathf.RoundToInt((width - 1) * percentX);
-            int y = Mathf.RoundToInt((height - 1) * percentY);
-            Debug.Log(x+ ", "+y);
-
-            return map[x][y];
+            // float percentX = (worldPosition.x) / ((width - 1) * TileSize);
+            // float percentY = (worldPosition.z) / ((height - 1) * TileSize);
+            //
+            // percentX = Mathf.Clamp01(percentX);
+            // percentY = Mathf.Clamp01(percentY);
+            //
+            // int x = Mathf.RoundToInt((width - 1) * percentX);
+            // int y = Mathf.RoundToInt((height - 1) * percentY);
+            // Debug.Log(x+ ", "+y);
+            //
+            // return map[x][y];
+            var cell = mainTileMap.WorldToCell(worldPosition);
+            return map[cell.x,cell.y];
         }
 
         void CheckDebug(bool debug)

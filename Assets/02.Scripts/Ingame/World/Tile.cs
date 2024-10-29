@@ -11,7 +11,8 @@ namespace _02.Scirpts.Ingame
         None = 0,
         NotConstructable = 1, // 1 << 0, // 건축 불가 지형
         Obstacle = 2,  // 1 << 1,         // 장애물 지형(통과 불가)
-        Void = 3 // 통과불가, 건축불가(맵밖)
+        Void = 3, // 통과불가, 건축불가(맵밖)
+        Nexus = 4 // 넥서스
                        // 
         //All = 1 << 10 - 1
     }

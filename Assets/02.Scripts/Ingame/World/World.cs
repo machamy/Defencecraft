@@ -108,6 +108,7 @@ namespace _02.Scirpts.Ingame
 
         [SerializeField] private TileBase ConstructableUnityTile;
         [SerializeField] private TileBase NotConstructableUnityTile;
+        [SerializeField] private TileBase NexusUnityTile;
         public GameObject Tile { get { return tileBase; } set { tileBase = value; } }
 
 
@@ -163,6 +164,8 @@ namespace _02.Scirpts.Ingame
         void Initialize()
         {
             map = new CustomTilemap(width,height);
+
+            Tile nexusTile = null;
             // mainTileMap.CellToWorld
             for (int i = 0; i < height; i++)
             {
@@ -182,6 +185,14 @@ namespace _02.Scirpts.Ingame
                     //건설가능여부 받아오기
                     TileBase unitySubTile =  subTileMap.GetTile(cell);
                     TileInfo info = GetTileInfo(unitySubTile);
+                    if(info == TileInfo.Nexus)
+                    {
+                        nexus = Instantiate(nexus,worldPoint,Quaternion.identity);
+                        nexus.transform.parent = this.transform;
+                        nexusTile = tile;
+                    }
+
+                    info = TileInfo.None;
                     
                     tile.Init(worldPoint, i, j, tileSize,type,dir,info);
                     
@@ -191,6 +202,16 @@ namespace _02.Scirpts.Ingame
                     tile.name = $"{unityTile?.name} {tile.TileType.name}({i},{j})[{info}||direction : {dir}]";
                 }
             }
+
+            if (nexusTile != null)
+            {
+                GetNeighbours(nexusTile);
+            }
+            else
+            {
+                Debug.LogError("No Nexus");
+            }
+            
         }
 
         /// <summary>
@@ -225,8 +246,10 @@ namespace _02.Scirpts.Ingame
         {
             if (unitySubTile == ConstructableUnityTile)
                 return TileInfo.None;
-            else if (unitySubTile == NotConstructableUnityTile)
+            if (unitySubTile == NotConstructableUnityTile)
                 return TileInfo.NotConstructable;
+            if (unitySubTile == NexusUnityTile)
+                return TileInfo.Nexus;
             return TileInfo.Void;
         }
 

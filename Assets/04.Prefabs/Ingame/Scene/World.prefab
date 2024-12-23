@@ -131,18 +131,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
+  doNotInitialize: 0
   width: 60
   height: 60
   tileSize: 10
   tileBase: {fileID: 161095633021880786, guid: a9fbeb1209ab7d049a40da9cb3d2ddb6, type: 3}
   LightTile: {fileID: 11400000, guid: 38b7979ccdd5a174a8896f86466b39e0, type: 2}
   HeavyTile: {fileID: 11400000, guid: 831bc17fe3025404589d2e6f3c871cf0, type: 2}
+  nexus: {fileID: -8109990659747576458, guid: d14b73a2475e48e488416dd2e6a06208, type: 3}
   mainTileMap: {fileID: 0}
   subTileMap: {fileID: 0}
   ConstructableUnityTile: {fileID: 11400000, guid: e35978461c73ae14ea991a85dadf22a3,
     type: 2}
   NotConstructableUnityTile: {fileID: 11400000, guid: eee6f40252faaf34a9dd74c434bc6329,
     type: 2}
+  NexusUnityTile: {fileID: 11400000, guid: 280621644da1c634e91b2881a8bf8b53, type: 2}
 --- !u!114 &3506668725992589073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,7 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isConstructMode: 0
   buildingPrefab:
-  - {fileID: 9195721713978335732, guid: 3b071d5cdab31be4eb5d1b72696f224d, type: 3}
+  - {fileID: 2232492531366019292, guid: d14b73a2475e48e488416dd2e6a06208, type: 3}
   - {fileID: 9195721713978335732, guid: 3b071d5cdab31be4eb5d1b72696f224d, type: 3}
   - {fileID: 1153912845795710514, guid: 5f804dd3a9029174a8a8c4ab912f0e5f, type: 3}
   - {fileID: 2232492531366019292, guid: df5b194d038ac354a989cda6de115f25, type: 3}

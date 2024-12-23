@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4937918050550211618}
   - component: {fileID: 6087193750936024448}
   - component: {fileID: 8029092179786252535}
-  - component: {fileID: 2993621164625474258}
+  - component: {fileID: -8109990659747576458}
   m_Layer: 0
   m_Name: Nexus
   m_TagString: building
@@ -129,7 +129,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2993621164625474258
+--- !u!114 &-8109990659747576458
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2232492531366019292}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 552412cd983fc034295d29f5acbc0aff, type: 3}
+  m_Script: {fileID: 11500000, guid: 63bba7ab0ddc76645a3efb51c074c553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 0

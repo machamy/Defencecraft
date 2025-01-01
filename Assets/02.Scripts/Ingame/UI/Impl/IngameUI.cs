@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
-using _02.Scirpts.Events;
+using TMPro;
+
+// using _02.Scirpts.Events;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -13,7 +15,7 @@ namespace _02.Scirpts.Ingame.UI
         [SerializeField] private GameObject go_ingameParent;
         [SerializeField] private GameObject go_pauseParent;
 
-        private EntityDamageSO EntityDamageChannel;
+        // private EntityDamageSO EntityDamageChannel;
         
         [SerializeField] private TextMeshProUGUI text_Health;
         [SerializeField] private TextMeshProUGUI text_Gold;
@@ -63,27 +65,27 @@ namespace _02.Scirpts.Ingame.UI
 
         public void RegisterUIUpdate()
         {
-            if(EntityDamageChannel is not null)
-                // 넥서스 데미지 이벤트 감지
-                EntityDamageChannel.OnDamageEvent += (attacker, damaged, damage) =>
-                {
-                    if (damaged is Nexus nexus)
-                    {
-                        StartCoroutine(LateUpdateCoroutine(() => HealthTextUpdate(nexus)));
-                    }
-                        
-                };
-            
+            // if(EntityDamageChannel is not null)
+            //     // 넥서스 데미지 이벤트 감지
+            //     EntityDamageChannel.OnDamageEvent += (attacker, damaged, damage) =>
+            //     {
+            //         if (damaged is Nexus nexus)
+            //         {
+            //             StartCoroutine(LateUpdateCoroutine(() => HealthTextUpdate(nexus)));
+            //         }
+            //             
+            //     };
+            //
             // TODO : 골드 변화 이벤트 감지 후 GoldTextUpdate() 구독
             // TODO : 적 사망 감지 후 RemainEntityTextUpdate() 구독
             // TODO : 웨이브 구현 시 RemainWaveTextUpdate() 구독
             
         }
         
-        public void HealthTextUpdate(Nexus attacker)
-        {
-            text_Health.text = "" + attacker.hp;
-        }
+        // public void HealthTextUpdate(Nexus attacker)
+        // {
+        //     text_Health.text = "" + attacker.hp;
+        // }
 
         public void GoldTextUpdate()
         {

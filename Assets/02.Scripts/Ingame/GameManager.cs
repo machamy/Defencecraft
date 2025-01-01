@@ -13,7 +13,7 @@ public class GameManager : Singleton<GameManager>
 {
 
     [Header("게임관련")]
-    public World world;
+    // public World world;
     
     public bool isPaused;
     public float prevTimeScale;

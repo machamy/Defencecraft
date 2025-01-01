@@ -9,16 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd6dbc9aaabf49139a2aec1847a088ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cb4487f84ef440eb008b0d2d8508035, type: 3}
   m_Name: HeavyTile
   m_EditorClassIdentifier: 
-  TileDefualt: {fileID: 11400000, guid: 2884c3a3dd6ad8041b579038b3f9bcb7, type: 2}
-  TileDown: {fileID: 11400000, guid: e0f7de1aa44531647a03ffb6d6ff9714, type: 2}
-  TileUp: {fileID: 11400000, guid: 6b0df0993bde8bd49be99e9dd99e68ba, type: 2}
-  TileLeft: {fileID: 11400000, guid: cc6f4419873a5014c8ce61a03b4c8a18, type: 2}
-  TileRight: {fileID: 11400000, guid: c70b78ab672a3e246a720a24bb9b3daa, type: 2}
-  Defualt: {fileID: 21300000, guid: b1239f2ffeb029544b2f75ccc015133a, type: 3}
-  Down: {fileID: 21300000, guid: d37c84be8c35bee459e1f07e66924857, type: 3}
-  Up: {fileID: 21300000, guid: 93f57cd94f54f0d4687b8fc8fa4649b0, type: 3}
-  Left: {fileID: 21300000, guid: 25eae93eabe823647829cd91174f4e4c, type: 3}
-  Right: {fileID: 21300000, guid: 8e8a57859dd59ba4492946b9630e428b, type: 3}
+  TileDefualt: {fileID: 0}
+  TileDown: {fileID: 0}
+  TileUp: {fileID: 0}
+  TileLeft: {fileID: 0}
+  TileRight: {fileID: 0}
+  Defualt: {fileID: 0}
+  Down: {fileID: 0}
+  Up: {fileID: 0}
+  Left: {fileID: 0}
+  Right: {fileID: 0}
